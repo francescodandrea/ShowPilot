@@ -7,8 +7,17 @@ const port = 8000;
 var inputs = easymidi.getInputs();
 var outputs = easymidi.getOutputs();
 
+app.use('/static', express.static('public'));
+
+app.get('/controlRoom', (req, res) => {
+  res.sendFile('static/controlRoom/index.html', {root: __dirname })
+});
+
+app.get('/testing', (req, res) => {
+  res.sendFile('static/testing/index.html', {root: __dirname })
+});
+
 app.get('/', (req, res) => {
-  res.send('Hello World!');
   console.log(inputs);
   console.log(outputs);
 });
