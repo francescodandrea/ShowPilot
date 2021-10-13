@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "easymidi": "^2.0.5",
+    "express": "^4.17.1",
+    "midi": "^2.0.0"
   }
 }
