@@ -1,1 +1,15 @@
 /*Style*/
+body{
+    background-color: #e7eaeb;
+}
+nav.spacenav{
+    padding-left: 1em;
+    cursor:default;
+}
+nav.mainnav{
+    flex-direction: initial;
+    width: 10em;
+    height: 100%;
+    align-items: normal!important;
+    padding-left: 1em;
+}
