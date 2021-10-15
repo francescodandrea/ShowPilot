@@ -1,6 +1,7 @@
 /*Style*/
 body{
     background-color: #e7eaeb;
+    user-select: none;
 }
 nav.spacenav{
     padding-left: 1em;
@@ -12,4 +13,7 @@ nav.mainnav{
     height: 100%;
     align-items: normal!important;
     padding-left: 1em;
+}
+li{
+    cursor: pointer;
 }
