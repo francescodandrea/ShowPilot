@@ -1,1 +1,2 @@
 //Ui js
+devices();

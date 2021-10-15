@@ -16,6 +16,12 @@ var outputs = easymidi.getOutputs();
 
 app.use('/static', express.static('public'));
 
+app.get('/testdevices', (req, res) => {
+  console.log(`Getting devices`);
+  var inputs = easymidi.getInputs();
+  var outputs = easymidi.getOutputs();
+  res.json({ "inputs": inputs, "outputs": outputs });
+});
 app.get('/testsend', (req, res) => {
   console.log(`Sending`);
   res.json({ state: 'Sent' })
