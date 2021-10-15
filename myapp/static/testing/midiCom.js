@@ -22,7 +22,7 @@ function devices(){
         xhr.open("GET", "http://127.0.0.1:8000/testdevices");
         xhr.send();
 }
-function devices(){
+function setdevices(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
@@ -45,7 +45,7 @@ function devices(){
                     });
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/testdevices");
+        xhr.open("POST", "http://127.0.0.1:8000/testsetdevices");
         xhr.send();
 }
 function sendmidi(){
