@@ -27,3 +27,6 @@ li{
 form{
     padding: 2em;
 }
+#channel,#controller,#value{
+    width: 2em;
+}

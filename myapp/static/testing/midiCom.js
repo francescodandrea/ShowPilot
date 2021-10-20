@@ -1,52 +1,26 @@
 //Midi communication
-function devices(){
+function getdevices(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     console.log(result);
-
-                    result.inputs.forEach(element => {
-                        var option = document.createElement("option");
-                        option.innerHTML=element;
-                        document.querySelector("#inputGroupSelect01").appendChild(option);
-                    });
-
-                    result.outputs.forEach(element => {
-                        var option = document.createElement("option");
-                        option.innerHTML=element;
-                        document.querySelector("#inputGroupSelect02").appendChild(option);
-                    });
+                    devicestoselect(result);
                 }
         });
         xhr.open("GET", "http://127.0.0.1:8000/testdevices");
         xhr.send();
 }
-function setdevices(){
+function senddevices(indevice,outdevice){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     console.log(result);
-
-                    document.querySelector("#inputGroupSelect01").innerHTML="";
-                    document.querySelector("#inputGroupSelect02").innerHTML="";
-
-                    result.inputs.forEach(element => {
-                        var option = document.createElement("option");
-                        option.innerHTML=element;
-                        document.querySelector("#inputGroupSelect01").appendChild(option);
-                    });
-
-                    result.outputs.forEach(element => {
-                        var option = document.createElement("option");
-                        option.innerHTML=element;
-                        document.querySelector("#inputGroupSelect02").appendChild(option);
-                    });
                 }
         });
-        xhr.open("POST", "http://127.0.0.1:8000/testsetdevices");
-        xhr.send();
+        xhr.open("POST", "http://127.0.0.1:8000/setdevices");
+        xhr.send("in="+indevice+"&out="+outdevice);
 }
 function sendmidi(){
     var xhr = new XMLHttpRequest();
