@@ -29,10 +29,10 @@ app.put('/setdevices', (req, res) => {
   if(req.query.in!="undefined")
     myinput = new easymidi.Input(req.query.in);
   if(req.query.out!="undefined")
-    myoutput = new easymidi.Input(req.query.out);
+    myoutput = new easymidi.Output(req.query.out);
 
   console.log('Devices set:'+ req.query.in+", "+req.query.out);
-  //res.json({ "log": "Devices set on server" });
+  res.json({ "log": "Devices set on server", "com": {"in": req.query.in, "out": req.query.out} });
 });
 app.get('/testsend', (req, res) => {
   console.log(`Sending`);
