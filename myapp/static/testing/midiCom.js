@@ -19,8 +19,8 @@ function senddevices(indevice,outdevice){
                     console.log(result);
                 }
         });
-        xhr.open("POST", "http://127.0.0.1:8000/setdevices");
-        xhr.send("in="+indevice+"&out="+outdevice);
+        xhr.open("PUT", "http://127.0.0.1:8000/setdevices?in="+indevice+"&out="+outdevice);
+        xhr.send();
 }
 function sendmidi(){
     var xhr = new XMLHttpRequest();
