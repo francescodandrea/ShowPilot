@@ -22,7 +22,7 @@ function senddevices(indevice,outdevice){
         xhr.open("PUT", "http://127.0.0.1:8000/setdevices?in="+indevice+"&out="+outdevice);
         xhr.send();
 }
-function sendmidi(){
+function ping(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
@@ -30,7 +30,18 @@ function sendmidi(){
                     console.log(result);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/testsend");
+        xhr.open("GET", "http://127.0.0.1:8000/ping");
+        xhr.send();
+}
+function sendcc(ch,co,va){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    console.log(result);
+                }
+        });
+        xhr.open("POST", "http://127.0.0.1:8000/sendcc?channel="+ch+"&controller="+co+"&value="+va);
         xhr.send();
 }
 function recivemidi(){

@@ -43,10 +43,11 @@ app.post('/sendcc', (req, res) => {
 });
 
 
-app.get('/testsend', (req, res) => {
-  console.log(`Sending`);
-  res.json({ state: 'Sent' })
+app.get('/ping', (req, res) => {
+  console.log(`Pong`);
+  res.json({ state: 'Pong' })
 });
+
 app.get('/testrecive', (req, res) => {
   console.log(`Reciving`);
   res.json({ state: 'Recived', note: 100 })

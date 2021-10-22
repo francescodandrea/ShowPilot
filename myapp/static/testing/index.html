@@ -36,10 +36,10 @@
             <p class="nav-link" onclick="getdevices()">Update devices list</p>
         </li>
         <li class="nav-item">
-            <p class="nav-link" onclick="sendmidi()">Send MIDI</p>
+            <p class="nav-link" onclick="ping()">Ping server</p>
         </li>
         <li class="nav-item">
-            <a class="nav-link" onclick="recivemidi()">Recive MIDI</a>
+            <a class="nav-link" onclick="sendccui()">sendcc</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" onclick="setdevices()">Send devices</a>
@@ -73,11 +73,11 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Channel</div>
                 </div>
-                <input type="number" class="form-control" id="controler" placeholder="0">
+                <input type="number" class="form-control" id="channel" placeholder="0">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Controller</div>
                 </div>
-                <input type="number" class="form-control" id="channel" placeholder="0">
+                <input type="number" class="form-control" id="controller" placeholder="0">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Value</div>
                 </div>

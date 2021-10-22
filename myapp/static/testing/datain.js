@@ -38,3 +38,10 @@ function setdevices(){
     
     senddevices(inptxt, outtxt);
 }
+
+function sendccui(){
+    let ch = document.querySelector("#channel").value;
+    let co = document.querySelector("#controller").value;
+    let va = document.querySelector("#value").value;
+    sendcc(ch,co,va);
+}
