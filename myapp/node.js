@@ -25,6 +25,7 @@ app.get('/testdevices', (req, res) => {
   var outputs = easymidi.getOutputs();
   res.json({ "inputs": inputs, "outputs": outputs });
 });
+
 app.put('/setdevices', (req, res) => {
   if(req.query.in!="undefined")
     myinput = new easymidi.Input(req.query.in);
@@ -34,6 +35,14 @@ app.put('/setdevices', (req, res) => {
   console.log('Devices set:'+ req.query.in+", "+req.query.out);
   res.json({ "log": "Devices set on server", "com": {"in": req.query.in, "out": req.query.out} });
 });
+
+app.post('/sendcc', (req, res) => {
+  console.log(req.query.channel+" "+req.query.controller+" "+req.query.value)
+
+  res.json({ "log": "CC sent", "com": {"in": req.query.in, "out": req.query.out} });
+});
+
+
 app.get('/testsend', (req, res) => {
   console.log(`Sending`);
   res.json({ state: 'Sent' })
