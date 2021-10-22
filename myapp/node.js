@@ -39,9 +39,8 @@ app.put('/setdevices', (req, res) => {
 app.post('/sendcc', (req, res) => {
   console.log(req.query.channel+" "+req.query.controller+" "+req.query.value)
 
-  res.json({ "log": "CC sent", "com": {"in": req.query.in, "out": req.query.out} });
+  res.json({ "log": "CC sent "+req.query.channel+' '+req.query.controller+' '+req.query.value, "com": {"in": req.query.in, "out": req.query.out} });
 });
-
 
 app.get('/ping', (req, res) => {
   console.log(`Pong`);
