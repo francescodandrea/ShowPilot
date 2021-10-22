@@ -25,13 +25,14 @@ app.get('/testdevices', (req, res) => {
   var outputs = easymidi.getOutputs();
   res.json({ "inputs": inputs, "outputs": outputs });
 });
-app.all('/setdevices', (req, res) => {
-  res.send('POST request to the homepage');
-  console.log(req.params.in);
-  myinput = new easymidi.Input(req.in);
-  myoutput = new easymidi.Input(req.out);
-  console.log('Devices set:'+ req.in+", "+req.out);
-  res.json({ "log": "Devices set on server" });
+app.put('/setdevices', (req, res) => {
+  if(req.query.in!="undefined")
+    myinput = new easymidi.Input(req.query.in);
+  if(req.query.out!="undefined")
+    myoutput = new easymidi.Input(req.query.out);
+
+  console.log('Devices set:'+ req.query.in+", "+req.query.out);
+  //res.json({ "log": "Devices set on server" });
 });
 app.get('/testsend', (req, res) => {
   console.log(`Sending`);

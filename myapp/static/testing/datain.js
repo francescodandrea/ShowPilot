@@ -22,5 +22,19 @@ function devicestoselect(result){
 }
 
 function setdevices(){
-    senddevices("devicio in", "devicio out");
+    let inp = document.querySelector("#inputGroupSelect01");
+    let out = document.querySelector("#inputGroupSelect02");
+    let inptxt; let outtxt;
+    try {
+        inptxt = inp.options[inp.selectedIndex].text;
+    } catch (error) {
+        if(inptxt==undefined){inptxt="undefined";}
+    }
+    try {
+        outtxt = out.options[out.selectedIndex].text;
+    } catch (error) {
+        if(outtxt==undefined){outtxt="undefined";}
+    }
+    
+    senddevices(inptxt, outtxt);
 }
