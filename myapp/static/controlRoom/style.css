@@ -1,1 +1,50 @@
 /*Style*/
+body{
+    background-color: #e7eaeb;
+    user-select: none;
+}
+nav.spacenav{
+    padding-left: 1em;
+    cursor:default;
+}
+nav.mainnav{
+    flex-direction: initial;
+    width: fit-content;
+    height: 100%;
+    align-items: normal!important;
+    padding-left: 1em;
+    padding-right: 3em;
+}
+.bg-dark{background-color: #1f2226!important;}
+body > nav > a{color:white!important};
+li{
+    height: 2em;
+    margin-bottom:1em;
+}
+li{
+    cursor: pointer;
+}
+li:last-child{
+    margin-top:auto;
+}
+#container{
+    display: flex;
+    width: 100%;
+    height: calc(100% - 3em);
+    position: fixed;
+}
+#channel,#controller,#value{
+    width: 5em;
+}
+
+section{
+    position:absolute;
+    display: none;
+    opacity: 0;
+    padding:2em;
+    transition: opacity 0.5s;
+}
+
+.bi {
+    font-size: 2em;
+}
