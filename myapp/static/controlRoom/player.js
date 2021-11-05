@@ -21,7 +21,7 @@
                 once sent it's the server to execute the sequence
 */
 
-var testseq={ "encoding": 0, "seq": {"0": , "1": req.query.out} };
+var testseq = {"encoding": 0, "seq": {"0": "a", "1": "s"}};
 
 
 function play(){

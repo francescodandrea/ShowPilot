@@ -48,3 +48,14 @@ section{
 .bi {
     font-size: 2em;
 }
+
+.scene{
+    height: 6em;
+    width: 11em;
+    background-image: linear-gradient(139deg, rgba(6,6,116,1) 0%, rgba(18,151,179,1) 100%);
+    border-radius: 8px;
+    outline: white solid 2px;
+    box-shadow: -1px 1px 15px 0px black;
+    color: white;
+    padding: 0.5em;
+}

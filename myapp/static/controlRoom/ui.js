@@ -1,5 +1,5 @@
 //Ui js
-var opensection="live";
+var opensection="scenes";
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
 
