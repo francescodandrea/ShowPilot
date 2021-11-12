@@ -48,14 +48,30 @@ section{
 .bi {
     font-size: 2em;
 }
-
-.scene{
+.category {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+.scene {
     height: 6em;
     width: 11em;
-    background-image: linear-gradient(139deg, rgba(6,6,116,1) 0%, rgba(18,151,179,1) 100%);
+    background-image: linear-gradient(139deg, rgba(6,6,116,1) 0%, rgb(60 62 80) 100%);
     border-radius: 8px;
-    outline: white solid 2px;
-    box-shadow: -1px 1px 15px 0px black;
+    outline: #ffffff solid 3px;
+    outline-offset: -1.5px;
+    letter-spacing: -0.05em;
+    box-shadow: 5px 6px 20px 0px #09097270;
     color: white;
-    padding: 0.5em;
+    padding: 0.7em;
+    padding-top: 0.5em;
+    transition: 0.1s all;
+}
+.scene:hover{
+    transform: scale(0.98);
+}
+.scene:active {
+    outline-offset: 38.5px;
+    outline: #ffffff00 solid 3px;
+    transform: scale(0.9);
 }
