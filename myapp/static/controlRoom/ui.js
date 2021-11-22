@@ -3,8 +3,6 @@ var opensection="scenes";
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
 
-getdevices();
-
 //section work
 function section(x){
     let prev=opensection;
