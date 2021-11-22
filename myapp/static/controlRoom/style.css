@@ -1,4 +1,4 @@
-/*Style*/
+/*########## GENERAL #########*/
 body{
     background-color: #e7eaeb;
     user-select: none;
@@ -48,7 +48,10 @@ section{
 .bi {
     font-size: 2em;
 }
+/*########## SCENE COLLECTION #########*/
 .category {
+}
+.sceneholder {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
@@ -73,5 +76,18 @@ section{
 .scene:active {
     outline-offset: 38.5px;
     outline: #ffffff00 solid 3px;
+    transform: scale(0.9);
+}
+.scene.create {
+    background-image: none;
+    outline: #aab0b2 dashed 3px;
+    box-shadow: none;
+    color: #aab0b2;
+    text-align: center;
+    font-size: 16px;
+    line-height: 5em;
+}
+.scene.create:active {
+    outline-offset: 0px;
     transform: scale(0.9);
 }
