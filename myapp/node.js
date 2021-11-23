@@ -38,6 +38,12 @@ app.put('/setdevices', (req, res) => {
 
 app.post('/sendcc', (req, res) => {
   console.log(req.query.channel+" "+req.query.controller+" "+req.query.value)
+  
+  myoutput.send('cc', {
+    channel: parseInt(req.query.channel),
+    controller: parseInt(req.query.controller),
+    value: parseInt(req.query.value)
+  });
 
   res.json({ "log": "CC sent "+req.query.channel+' '+req.query.controller+' '+req.query.value, "com": {"in": req.query.in, "out": req.query.out} });
 });
