@@ -21,7 +21,7 @@
                 once sent it's the server to execute the sequence
 */
 
-var testseq = {"encoding": 0, "seq": {"0": "a", "1": "s"}};
+var testseq = {"meta": {"name": "Intro", "show": "sgt2022", "author": "user1", "encoding": 3},"seq": {"0": "a", "1": "s"}};
 
 
 function play(){
