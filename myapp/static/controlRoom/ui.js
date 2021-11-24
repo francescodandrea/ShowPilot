@@ -32,22 +32,26 @@ function collectionin(data){
     p.innerHTML="Tutte le scene";
     container.appendChild(p);
 
-    data.forEach(element => {
-        let scene = document.createElement("div");
-        scene.className="scene";
-        scene.innerHTML=element.name;
-        if(element.pattern) scene.classList.add(element.pattern);
-        if(element.types)
-            element.types.forEach(type => {
-                scene.classList.add(type);
-            });
-        holder.appendChild(scene);
+    data.forEach((element, i) => {
+        if(element.name){//if scene isnt hidden
+            let scene = document.createElement("div");
+            scene.className="scene";
+            scene.innerHTML=element.name;
+            if(element.pattern) scene.classList.add(element.pattern);
+            if(element.types)
+                element.types.forEach(type => {
+                    scene.classList.add(type);
+                });
+            scene.setAttribute("onclick","goscene("+i+")");
+            holder.appendChild(scene);
+        }
     });
 
     //add create button
     let scene = document.createElement("div");
     scene.className="scene create";
     scene.innerHTML="+";
+    scene.setAttribute("onclick","linkscene()");
     holder.appendChild(scene);
 
     //append to container

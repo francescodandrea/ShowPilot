@@ -71,3 +71,8 @@ function recivemidi(){
         xhr.open("GET", "http://127.0.0.1:8000/testrecive");
         xhr.send();
 }
+function goscene(i){
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:8000/goscene?index="+i);
+        xhr.send();
+}

@@ -72,6 +72,16 @@ app.post('/sendcc', (req, res) => {
 
   res.json({ "log": "CC sent "+req.query.channel+' '+req.query.controller+' '+req.query.value, "com": {"in": req.query.in, "out": req.query.out} });
 });
+app.post('/goscene', (req, res) => {
+  myoutput.send('cc', {
+    channel: req.query.index,
+    controller: 0,
+    value: 0
+  });
+
+  console.log("goscene "+req.query.index);
+  res.send();
+});
 
 //FROM MIDI
 
