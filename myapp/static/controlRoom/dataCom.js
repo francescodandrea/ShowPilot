@@ -1,4 +1,6 @@
 //NET
+
+//CLIENT SERVER CONNECTION
 async function pingcom(){
     return new Promise(resolve => {
     var xhr = new XMLHttpRequest();
@@ -16,7 +18,10 @@ async function pingcom(){
 function ping(){
     statusupd("server",pingcom());
 };
-//ping repeat
+//ping start and repeat
+setTimeout(() => {
+    statusupd("server",pingcom());
+}, 1000);
 setInterval(() => {
     statusupd("server",pingcom());
-}, 60000);
+}, 10000);

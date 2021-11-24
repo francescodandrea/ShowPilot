@@ -23,11 +23,15 @@ var myoutput=false;
 //SETTINGS
 
 //SETUP COMMUNICATION
-app.get('/devices', (req, res) => {
+app.get('/devicelist', (req, res) => {
   console.log(`Getting devices`);
   let inputs = easymidi.getInputs();
   let outputs = easymidi.getOutputs();
   res.json({ "inputs": inputs, "outputs": outputs });
+});
+app.get('/devices', (req, res) => {
+  console.log(`Getting devices`);
+  res.json({ "input": myinput, "output": myoutput });
 });
 app.post('/devices', (req, res) => {
   if(req.query.in!="undefined")
@@ -70,7 +74,7 @@ app.put('/setdevices', (req, res) => {
   res.json({ "log": "Devices set on server", "com": {"in": req.query.in, "out": req.query.out} });
 });
 app.get('/ping', (req, res) => {
-  console.log(`Pong`);
+  //console.log(`Pong`);
   res.json({ state: 'Pong' })
 });
 app.get('/controlRoom', (req, res) => {
