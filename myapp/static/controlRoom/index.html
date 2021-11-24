@@ -24,8 +24,8 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark spacenav">
             <a class="navbar-brand">Control room</a>
             <p id="status_server" onclick="ping()" class="status unk">Server</p>
-            <p id="status_miin" class="status unk">MIDI in</p>
-            <p id="status_miout" class="status unk">MIDI out</p>
+            <p id="status_miin" onclick="getdevices()" class="status unk">MIDI in</p>
+            <p id="status_miout" onclick="getdevices()" class="status unk">MIDI out</p>
       </nav>
   
 <div id="container">  
@@ -86,7 +86,7 @@
 
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                    <button type="button" class="btn btn-secondary"><i class="bi bi-arrow-clockwise" onclick="getdevices()"></i> Refresh</button>
+                    <button type="button" class="btn btn-secondary" onclick="getdevicelist()"><i class="bi bi-arrow-clockwise"></i> Refresh</button>
                     </div>
                     <button type="button" class="btn btn-outline-secondary" onclick="setdevices()">Set</button>
                 </div>
