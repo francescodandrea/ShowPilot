@@ -6,7 +6,7 @@ function getdevicelist(){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
-                    console.log(result);
+                    //console.log(result);
                     devicestoselect(result);
                 }
         });
