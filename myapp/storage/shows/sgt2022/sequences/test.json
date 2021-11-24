@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "name": "Intro",
+        "show": "sgt2022",
+        "author": "user1",
+        "encoding": 3
+    },
+    "seq": {
+        "1.21": 1,
+        "5.18": 2
+    }
+}

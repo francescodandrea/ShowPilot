@@ -1,0 +1,22 @@
+{
+    "0": {
+        "name": "Dark",
+        "color1": "#000",
+        "color2": "#000",
+        "types": ["black"]
+    },
+    "1": {
+        "name": "Red",
+        "color1": "#f00",
+        "color2": "#900",
+        "pattern": "high",
+        "types": ["back",""]
+    },
+    "2": {
+        "name": "Blue",
+        "color1": "#00f",
+        "color2": "#009",
+        "pattern": "dots",
+        "types": ["audience","moving"]
+    }
+}
