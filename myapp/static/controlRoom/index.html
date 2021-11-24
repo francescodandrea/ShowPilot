@@ -10,9 +10,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
     
-    <script src="datain.js" defer></script>
+    <script src="dataCom.js" defer></script>
     <script src="midiCom.js" defer></script>
     <script src="ui.js" defer></script>
     <script src="player.js" defer></script>
@@ -21,9 +20,12 @@
 
 </head>
 <body>
-    <!-- A horizontal spacer nav -->
+    <!-- A horizontal nav -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark spacenav">
             <a class="navbar-brand">Control room</a>
+            <p id="status_server" onclick="ping()" class="status unk">Server</p>
+            <p id="status_miin" class="status unk">MIDI in</p>
+            <p id="status_miout" class="status unk">MIDI out</p>
       </nav>
   
 <div id="container">  
@@ -73,9 +75,9 @@
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Running scene" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" onclick="play()"><i class="bi bi-play-fill"></i></button>
-                  <button class="btn btn-outline-secondary" type="button"><i class="bi bi-pause-fill"></i></button>
-                  <button class="btn btn-outline-secondary" type="button"><i class="bi bi-stop-fill"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" onclick="play()"><i class="bi biduble bi-play-fill"></i></button>
+                  <button class="btn btn-outline-secondary" type="button"><i class="bi biduble bi-pause-fill"></i></button>
+                  <button class="btn btn-outline-secondary" type="button"><i class="bi biduble bi-stop-fill"></i></button>
                 </div>
               </div>
         </section>
@@ -84,9 +86,16 @@
 
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Input device</label>
+                    <button type="button" class="btn btn-secondary"><i class="bi bi-arrow-clockwise" onclick="getdevices()"></i> Refresh</button>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01" onchange="setdevices()">
+                    <button type="button" class="btn btn-outline-secondary" onclick="setdevices()">Set</button>
+                </div>
+
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Input device</label>
+                    </div>
+                    <select class="custom-select" id="inputGroupSelect01">
                     </select>
                 </div>
 
@@ -94,7 +103,7 @@
                     <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Output device</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect02" onchange="setdevices()">
+                    <select class="custom-select" id="inputGroupSelect02">
                     </select>
                 </div>
 
