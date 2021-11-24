@@ -1,4 +1,4 @@
-//Midi communication
+//MIDI COM
 function getdevices(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
@@ -8,7 +8,7 @@ function getdevices(){
                     devicestoselect(result);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/testdevices");
+        xhr.open("GET", "http://127.0.0.1:8000/devices");
         xhr.send();
 }
 function senddevices(indevice,outdevice){
@@ -20,17 +20,6 @@ function senddevices(indevice,outdevice){
                 }
         });
         xhr.open("PUT", "http://127.0.0.1:8000/setdevices?in="+indevice+"&out="+outdevice);
-        xhr.send();
-}
-function ping(){
-    var xhr = new XMLHttpRequest();
-        xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
-                    var result=JSON.parse(this.responseText);
-                    console.log(result);
-                }
-        });
-        xhr.open("GET", "http://127.0.0.1:8000/ping");
         xhr.send();
 }
 function sendcc(ch,co,va){
