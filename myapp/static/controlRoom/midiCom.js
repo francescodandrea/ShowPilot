@@ -21,6 +21,7 @@ function getdevices(){
                     //console.log(result);
                     statusupd("miin",result.input);
                     statusupd("miout",result.output);
+                    serverdevices(result.input,result.output);
                 }
         });
         xhr.open("GET", "http://127.0.0.1:8000/devices");
@@ -35,10 +36,11 @@ function senddevices(indevice,outdevice){
                     getdevices();
                 }
         });
-        xhr.open("PUT", "http://127.0.0.1:8000/setdevices?in="+indevice+"&out="+outdevice);
+        xhr.open("PUT", "http://127.0.0.1:8000/devices?in="+indevice+"&out="+outdevice);
         xhr.send();
 }
 //ping start and repeat
+getdevicelist(); //get full list on launch
 setTimeout(() => {
     getdevices();
 }, 1000);

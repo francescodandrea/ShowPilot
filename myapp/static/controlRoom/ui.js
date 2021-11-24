@@ -18,7 +18,7 @@ function section(x){
 }
 
 //devices upd
-//----set get
+//----set
 function devicestoselect(result){
     //set
     let inlist = document.querySelector("#inputGroupSelect01");
@@ -56,6 +56,13 @@ function setdevices(){
     }
     
     senddevices(inptxt, outtxt);
+}
+function serverdevices(sinp,sout){
+    let inp = document.querySelector("#inputGroupSelect01");
+    let out = document.querySelector("#inputGroupSelect02");
+    
+    inp.value=sinp;
+    out.value=sout;
 }
 //----devices status
 function statusupd(element, bool){
