@@ -91,6 +91,12 @@ body > nav > p:nth-child(2){
 .form-inline{
     gap: 1em;
 }
+hr {
+    flex-basis: 100%;
+    border-top: 2px solid rgb(0 0 0 / 9%);
+    margin: 0;
+}
+
 /*########## SCENE COLLECTION #########*/
 .sceneholder {
     display: flex;
@@ -132,6 +138,7 @@ body > nav > p:nth-child(2){
     outline-offset: 0px;
     transform: scale(0.9);
 }
+
 /*########## DEVICES #########*/
 #channel,#controller,#value{
     width: 5em;
