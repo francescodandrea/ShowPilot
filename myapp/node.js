@@ -44,6 +44,22 @@ app.put('/devices', (req, res) => {
   savedevices();
 });
 
+//SETUP COMMUNICATION
+app.get('/collection', async (req, res) => {
+  res.send(await collection())
+  console.log("sent collection");
+});
+app.put('/collection', (req, res) => {
+  if(req.query.in!="undefined")
+    myinput = new easymidi.Input(req.query.in);
+  if(req.query.out!="undefined")
+    myoutput = new easymidi.Output(req.query.out);
+
+  console.log('Devices set:'+ req.query.in+", "+req.query.out);
+  res.json({ "log": "Devices set on server", "com": {"in": req.query.in, "out": req.query.out} });
+  savedevices();
+});
+
 //TO MIDI
 app.post('/sendcc', (req, res) => {
   console.log(req.query.channel+" "+req.query.controller+" "+req.query.value)
@@ -83,6 +99,7 @@ app.listen(port, () => {
 });
 
 //READWRITE FILE
+//----------CONFIG
 //const config = await config();
 async function config(){
   return new Promise(resolve => {
@@ -129,5 +146,34 @@ async function startupconfigs(){
 
     console.log('Devices set:'+ myinput.name+", "+myoutput.name);
 }
+
+//----------SCENE COLLECTION
+async function collection(){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/scenes/scenes.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
+function collectionsave(collect){
+  const jsonString = JSON.stringify(collect);
+  fs.writeFile("storage/shows/sgt2022/scenes/scenes.json", jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('config saved')
+    }
+})
+}
+
 
 //npm start

@@ -25,3 +25,18 @@ setTimeout(() => {
 setInterval(() => {
     statusupd("server",pingcom());
 }, 10000);
+
+//SCENE COLLECTION
+collection();
+function collection(){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    collectionin(result);
+                    //console.log(result);
+                }
+        });
+        xhr.open("GET", "http://127.0.0.1:8000/collection");
+        xhr.send();
+}

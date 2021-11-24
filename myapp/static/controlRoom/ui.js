@@ -1,9 +1,9 @@
 //Ui js
-var opensection="devices"; //startup screen
+var opensection="scenes"; //startup screen
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
 
-//section work
+//################ SECTIONS WORK
 function section(x){
     let prev=opensection;
     if(x!=prev){
@@ -17,6 +17,46 @@ function section(x){
     }
 }
 
+//################ SCENE COLLECTION
+function collectionin(data){
+    
+    let container = document.querySelector("#scenecollection");
+    container.innerHTML="";
+
+    let category = document.createElement("div");
+    category.className="category";
+
+    let holder = document.createElement("div"),
+        p = document.createElement("p");
+    holder.className="sceneholder";
+    p.innerHTML="Tutte le scene";
+    container.appendChild(p);
+
+    data.forEach(element => {
+        let scene = document.createElement("div");
+        scene.className="scene";
+        scene.innerHTML=element.name;
+        if(element.pattern) scene.classList.add(element.pattern);
+        if(element.types)
+            element.types.forEach(type => {
+                scene.classList.add(type);
+            });
+        holder.appendChild(scene);
+    });
+
+    //add create button
+    let scene = document.createElement("div");
+    scene.className="scene create";
+    scene.innerHTML="+";
+    holder.appendChild(scene);
+
+    //append to container
+    container.appendChild(holder);
+
+}
+
+
+//################ DEVICES
 //devices upd
 //----set
 function devicestoselect(result){
