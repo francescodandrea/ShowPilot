@@ -32,20 +32,20 @@ function collectionin(data){
     p.innerHTML="Tutte le scene";
     container.appendChild(p);
 
-    data.forEach((element, i) => {
-        if(element.name){//if scene isnt hidden
+    for (let [key, value] of Object.entries(data)) {
+        if(value.name){//if scene isnt hidden
             let scene = document.createElement("div");
             scene.className="scene";
-            scene.innerHTML=element.name;
-            if(element.pattern) scene.classList.add(element.pattern);
-            if(element.types)
-                element.types.forEach(type => {
+            scene.innerHTML=value.name;
+            if(value.pattern) scene.classList.add(value.pattern);
+            if(value.types)
+                value.types.forEach(type => {
                     scene.classList.add(type);
                 });
-            scene.setAttribute("onclick","goscene("+i+")");
+            scene.setAttribute("onclick","goscene("+key+")");
             holder.appendChild(scene);
         }
-    });
+    };
 
     //add create button
     let scene = document.createElement("div");
