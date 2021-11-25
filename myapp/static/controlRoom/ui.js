@@ -1,5 +1,5 @@
 //Ui js
-var opensection="scenes"; //startup screen
+var opensection="sequences"; //startup screen
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
 

@@ -21,8 +21,7 @@ var myoutput=false;
 startupconfigs();
 
 //SETTINGS
-
-//SETUP COMMUNICATION
+//setup communication
 app.get('/devicelist', (req, res) => {
   console.log(`Getting devices`);
   let inputs = easymidi.getInputs();
@@ -44,20 +43,19 @@ app.put('/devices', (req, res) => {
   savedevices();
 });
 
-//SETUP COMMUNICATION
+//storage
 app.get('/collection', async (req, res) => {
   res.send(await collection())
   console.log("sent collection");
 });
 app.put('/collection', (req, res) => {
-  if(req.query.in!="undefined")
-    myinput = new easymidi.Input(req.query.in);
-  if(req.query.out!="undefined")
-    myoutput = new easymidi.Output(req.query.out);
-
-  console.log('Devices set:'+ req.query.in+", "+req.query.out);
-  res.json({ "log": "Devices set on server", "com": {"in": req.query.in, "out": req.query.out} });
-  savedevices();
+});
+app.get('/sequence', async (req, res) => {
+  res.send(await sequence(req.query.file))
+  console.log("sent sequance");
+});
+app.put('/sequence', (req, res) => {
+  
 });
 
 //TO MIDI
@@ -184,6 +182,32 @@ function collectionsave(collect){
     }
 })
 }
-
+//----------SEQUENCE
+async function sequence(name){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/sequences/"+name+".json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
+function sequencename(collect, name){
+  const jsonString = JSON.stringify(collect);
+  fs.writeFile("storage/shows/sgt2022/sequences/"+name+".json", jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('sequence saved')
+    }
+})
+}
 
 //npm start

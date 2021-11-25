@@ -40,3 +40,29 @@ function collection(){
         xhr.open("GET", "http://127.0.0.1:8000/collection");
         xhr.send();
 }
+//SEQUENCE
+var mysequence;
+sequence("test");
+function sequence(name){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    console.log(result);
+                    mysequence=result;
+                }
+        });
+        xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
+        xhr.send();
+}
+function savesequence(name,sequence){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    console.log(result);
+                }
+        });
+        xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
+        xhr.send();
+}
