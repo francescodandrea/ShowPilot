@@ -33,7 +33,7 @@ async function pingobs(){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result= JSON.parse(this.responseText);
-                    console.log(result);
+                    //console.log(result);
                     if (result.state=="pong") {resolve(true);} else resolve(false)
                 }
         });
@@ -48,7 +48,6 @@ setTimeout(() => {
 setInterval(() => {
     statusupd("obs",pingobs());
 }, 10000);
-
 
 //SCENE COLLECTION
 collection();
@@ -72,7 +71,7 @@ function sequence(name){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
-                    console.log(result);
+                    //console.log(result);
                     mysequence=result;
                 }
         });
@@ -90,3 +89,19 @@ function savesequence(name,sequence){
         xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
         xhr.send();
 }
+
+//OBS SCENELIST
+async function obsscenelist(){
+    return new Promise(resolve => {
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result= JSON.parse(this.responseText);
+                    //console.log(result.obsscenelist);
+                    resolve(result.obsscenelist);
+                }
+        });
+        xhr.open("GET", "http://127.0.0.1:8000/obsscenelist");
+        xhr.send();
+    }
+)};

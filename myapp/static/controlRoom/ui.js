@@ -59,6 +59,33 @@ function collectionin(data){
 
 }
 
+//################ SEQUENCE EDITOR
+selectobsupd();
+async function selectobsupd(){
+    let list= await obsscenelist();
+    let selects=document.querySelectorAll("#seqcomposer > div > select");
+
+    let options = [];
+    
+    let option = document.createElement("option");
+    option.value=null
+    option.innerHTML=null;
+    options.push(option);
+
+    list.forEach(element => {
+        let option = document.createElement("option");
+        option.innerHTML=element;
+        options.push(option);
+    });
+
+    selects.forEach(select => {
+        select.innerHTML="";
+        options.forEach(option => {
+            select.appendChild(option.cloneNode(true));
+        });
+    });
+}
+
 
 //################ DEVICES
 //devices upd

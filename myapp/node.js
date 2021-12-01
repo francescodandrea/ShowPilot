@@ -1,6 +1,8 @@
 const express = require('express'); //express
 const app = express();
 var easymidi = require('easymidi'); //midi com
+const OBSWebSocket = require('obs-websocket-js'); //obs
+const obs = new OBSWebSocket();
 const cors = require('cors'); //cors made east
 const fs = require("fs"); //file reading
 
@@ -18,7 +20,9 @@ app.use('/static', express.static('public'));
 var myinput=false;
 var myoutput=false;
 
-startupconfigs();
+startupconfigsmidi();
+
+obs.connect({ address: 'localhost:4444'})
 
 //SETTINGS
 //setup communication
@@ -83,6 +87,7 @@ app.post('/goscene', (req, res) => {
 
 //FROM MIDI
 
+
 //testing only
 app.get('/testdevices', (req, res) => {
   console.log(`Getting devices`);
@@ -99,6 +104,32 @@ app.get('/controlRoom', (req, res) => {
 });
 app.get('/testing', (req, res) => {
   res.sendFile('static/testing/index.html', {root: __dirname })
+});
+
+//TO OBS
+app.get('/obsscenelist', (req, res) => {
+  console.log(`Getting obs scenes`);
+  let scenelist=[];
+  obs.send('GetSceneList').then(data => {
+    data.scenes.forEach(scene => {
+      scenelist.push(scene.name);
+    });
+    res.json({ "obsscenelist": scenelist });
+  });
+
+});
+function triggerobsscene(name){
+  obs.send('SetCurrentScene', {
+        'scene-name': name
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+//FROM OBS
+obs.on('SwitchScenes', data => {
+  //console.log(`New Active Scene: ${data.sceneName}`);
 });
 
 //LISTEN PORT
@@ -144,7 +175,7 @@ async function savedevices(){
   configsave(configs);
 }
 //LOADING CONFIGs
-async function startupconfigs(){
+async function startupconfigsmidi(){
   var configs = await config();
 
   if(easymidi.getInputs().includes(configs.devices.input))
