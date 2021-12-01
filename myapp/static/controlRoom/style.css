@@ -139,6 +139,46 @@ hr {
     transform: scale(0.9);
 }
 
+/*########## SEQUENCE EDITOR #########*/
+#sequences > h2{
+    display: inline;
+}
+#sqplayer {
+    display: inline-block;
+    margin-left: 20px;
+}
+#sqplayer {
+    display: inline-block;
+    margin-left: 20px;
+}
+#seqcomposer{
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 1em;
+    height: fit-content;
+    position: absolute;
+}
+.trigger {
+    border-radius: 3px;
+    padding: 5px;
+    transition: 0.1s all;
+    outline: solid 2px #aab0b2;
+}
+.trigger.create {
+    outline: #95999a dashed 2px;
+    color: #aab0b2;
+    text-align: center;
+    font-size: 16px;
+}
+.trigger:hover{
+    transform: scale(0.99);
+}
+.trigger.create:active{
+    transform: scale(0.93);
+}
+
 /*########## DEVICES #########*/
 #channel,#controller,#value{
     width: 5em;
