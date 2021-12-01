@@ -26,6 +26,30 @@ setInterval(() => {
     statusupd("server",pingcom());
 }, 10000);
 
+//OBS CONNECTION
+async function pingobs(){
+    return new Promise(resolve => {
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result= JSON.parse(this.responseText);
+                    console.log(result);
+                    if (result.state=="pong") {resolve(true);} else resolve(false)
+                }
+        });
+        xhr.open("GET", "http://127.0.0.1:8000/ping");
+        xhr.send();
+    }
+)};
+//ping start and repeat
+setTimeout(() => {
+    statusupd("obs",pingobs());
+}, 1000);
+setInterval(() => {
+    statusupd("obs",pingobs());
+}, 10000);
+
+
 //SCENE COLLECTION
 collection();
 function collection(){
