@@ -50,7 +50,6 @@ setInterval(() => {
 }, 10000);
 
 //SCENE COLLECTION
-collection();
 function collection(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
@@ -63,9 +62,26 @@ function collection(){
         xhr.open("GET", "http://127.0.0.1:8000/collection");
         xhr.send();
 }
+async function scenecollist(){
+    var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    let list=[];
+                    for (var key in result) {
+                        let value = result[key].name;
+                        list.push([value,key]);
+                    }
+                    resolve(list);
+                }
+        });
+        xhr.open("GET", "http://127.0.0.1:8000/collection");
+        xhr.send();
+    });
+}
 //SEQUENCE
 var mysequence;
-sequence("test");
 function sequence(name){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {

@@ -63,14 +63,27 @@
         </section>
         <section id="sequences">
             <h2>Sequence editor</h2>
+            <div id="sqplayer">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Running scene" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" onclick="play()"><i class="bi biduble bi-play-fill"></i></button>
+                    <button class="btn btn-outline-secondary" type="button"><i class="bi biduble bi-pause-fill"></i></button>
+                    <button class="btn btn-outline-secondary" type="button"><i class="bi biduble bi-stop-fill"></i></button>
+                    </div>
+                </div>
+            </div>
             <div id="seqcomposer">
                 <div class="trigger">
                     <input type="number" min="0" max="999999" value="0">
                     <select>
                         <option>Choice</option>
                     </select>
+                    <select>
+                        <option>Choice</option>
+                    </select>
                 </div>
-                <div class="trigger add">
+                <div class="trigger create">
                     +
                 </div>
             </div>
@@ -84,7 +97,7 @@
                   <button class="btn btn-outline-secondary" type="button"><i class="bi biduble bi-pause-fill"></i></button>
                   <button class="btn btn-outline-secondary" type="button"><i class="bi biduble bi-stop-fill"></i></button>
                 </div>
-              </div>
+            </div>
         </section>
         <section id="devices">
             <form class="form-inline">

@@ -1,7 +1,9 @@
 //Ui js
+
 var opensection="sequences"; //startup screen
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
+section(opensection);
 
 //################ SECTIONS WORK
 function section(x){
@@ -14,6 +16,16 @@ function section(x){
             document.querySelector("#"+x).style.opacity=1;
             document.querySelector("#"+prev).style.display="none";
         }, 500);
+    }
+    switch (x) {
+        case "scenes":
+            collection();
+            break;
+        case "sequences":
+            sequence("test");
+            selectobsupd();
+            selectsceneupd();
+            break;
     }
 }
 
@@ -60,10 +72,10 @@ function collectionin(data){
 }
 
 //################ SEQUENCE EDITOR
-selectobsupd();
+
 async function selectobsupd(){
     let list= await obsscenelist();
-    let selects=document.querySelectorAll("#seqcomposer > div > select");
+    let selects=document.querySelectorAll("#seqcomposer > div > select:nth-of-type(1)");
 
     let options = [];
     
@@ -75,6 +87,31 @@ async function selectobsupd(){
     list.forEach(element => {
         let option = document.createElement("option");
         option.innerHTML=element;
+        options.push(option);
+    });
+
+    selects.forEach(select => {
+        select.innerHTML="";
+        options.forEach(option => {
+            select.appendChild(option.cloneNode(true));
+        });
+    });
+}
+async function selectsceneupd(){
+    let list= await scenecollist();
+    let selects=document.querySelectorAll("#seqcomposer > div > select:nth-of-type(2)");
+
+    let options = [];
+    
+    let option = document.createElement("option");
+    option.value=null
+    option.innerHTML=null;
+    options.push(option);
+
+    list.forEach(element => {
+        let option = document.createElement("option");
+        option.innerHTML=element[0];
+        option.value=element[1];
         options.push(option);
     });
 
