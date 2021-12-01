@@ -13,12 +13,15 @@
     "cors": "^2.8.5",
     "easymidi": "^2.0.5",
     "express": "^4.17.1",
-    "midi": "^2.0.0"
+    "midi": "^2.0.0",
+    "obs-websocket-js": "^4.0.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
   },
   "nodemonConfig": {
-    "ignore": ["storage/*.json"]
+    "ignore": [
+      "storage/*.json"
+    ]
   }
 }
