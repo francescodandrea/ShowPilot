@@ -178,7 +178,20 @@ hr {
 .trigger.create:active{
     transform: scale(0.93);
 }
-
+.trigger > input, .trigger > select {
+    padding: .375rem .75rem;
+    margin: 2px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+.trigger > input:focus, .trigger > select:focus {
+    outline: none;
+}
 /*########## DEVICES #########*/
 #channel,#controller,#value{
     width: 5em;

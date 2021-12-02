@@ -90,7 +90,7 @@ function sequence(name){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
-                    //console.log(result);
+                    console.log(result);
                     mysequence=result;
                     triggersupd(result.seq);
                     editoruiupd(result.meta,result.obsscene);
@@ -99,16 +99,16 @@ function sequence(name){
         xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
         xhr.send();
 }
-function savesequence(name,sequence){
+function sequenceeditupd(name,sequence){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
-                    var result=JSON.parse(this.responseText);
+                    var result=JSON.parse(this.respoSnseText);
                     console.log(result);
                 }
         });
         xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
-        xhr.send();
+        xhr.send(sequence);
 }
 
 //OBS SCENELIST

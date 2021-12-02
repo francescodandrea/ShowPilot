@@ -112,6 +112,21 @@ async function triggersupd(seq){
 function editoruiupd(meta, obsscene){
     document.querySelector("#sqplayer > div > input").value=obsscene;
 }
+function sequencesave(){
+    let name = document.querySelector("#sqplayer > div > input").value;
+    let sequence=[];
+
+    let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
+    trigger.forEach(el => {
+        
+        let key = el.childNodes[0].value;
+        let val = el.childNodes[1].value;
+        let obj={};
+        obj[key]=val;
+        sequence.push(obj);
+    });
+    sequenceeditupd(name,sequence);
+}
 
 //precomp options fields for select elems
 async function optionsobs(){
