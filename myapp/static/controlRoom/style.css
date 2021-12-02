@@ -5,10 +5,12 @@ body{
 }
 /*menu and structure*/
 section{
-    position:absolute;
+    position: relative;
     display: none;
     opacity: 0;
     padding:2em;
+    overflow: hidden;
+    height: 100%;
     transition: opacity 0.5s;
 }
 nav.spacenav{
@@ -156,14 +158,20 @@ hr {
     padding-top: 1em;
     width: fit-content;
 }
-#seqcomposer{
+#seqcomposer {
     margin-top: 24px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
     gap: 1em;
-    height: fit-content;
+    padding: 0.5em;
+    padding-right: 2em;
+    height: 68%;
+    width: fit-content;
     position: absolute;
+    outline: solid 2px #aab0b230;
+    border-radius: 4px;
+    overflow-y: scroll;
 }
 .trigger {
     border-radius: 3px;
@@ -208,3 +216,38 @@ hr {
 #channel,#controller,#value{
     width: 5em;
 }
+
+/*########## SCROLLBAR ############*/
+::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #adadad;
+    border: 0px none #ffffff;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #adadad;
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: #949494;
+  }
+  ::-webkit-scrollbar-track {
+    background: #e7eaeb;
+    border: 0px none #ffffff;
+    border-radius: 0px;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: #e7eaeb;
+  }
+  ::-webkit-scrollbar-track:active {
+    background: #e7eaeb;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }

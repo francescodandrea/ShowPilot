@@ -78,6 +78,7 @@ async function triggersupd(data){
     
     let optionsobsdat = await optionsobs();
     let obsselector=document.querySelector("#obsselect");
+    obsselector.innerHTML="";
     optionsobsdat.forEach(option => {
         obsselector.appendChild(option.cloneNode(true));
     });
@@ -144,6 +145,9 @@ async function createtriggers(seq){
         trigger.innerHTML="+";
         trigger.setAttribute("onclick","newtrigger()");
     container.appendChild(trigger);
+
+    container.scrollTop = container.scrollHeight;
+
 }
 function newtrigger(){
     let edited = current_seqdat;
@@ -152,7 +156,7 @@ function newtrigger(){
         i=counter;
     } else {
         for (var key in edited.seq) {
-            if(key>i) i=key;
+            if(Number(key)>Number(i)) i=key;
         }
         i++;
     }
