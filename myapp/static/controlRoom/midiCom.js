@@ -80,12 +80,11 @@ function goscene(i){
 //PLAYER TRIGGER
 function midiplay(filename){
     var xhr = new XMLHttpRequest();
-        xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
-                    //var result=JSON.parse(this.responseText);
-                    //console.log(result);
-                }
-        });
         xhr.open("POST", "http://127.0.0.1:8000/play?file="+filename);
+        xhr.send();
+}
+function midistop(filename){
+    var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://127.0.0.1:8000/stop");
         xhr.send();
 }

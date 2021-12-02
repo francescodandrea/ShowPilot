@@ -87,6 +87,11 @@ app.post('/play', async (req, res) => {
   console.log("Currently playing "+data.meta.name);
   res.send();
 });
+app.post('/stop', async (req, res) => {
+  intervals.forEach(clearInterval);
+  console.log("Stopped all intervals");
+  res.send();
+});
 //FROM MIDI
 
 
@@ -268,8 +273,9 @@ function sequencename(collect, name){
 }
 
 //----------MIDI code to note TRIGGER
+var intervals = [];
 function miditrigger(x,t){
-  setTimeout(() => {
+  let i = setTimeout(() => {
     myoutput.send('cc', {
       channel: x,
       controller: 0,
@@ -277,6 +283,7 @@ function miditrigger(x,t){
     });
   console.log("midi "+x)
   }, t);
+  intervals.push(i);
 }
 
 //npm start

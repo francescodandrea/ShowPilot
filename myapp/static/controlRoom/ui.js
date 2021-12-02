@@ -221,6 +221,13 @@ function se_play(){
 function se_stop(){
     newonclick=false;
     counter=undefined;
+    midistop();
+    clearInterval(counterengine);
+}
+function se_reset(){
+    newonclick=false;
+    counter=undefined;
+    midistop();
     clearInterval(counterengine);
     midiplay("off");
 }
