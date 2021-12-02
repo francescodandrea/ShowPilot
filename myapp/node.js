@@ -1,5 +1,6 @@
 const express = require('express'); //express
 const app = express();
+app.use(express.json());
 var easymidi = require('easymidi'); //midi com
 const OBSWebSocket = require('obs-websocket-js'); //obs
 const obs = new OBSWebSocket();
@@ -55,11 +56,11 @@ app.get('/collection', async (req, res) => {
 app.put('/collection', (req, res) => {
 });
 app.get('/sequence', async (req, res) => {
-  res.send(await sequence(req.query.file))
-  console.log("sent sequance");
+  res.send(await sequence(req.query.file));
+  console.log("sent sequence");
 });
 app.put('/sequence', (req, res) => {
-  
+  sequencesave(req.body);
 });
 
 //TO MIDI
@@ -115,6 +116,9 @@ app.get('/obsscenelist', (req, res) => {
       scenelist.push(scene.name);
     });
     res.json({ "obsscenelist": scenelist });
+  })
+  .catch(err => {
+    console.log(err.description);
   });
 
 });
@@ -123,7 +127,7 @@ function triggerobsscene(name){
         'scene-name': name
   })
   .catch(err => {
-    console.log(err);
+    console.log(err.description);
   });
 }
 
@@ -229,6 +233,16 @@ async function sequence(name){
     }
   });
   });
+}
+function sequencesave(data){
+  const jsonString = JSON.stringify(data);
+  fs.writeFile("storage/shows/sgt2022/sequences/"+data.meta.file+".json", jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('sequence '+data.meta.name+' saved')
+    }
+})
 }
 function sequencename(collect, name){
   const jsonString = JSON.stringify(collect);

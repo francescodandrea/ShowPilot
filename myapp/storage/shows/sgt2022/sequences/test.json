@@ -1,13 +1,1 @@
-{
-    "meta": {
-        "name": "Intro",
-        "show": "sgt2022",
-        "author": "user1",
-        "encoding": 3
-    },
-    "obsscene": "sync test",
-    "seq": {
-        "0": 1,
-        "2000": 2
-    }
-}
+{"meta":{"file":"test","name":"Intro","show":"sgt2022","author":"user1","encoding":3,"obsscene":"sync test"},"seq":{"0":"2","2000":"2"}}

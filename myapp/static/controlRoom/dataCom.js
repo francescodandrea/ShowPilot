@@ -84,22 +84,21 @@ async function scenecollist(){
 }
 
 //SEQUENCE
-var mysequence;
 function sequence(name){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     console.log(result);
-                    mysequence=result;
                     triggersupd(result.seq);
-                    editoruiupd(result.meta,result.obsscene);
+                    editoruiupd(result);
                 }
         });
         xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
         xhr.send();
 }
-function sequenceeditupd(name,sequence){
+function sequenceeditupd(file,sequence){
+    console.log(sequence);
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
@@ -107,8 +106,9 @@ function sequenceeditupd(name,sequence){
                     console.log(result);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
-        xhr.send(sequence);
+        xhr.open("PUT", "http://127.0.0.1:8000/sequence?file="+file);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(sequence));
 }
 
 //OBS SCENELIST
