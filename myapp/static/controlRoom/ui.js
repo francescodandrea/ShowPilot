@@ -84,7 +84,11 @@ async function triggersupd(data){
     obsselector.value=data.meta.obsscene;
 }
 function sequencesave(){
-    let name = document.querySelector("#seqselect").value;
+    current_seqdat.seq=containertodata();
+    current_seqdat.meta.obsscene=document.querySelector("#obsselect").value;
+    sequenceeditupd(current_seqdat.meta.file,current_seqdat);
+}
+function containertodata(){
     let sequence={};
 
     let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
@@ -94,9 +98,7 @@ function sequencesave(){
         let val = el.childNodes[1].value;
         sequence[key]=val;
     });
-    current_seqdat.seq=sequence;
-    current_seqdat.meta.obsscene=document.querySelector("#obsselect").value;
-    sequenceeditupd(current_seqdat.meta.file,current_seqdat);
+    return sequence;
 }
 async function createtriggers(seq){
     let container=document.querySelector("#seqcomposer");
@@ -146,15 +148,21 @@ async function createtriggers(seq){
 function newtrigger(){
     let edited = current_seqdat;
     let i=0;
-    for (var key in edited.seq) {
-        if(key>i) i=key;
+    if(counter!=0){
+
+    } else {
+        for (var key in edited.seq) {
+            if(key>i) i=key;
+        }
+        i++;
     }
-    edited.seq[Number(i)+1] = null;
+    edited.seq[i] = null;
     triggersupd(edited);
     current_seqdat=edited;
 }
 function deletetrigger(p){
-    p.parentElement.remove()
+    p.parentElement.remove();
+    current_seqdat.seq=containertodata();
 }
 //precomp options fields for select elems
 async function optionsobs(){
@@ -194,6 +202,7 @@ async function optionsscenes(){
 }
 
 var newonclick=false;
+var counter=0;
 //keylistener
 const handleKeyboard = event => {
 if (newonclick && event.key==='n' || event.key==='N') newtrigger()
@@ -207,6 +216,7 @@ function se_play(){
 }
 function se_stop(){
     newonclick=false;
+    counter=undefined;
     midiplay("off");
 }
 
