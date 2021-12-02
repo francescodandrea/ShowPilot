@@ -51,7 +51,7 @@ app.put('/devices', (req, res) => {
 //storage
 app.get('/collection', async (req, res) => {
   res.send(await collection())
-  console.log("sent collection");
+  //console.log("sent collection");
 });
 app.put('/collection', (req, res) => {
 });
@@ -109,7 +109,7 @@ app.get('/testing', (req, res) => {
 
 //TO OBS
 app.get('/obsscenelist', (req, res) => {
-  console.log(`Getting obs scenes`);
+  //console.log(`Getting obs scenes`);
   let scenelist=[];
   obs.send('GetSceneList').then(data => {
     data.scenes.forEach(scene => {
@@ -240,7 +240,7 @@ function sequencesave(data){
     if (err) {
         console.log('Error writing file', err)
     } else {
-        console.log('sequence '+data.meta.name+' saved')
+        console.log('sequence '+data.meta.name+' saved');
     }
 })
 }

@@ -197,6 +197,13 @@ hr {
 .trigger > input:focus, .trigger > select:focus {
     outline: none;
 }
+.trigger > p {
+    display: inline;
+    margin-left: 7px;
+    margin-right: 7px;
+    color: #979ca2;
+    font-weight: bold;
+}
 /*########## DEVICES #########*/
 #channel,#controller,#value{
     width: 5em;

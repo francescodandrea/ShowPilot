@@ -70,19 +70,47 @@ function collectionin(data){
 }
 
 //################ SEQUENCE EDITOR
-async function triggersupd(seq){
-    let container=document.querySelector("#seqcomposer");
+var current_seqdat;
+async function triggersupd(data){
+    createtriggers(data.seq);
+    current_seqdat=data;
+    document.querySelector("#seqselect > option").innerHTML=data.meta.name;
+    
+    let optionsobsdat = await optionsobs();
     let obsselector=document.querySelector("#obsselect");
+    optionsobsdat.forEach(option => {
+        obsselector.appendChild(option.cloneNode(true));
+    });
+    obsselector.value=data.meta.obsscene;
+}
+function sequencesave(){
+    let name = document.querySelector("#seqselect").value;
+    let sequence={};
+
+    let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
+    trigger.forEach(el => {
+        
+        let key = el.childNodes[0].value;
+        let val = el.childNodes[1].value;
+        sequence[key]=val;
+    });
+    current_seqdat.seq=sequence;
+    current_seqdat.meta.obsscene=document.querySelector("#obsselect").value;
+    sequenceeditupd(current_seqdat.meta.file,current_seqdat);
+}
+async function createtriggers(seq){
+    let container=document.querySelector("#seqcomposer");
     container.innerHTML="";
 
-    let optionsobsdat = await optionsobs();
+    //let optionsobsdat = await optionsobs();
     let optionsscenesdat = await optionsscenes();
 
     for (var key in seq) {
         let trigger = document.createElement("div"),
             input = document.createElement("input"),
             selobs = document.createElement("select"),
-            selsce = document.createElement("select");
+            selsce = document.createElement("select"),
+            x = document.createElement("p");
         
         trigger.className="trigger";
 
@@ -99,41 +127,35 @@ async function triggersupd(seq){
         });
         selsce.value=seq[key];
 
+        x.innerHTML="X";
+        x.setAttribute("onclick","deletetrigger(this)");
+
         trigger.appendChild(input);
         //trigger.appendChild(selobs);
         trigger.appendChild(selsce);
+        trigger.appendChild(x);
 
         container.appendChild(trigger);
     }
     let trigger = document.createElement("div");
         trigger.className="trigger create";
         trigger.innerHTML="+";
+        trigger.setAttribute("onclick","newtrigger()");
     container.appendChild(trigger);
-
-    optionsobsdat.forEach(option => {
-        obsselector.appendChild(option.cloneNode(true));
-    });
 }
-var current_seq;
-function editoruiupd(seq){
-    current_seq=seq;
-    document.querySelector("#seqselect > option").innerHTML=seq.meta.name;
+function newtrigger(){
+    let edited = current_seqdat;
+    let i=0;
+    for (var key in edited.seq) {
+        if(key>i) i=key;
+    }
+    edited.seq[Number(i)+1] = null;
+    triggersupd(edited);
+    current_seqdat=edited;
 }
-function sequencesave(){
-    let name = document.querySelector("#seqselect").value;
-    let sequence={};
-
-    let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
-    trigger.forEach(el => {
-        
-        let key = el.childNodes[0].value;
-        let val = el.childNodes[1].value;
-        sequence[key]=val;
-    });
-    current_seq.seq=sequence;
-    sequenceeditupd(current_seq.meta.file,current_seq);
+function deletetrigger(p){
+    p.parentElement.remove()
 }
-
 //precomp options fields for select elems
 async function optionsobs(){
     let list= await obsscenelist();
@@ -170,6 +192,13 @@ async function optionsscenes(){
 
     return options;
 }
+
+var newonclick=false;
+//keylistener
+const handleKeyboard = event => {
+if (newonclick && event.key==='n' || event.key==='N') newtrigger()
+}  
+document.addEventListener('keyup', handleKeyboard)
 
 //player
 

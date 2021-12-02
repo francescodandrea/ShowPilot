@@ -90,15 +90,13 @@ function sequence(name){
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     console.log(result);
-                    triggersupd(result.seq);
-                    editoruiupd(result);
+                    triggersupd(result);
                 }
         });
         xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
         xhr.send();
 }
 function sequenceeditupd(file,sequence){
-    console.log(sequence);
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
