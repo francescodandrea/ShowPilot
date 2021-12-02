@@ -23,8 +23,6 @@ function section(x){
             break;
         case "sequences":
             sequence("test");
-            selectobsupd();
-            selectsceneupd();
             break;
     }
 }
@@ -72,11 +70,52 @@ function collectionin(data){
 }
 
 //################ SEQUENCE EDITOR
+async function triggersupd(seq){
+    let container=document.querySelector("#seqcomposer");
+    container.innerHTML="";
 
-async function selectobsupd(){
+    //let optionsobsdat = await optionsobs();
+    let optionsscenesdat = await optionsscenes();
+
+    for (var key in seq) {
+        let trigger = document.createElement("div"),
+            input = document.createElement("input"),
+            selobs = document.createElement("select"),
+            selsce = document.createElement("select");
+        
+        trigger.className="trigger";
+
+        input.type="number";
+        input.min=0; input.max=600000;
+        input.value=key;
+
+        /*optionsobsdat.forEach(option => {
+            selobs.appendChild(option.cloneNode(true));
+        });*/
+
+        optionsscenesdat.forEach(option => {
+            selsce.appendChild(option.cloneNode(true));
+        });
+        selsce.value=seq[key];
+
+        trigger.appendChild(input);
+        //trigger.appendChild(selobs);
+        trigger.appendChild(selsce);
+
+        container.appendChild(trigger);
+    }
+    let trigger = document.createElement("div");
+        trigger.className="trigger create";
+        trigger.innerHTML="+";
+    container.appendChild(trigger);
+}
+function editoruiupd(meta, obsscene){
+    document.querySelector("#sqplayer > div > input").value=obsscene;
+}
+
+//precomp options fields for select elems
+async function optionsobs(){
     let list= await obsscenelist();
-    let selects=document.querySelectorAll("#seqcomposer > div > select:nth-of-type(1)");
-
     let options = [];
     
     let option = document.createElement("option");
@@ -90,17 +129,10 @@ async function selectobsupd(){
         options.push(option);
     });
 
-    selects.forEach(select => {
-        select.innerHTML="";
-        options.forEach(option => {
-            select.appendChild(option.cloneNode(true));
-        });
-    });
+    return options;
 }
-async function selectsceneupd(){
+async function optionsscenes(){
     let list= await scenecollist();
-    let selects=document.querySelectorAll("#seqcomposer > div > select:nth-of-type(2)");
-
     let options = [];
     
     let option = document.createElement("option");
@@ -115,13 +147,10 @@ async function selectsceneupd(){
         options.push(option);
     });
 
-    selects.forEach(select => {
-        select.innerHTML="";
-        options.forEach(option => {
-            select.appendChild(option.cloneNode(true));
-        });
-    });
+    return options;
 }
+
+//player
 
 
 //################ DEVICES

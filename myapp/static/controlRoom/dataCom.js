@@ -1,6 +1,6 @@
 //NET
 
-//CLIENT SERVER CONNECTION
+//SERVER CHECKS
 async function pingcom(){
     return new Promise(resolve => {
     var xhr = new XMLHttpRequest();
@@ -26,7 +26,7 @@ setInterval(() => {
     statusupd("server",pingcom());
 }, 10000);
 
-//OBS CONNECTION
+//OBS CHECKS
 async function pingobs(){
     return new Promise(resolve => {
     var xhr = new XMLHttpRequest();
@@ -48,6 +48,8 @@ setTimeout(() => {
 setInterval(() => {
     statusupd("obs",pingobs());
 }, 10000);
+
+//############## CLIENT SERVER CONNECTION
 
 //SCENE COLLECTION
 function collection(){
@@ -80,6 +82,7 @@ async function scenecollist(){
         xhr.send();
     });
 }
+
 //SEQUENCE
 var mysequence;
 function sequence(name){
@@ -89,6 +92,8 @@ function sequence(name){
                     var result=JSON.parse(this.responseText);
                     //console.log(result);
                     mysequence=result;
+                    triggersupd(result.seq);
+                    editoruiupd(result.meta,result.obsscene);
                 }
         });
         xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
