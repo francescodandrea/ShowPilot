@@ -179,6 +179,17 @@ hr {
     transition: 0.1s all;
     outline: solid 2px #aab0b2;
 }
+.trigger.pulse {
+    animation: triggerpulse 1s forwards;
+}
+@keyframes triggerpulse {
+    0%{
+        outline: solid 10px #ff7373;
+    }
+    100%{
+        outline: solid 1px #aab0b2;
+    }
+}
 .trigger.create {
     outline: #95999a dashed 2px;
     color: #aab0b2;

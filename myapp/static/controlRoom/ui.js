@@ -223,21 +223,45 @@ function se_play(){
     counterengine = setInterval(() => {
         counter+=100;
     }, 100);
+    timeoutpulse();
 }
 function se_stop(){
     newonclick=false;
     counter=undefined;
     midistop();
     clearInterval(counterengine);
+    timeoutpulse_reset();
 }
 function se_reset(){
     newonclick=false;
     counter=undefined;
     midistop();
-    clearInterval(counterengine);
     midiplay("off");
+    clearInterval(counterengine);
+    timeoutpulse_reset();
 }
 
+//trigger pulse on done
+var pulseinterval=[];
+function timeoutpulse(){
+    let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
+    trigger.forEach(el => {
+        timeoutpulse_t(el,el.childNodes[0].value);
+    });
+}
+function timeoutpulse_t(el,t){
+    let i = setTimeout(() => {
+        el.classList.add("pulse");
+    }, t);
+    pulseinterval.push(i);
+}
+function timeoutpulse_reset(){
+    pulseinterval.forEach(clearInterval);
+    let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
+    trigger.forEach(el => {
+        el.className="trigger";
+    });
+}
 
 //################ DEVICES
 //devices upd
