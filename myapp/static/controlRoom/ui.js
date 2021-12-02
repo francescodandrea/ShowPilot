@@ -205,6 +205,11 @@ function se_play(){
     newonclick=true;
     midiplay(current_seqdat.meta.file);
 }
+function se_stop(){
+    newonclick=false;
+    midiplay("off");
+}
+
 
 //################ DEVICES
 //devices upd
