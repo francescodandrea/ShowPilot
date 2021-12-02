@@ -149,7 +149,7 @@ function newtrigger(){
     let edited = current_seqdat;
     let i=0;
     if(counter!=0){
-
+        i=counter;
     } else {
         for (var key in edited.seq) {
             if(key>i) i=key;
@@ -203,6 +203,7 @@ async function optionsscenes(){
 
 var newonclick=false;
 var counter=0;
+var counterengine;
 //keylistener
 const handleKeyboard = event => {
 if (newonclick && event.key==='n' || event.key==='N') newtrigger()
@@ -213,10 +214,14 @@ document.addEventListener('keyup', handleKeyboard)
 function se_play(){
     newonclick=true;
     midiplay(current_seqdat.meta.file);
+    counterengine = setInterval(() => {
+        counter+=100;
+    }, 100);
 }
 function se_stop(){
     newonclick=false;
     counter=undefined;
+    clearInterval(counterengine);
     midiplay("off");
 }
 
