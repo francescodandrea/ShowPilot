@@ -201,7 +201,10 @@ if (newonclick && event.key==='n' || event.key==='N') newtrigger()
 document.addEventListener('keyup', handleKeyboard)
 
 //player
-
+function se_play(){
+    newonclick=true;
+    midiplay(current_seqdat.meta.file);
+}
 
 //################ DEVICES
 //devices upd

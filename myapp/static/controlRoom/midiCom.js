@@ -76,3 +76,16 @@ function goscene(i){
         xhr.open("POST", "http://127.0.0.1:8000/goscene?index="+i);
         xhr.send();
 }
+
+//PLAYER TRIGGER
+function midiplay(filename){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    //var result=JSON.parse(this.responseText);
+                    //console.log(result);
+                }
+        });
+        xhr.open("POST", "http://127.0.0.1:8000/play?file="+filename);
+        xhr.send();
+}

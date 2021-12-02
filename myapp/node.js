@@ -64,17 +64,6 @@ app.put('/sequence', (req, res) => {
 });
 
 //TO MIDI
-app.post('/sendcc', (req, res) => {
-  console.log(req.query.channel+" "+req.query.controller+" "+req.query.value)
-  
-  myoutput.send('cc', {
-    channel: parseInt(req.query.channel),
-    controller: parseInt(req.query.controller),
-    value: parseInt(req.query.value)
-  });
-
-  res.json({ "log": "CC sent "+req.query.channel+' '+req.query.controller+' '+req.query.value, "com": {"in": req.query.in, "out": req.query.out} });
-});
 app.post('/goscene', (req, res) => {
   myoutput.send('cc', {
     channel: req.query.index,
@@ -85,7 +74,19 @@ app.post('/goscene', (req, res) => {
   console.log("goscene "+req.query.index);
   res.send();
 });
+app.post('/play', async (req, res) => {
+  let data=await sequence(req.query.file);
+  let seq=data.seq;
 
+  obsscenetrigger(data.meta.obsscene);
+
+  for (var key in seq) {
+      if(seq[key]!="null") miditrigger(seq[key],key);
+  }
+
+  console.log("Currently playing "+data.meta.name);
+  res.send();
+});
 //FROM MIDI
 
 
@@ -106,6 +107,17 @@ app.get('/controlRoom', (req, res) => {
 app.get('/testing', (req, res) => {
   res.sendFile('static/testing/index.html', {root: __dirname })
 });
+app.post('/sendcc', (req, res) => {
+  console.log(req.query.channel+" "+req.query.controller+" "+req.query.value)
+  
+  myoutput.send('cc', {
+    channel: parseInt(req.query.channel),
+    controller: parseInt(req.query.controller),
+    value: parseInt(req.query.value)
+  });
+
+  res.json({ "log": "CC sent "+req.query.channel+' '+req.query.controller+' '+req.query.value, "com": {"in": req.query.in, "out": req.query.out} });
+});
 
 //TO OBS
 app.get('/obsscenelist', (req, res) => {
@@ -122,7 +134,7 @@ app.get('/obsscenelist', (req, res) => {
   });
 
 });
-function triggerobsscene(name){
+function obsscenetrigger(name){
   obs.send('SetCurrentScene', {
         'scene-name': name
   })
@@ -253,6 +265,18 @@ function sequencename(collect, name){
         console.log('sequence saved')
     }
 })
+}
+
+//----------MIDI code to note TRIGGER
+function miditrigger(x,t){
+  setTimeout(() => {
+    myoutput.send('cc', {
+      channel: x,
+      controller: 0,
+      value: 0
+    });
+  console.log("midi "+x)
+  }, t);
 }
 
 //npm start
