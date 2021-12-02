@@ -22,7 +22,7 @@ function section(x){
             collection();
             break;
         case "sequences":
-            sequence("test");
+            sequence("stay");
             break;
     }
 }
@@ -152,6 +152,7 @@ async function createtriggers(seq){
 function newtrigger(){
     let edited = current_seqdat;
     let i=0;
+    console.log(counter);
     if(counter!=0){
         i=counter;
     } else {
@@ -206,7 +207,7 @@ async function optionsscenes(){
 }
 
 var newonclick=false;
-var counter=0;
+var counter=undefined;
 var counterengine;
 //keylistener
 const handleKeyboard = event => {
@@ -218,6 +219,7 @@ document.addEventListener('keyup', handleKeyboard)
 function se_play(){
     newonclick=true;
     midiplay(current_seqdat.meta.file);
+    counter=0;
     counterengine = setInterval(() => {
         counter+=100;
     }, 100);
