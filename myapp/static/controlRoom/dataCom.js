@@ -97,7 +97,7 @@ function sequence(name){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
-                    console.log(result);
+                    //console.log(result);
                     triggersupd(result);
                 }
         });
@@ -116,8 +116,67 @@ function sequenceeditupd(file,sequence){
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(sequence));
 }
+async function sequencecollist(show){
+    var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    let list=[];
+                    list.show=result.sequences.show;
+                    list.bin=result.sequences.bin;
+                    resolve(list);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/show?file="+show);
+        xhr.send();
+    });
+}
+
+//SHOW
+function show(name){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    console.log(result);
+                    triggersupd(result);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/show?file="+name);
+        xhr.send();
+}
+function showeditupd(file,show){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.respoSnseText);
+                    console.log(result);
+                }
+        });
+        xhr.open("PUT", "http://"+ip+":8000/show?file="+file);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(show));
+}
+
 
 //OBS SCENELIST
+async function obsscenelist(){
+    return new Promise(resolve => {
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result= JSON.parse(this.responseText);
+                    //console.log(result.obsscenelist);
+                    resolve(result.obsscenelist);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/obsscenelist");
+        xhr.send();
+    }
+)};
+
+//OBS DIRECT
 async function obsscenelist(){
     return new Promise(resolve => {
     var xhr = new XMLHttpRequest();

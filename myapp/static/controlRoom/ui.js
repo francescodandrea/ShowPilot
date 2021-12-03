@@ -24,7 +24,7 @@ function section(x){
             collection();
             break;
         case "sequences":
-            sequence("stay");
+            squencelistupd("sgt2022");
             break;
     }
 }
@@ -73,10 +73,18 @@ function collectionin(data){
 
 //################ SEQUENCE EDITOR
 var current_seqdat;
+async function squencelistupd(show){
+    let optionsseqdat = await optionssequences(show);
+    let seqselector=document.querySelector("#seqselect");
+    seqselector.innerHTML="";
+    optionsseqdat.forEach(option => {
+        seqselector.appendChild(option.cloneNode(true));
+    });
+    sequence(optionsseqdat[0].innerHTML);
+}
 async function triggersupd(data){
     createtriggers(data.seq);
     current_seqdat=data;
-    document.querySelector("#seqselect > option").innerHTML=data.meta.name;
     
     let optionsobsdat = await optionsobs();
     let obsselector=document.querySelector("#obsselect");
@@ -202,6 +210,25 @@ async function optionsscenes(){
         let option = document.createElement("option");
         option.innerHTML=element[0];
         option.value=element[1];
+        options.push(option);
+    });
+
+    return options;
+}
+async function optionssequences(show){
+    let list= await sequencecollist(show);
+    let options = [];
+
+    list.show.forEach(element => {
+        let option = document.createElement("option");
+        option.innerHTML=element;
+        option.value=element;
+        options.push(option);
+    });
+    list.bin.forEach(element => {
+        let option = document.createElement("option");
+        option.innerHTML=element;
+        option.value=element;
         options.push(option);
     });
 

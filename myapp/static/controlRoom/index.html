@@ -65,9 +65,7 @@
             <h2>Sequence editor</h2>
             <div id="sqplayer">
                 <div class="input-group">
-                    <select id="seqselect" class="form-control">
-                        <option></option>
-                    </select>
+                    <select id="seqselect"  onchange="sequence(this.value)" class="form-control"></select>
                     <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" onclick="se_play()"><i class="bi bi-play-fill"></i></button>
                     <button class="btn btn-outline-secondary" type="button" onclick="se_stop()"><i class="bi bi-pause-fill"></i></button>
@@ -82,7 +80,7 @@
                     </select>
                     <div class="input-group-append">
                     <button class="btn btn-outline-secondary" type="button" onclick="obs_play()"><i class="bi bi-play-fill"></i></button>
-                    <button class="btn btn-outline-secondary" type="button"><i class="bi bi-stop-fill"></i></button>
+                    <button class="btn btn-outline-secondary" type="button" onclick="obs_reset()"><i class="bi bi-stop-fill"></i></button>
                     </div>
                 </div>
             </div>

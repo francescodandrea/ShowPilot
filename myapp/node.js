@@ -63,6 +63,13 @@ app.get('/sequence', async (req, res) => {
 app.put('/sequence', (req, res) => {
   sequencesave(req.body);
 });
+app.get('/show', async (req, res) => {
+  res.send(await show(req.query.file));
+  console.log("sent show");
+});
+app.put('/show', (req, res) => {
+  showsave(req.body);
+});
 
 //TO MIDI
 app.post('/goscene', (req, res) => {
@@ -269,6 +276,34 @@ function sequencename(collect, name){
         console.log('Error writing file', err)
     } else {
         console.log('sequence saved')
+    }
+})
+}
+
+//----------SHOW
+async function show(name){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/"+name+"/"+name+".json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
+function showsave(data){
+  const jsonString = JSON.stringify(data);
+  fs.writeFile("storage/shows/"+data.meta.file+"/"+data.meta.file+".json", jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('show '+data.meta.name+' saved');
     }
 })
 }
