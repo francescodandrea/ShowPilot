@@ -10,7 +10,7 @@ function getdevicelist(){
                     devicestoselect(result);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/devicelist");
+        xhr.open("GET", "http://"+ip+":8000/devicelist");
         xhr.send();
 }
 function getdevices(){
@@ -24,7 +24,7 @@ function getdevices(){
                     serverdevices(result.input,result.output);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/devices");
+        xhr.open("GET", "http://"+ip+":8000/devices");
         xhr.send();
 }
 function senddevices(indevice,outdevice){
@@ -36,7 +36,7 @@ function senddevices(indevice,outdevice){
                     getdevices();
                 }
         });
-        xhr.open("PUT", "http://127.0.0.1:8000/devices?in="+indevice+"&out="+outdevice);
+        xhr.open("PUT", "http://"+ip+":8000/devices?in="+indevice+"&out="+outdevice);
         xhr.send();
 }
 //ping start and repeat
@@ -57,7 +57,7 @@ function sendcc(ch,co,va){
                     console.log(result);
                 }
         });
-        xhr.open("POST", "http://127.0.0.1:8000/sendcc?channel="+ch+"&controller="+co+"&value="+va);
+        xhr.open("POST", "http://"+ip+":8000/sendcc?channel="+ch+"&controller="+co+"&value="+va);
         xhr.send();
 }
 function recivemidi(){
@@ -68,23 +68,23 @@ function recivemidi(){
                     console.log(result);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/testrecive");
+        xhr.open("GET", "http://"+ip+":8000/testrecive");
         xhr.send();
 }
 function goscene(i){
     var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:8000/goscene?index="+i);
+        xhr.open("POST", "http://"+ip+":8000/goscene?index="+i);
         xhr.send();
 }
 
 //PLAYER TRIGGER
 function midiplay(filename){
     var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:8000/play?file="+filename);
+        xhr.open("POST", "http://"+ip+":8000/play?file="+filename);
         xhr.send();
 }
 function midistop(filename){
     var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://127.0.0.1:8000/stop");
+        xhr.open("POST", "http://"+ip+":8000/stop");
         xhr.send();
 }

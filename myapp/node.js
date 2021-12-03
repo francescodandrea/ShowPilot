@@ -1,6 +1,7 @@
 const express = require('express'); //express
 const app = express();
 app.use(express.json());
+var path = require('path'); //path express
 var easymidi = require('easymidi'); //midi com
 const OBSWebSocket = require('obs-websocket-js'); //obs
 const obs = new OBSWebSocket();
@@ -135,7 +136,7 @@ app.get('/obsscenelist', (req, res) => {
     res.json({ "obsscenelist": scenelist });
   })
   .catch(err => {
-    console.log(err.description);
+    console.log("Obs isn't active");
   });
 
 });
@@ -144,7 +145,7 @@ function obsscenetrigger(name){
         'scene-name': name
   })
   .catch(err => {
-    console.log(err.description);
+    console.log("Obs isn't active");
   });
 }
 
@@ -284,6 +285,31 @@ function miditrigger(x,t){
   console.log("midi "+x)
   }, t);
   intervals.push(i);
+}
+
+// ############### Serving files
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
+});
+
+const files = [
+  'style.css',
+  'dataCom.js',
+  'midiCom.js',
+  'player.js',
+  'style.css',
+  'ui.js'
+]
+
+servingfiles(files);
+
+function servingfiles(files){
+  files.forEach(file => {
+    app.get('/'+file, function(req, res) {
+      res.sendFile(path.join(__dirname, '/static/controlRoom/'+file));
+    });
+  });
 }
 
 //npm start

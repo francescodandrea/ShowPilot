@@ -224,9 +224,6 @@ hr {
     font-weight: bold;
 }
 /*########## DEVICES #########*/
-#channel,#controller,#value{
-    width: 5em;
-}
 
 /*########## SCROLLBAR ############*/
 ::-webkit-scrollbar {

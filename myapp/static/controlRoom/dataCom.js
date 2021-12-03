@@ -1,4 +1,12 @@
 //NET
+let ip="localhost";
+if(localStorage.getItem("ip")) {
+    ip=localStorage.getItem("ip");
+    document.querySelector("#serverip").innerHTML=ip;
+};
+function serveripsave(ip){
+    localStorage.setItem("ip",ip);
+}
 
 //SERVER CHECKS
 async function pingcom(){
@@ -11,7 +19,7 @@ async function pingcom(){
                     if (result.state=="pong") {resolve(true);} else resolve(false)
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/ping");
+        xhr.open("GET", "http://"+ip+":8000/ping");
         xhr.send();
     }
 )};
@@ -37,7 +45,7 @@ async function pingobs(){
                     if (result.state=="pong") {resolve(true);} else resolve(false)
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/ping");
+        xhr.open("GET", "http://"+ip+":8000/ping");
         xhr.send();
     }
 )};
@@ -61,7 +69,7 @@ function collection(){
                     //console.log(result);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/collection");
+        xhr.open("GET", "http://"+ip+":8000/collection");
         xhr.send();
 }
 async function scenecollist(){
@@ -78,7 +86,7 @@ async function scenecollist(){
                     resolve(list);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/collection");
+        xhr.open("GET", "http://"+ip+":8000/collection");
         xhr.send();
     });
 }
@@ -93,7 +101,7 @@ function sequence(name){
                     triggersupd(result);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/sequence?file="+name);
+        xhr.open("GET", "http://"+ip+":8000/sequence?file="+name);
         xhr.send();
 }
 function sequenceeditupd(file,sequence){
@@ -104,7 +112,7 @@ function sequenceeditupd(file,sequence){
                     console.log(result);
                 }
         });
-        xhr.open("PUT", "http://127.0.0.1:8000/sequence?file="+file);
+        xhr.open("PUT", "http://"+ip+":8000/sequence?file="+file);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(sequence));
 }
@@ -120,7 +128,7 @@ async function obsscenelist(){
                     resolve(result.obsscenelist);
                 }
         });
-        xhr.open("GET", "http://127.0.0.1:8000/obsscenelist");
+        xhr.open("GET", "http://"+ip+":8000/obsscenelist");
         xhr.send();
     }
 )};

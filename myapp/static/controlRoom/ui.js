@@ -1,8 +1,10 @@
 //Ui js
 
 var opensection="sequences"; //startup screen
+if(localStorage.getItem("ip")===null) opensection="devices";
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
+
 section(opensection);
 
 //################ SECTIONS WORK
