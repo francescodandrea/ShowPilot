@@ -4,11 +4,12 @@
 function getdevicelist(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
+            if (this.readyState === this.DONE) { try{
                     var result=JSON.parse(this.responseText);
-                    //console.log(result);
                     devicestoselect(result);
-                }
+                } catch (error) {
+                    statusupd("server",false);
+                }}
         });
         xhr.open("GET", "http://"+ip+":8000/devicelist");
         xhr.send();
@@ -16,13 +17,15 @@ function getdevicelist(){
 function getdevices(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
+            if (this.readyState === this.DONE) { try{
                     var result=JSON.parse(this.responseText);
-                    //console.log(result);
-                    statusupd("miin",result.input);
-                    statusupd("miout",result.output);
+                    statusupd("miin",isEmpty(result.input));
+                    statusupd("miout",isEmpty(result.output));
                     serverdevices(result.input,result.output);
-                }
+                } catch (error) {
+                    statusupd("miin",false);
+                    statusupd("miout",false);
+                }}
         });
         xhr.open("GET", "http://"+ip+":8000/devices");
         xhr.send();

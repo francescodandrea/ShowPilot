@@ -13,25 +13,26 @@ async function pingcom(){
     return new Promise(resolve => {
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
+            if (this.readyState === this.DONE) { try {
                     var result= JSON.parse(this.responseText);
-                    //console.log(result);
                     if (result.state=="pong") {resolve(true);} else resolve(false)
-                }
+                } catch (error) {
+                    statusupd("server",false);
+                }}
         });
         xhr.open("GET", "http://"+ip+":8000/ping");
         xhr.send();
     }
 )};
-function ping(){
-    statusupd("server",pingcom());
+async function ping(){
+    statusupd("server",await pingcom());
 };
 //ping start and repeat
-setTimeout(() => {
-    statusupd("server",pingcom());
+setTimeout(async () => {
+    statusupd("server",await pingcom());
 }, 1000);
-setInterval(() => {
-    statusupd("server",pingcom());
+setInterval(async () => {
+    statusupd("server",await pingcom());
 }, 10000);
 
 //OBS CHECKS
@@ -39,22 +40,23 @@ async function pingobs(){
     return new Promise(resolve => {
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
+            if (this.readyState === this.DONE) { try {
                     var result= JSON.parse(this.responseText);
-                    //console.log(result);
                     if (result.state=="pong") {resolve(true);} else resolve(false)
-                }
+                } catch (error) {
+                    statusupd("obs",false);
+                }}
         });
         xhr.open("GET", "http://"+ip+":8000/ping");
         xhr.send();
     }
 )};
 //ping start and repeat
-setTimeout(() => {
-    statusupd("obs",pingobs());
+setTimeout(async () => {
+    statusupd("obs",await pingobs());
 }, 1000);
-setInterval(() => {
-    statusupd("obs",pingobs());
+setInterval(async () => {
+    statusupd("obs",await pingobs());
 }, 10000);
 
 //############## CLIENT SERVER CONNECTION
