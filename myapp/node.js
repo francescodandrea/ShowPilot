@@ -114,6 +114,10 @@ app.get('/ping', async (req, res) => {
   //console.log(`Pong`);
   res.json({ state: 'Pong' })
 });
+app.get('/pingobs', async (req, res) => {
+  //console.log(`Pong`);
+  res.json({ state: 'Pong' })
+});
 app.get('/controlRoom', (req, res) => {
   res.sendFile('static/controlRoom/index.html', {root: __dirname })
 });

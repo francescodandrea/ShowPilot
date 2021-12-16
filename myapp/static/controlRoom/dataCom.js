@@ -48,7 +48,7 @@ async function pingobs(){
                     statusupd("obs",false);
                 }}
         });
-        xhr.open("GET", "http://"+ip+":8000/ping");
+        xhr.open("GET", "http://"+ip+":8000/pingobs");
         xhr.send();
     }
 )};
