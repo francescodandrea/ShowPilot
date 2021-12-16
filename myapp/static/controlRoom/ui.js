@@ -351,6 +351,17 @@ function statusupd(element, bool){
             arg.className="status no";
         }
     }, 200);
+
+    let needserver=["#scenes","#sequences","#live"];
+
+    switch (element) {
+        case "server":
+            needserver.forEach(element => {
+                if(!bool) {document.querySelector(element).classList.add("unavailable");}
+                else {document.querySelector(element).classList.remove("unavailable");}
+            });
+            break;
+    }
 }
 
 //send cc

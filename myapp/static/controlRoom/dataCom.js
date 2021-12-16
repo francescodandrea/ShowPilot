@@ -15,7 +15,7 @@ async function pingcom(){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) { try {
                     var result= JSON.parse(this.responseText);
-                    if (result.state=="pong") {resolve(true);} else resolve(false)
+                    if (result.state=="Pong") {resolve(true);} else resolve(false)
                 } catch (error) {
                     statusupd("server",false);
                 }}
@@ -25,6 +25,7 @@ async function pingcom(){
     }
 )};
 async function ping(){
+   await pingcom()
     statusupd("server",await pingcom());
 };
 //ping start and repeat
@@ -42,7 +43,7 @@ async function pingobs(){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) { try {
                     var result= JSON.parse(this.responseText);
-                    if (result.state=="pong") {resolve(true);} else resolve(false)
+                    if (result.state=="Pong") {resolve(true);} else resolve(false)
                 } catch (error) {
                     statusupd("obs",false);
                 }}

@@ -19,8 +19,8 @@ function getdevices(){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) { try{
                     var result=JSON.parse(this.responseText);
-                    statusupd("miin",isEmpty(result.input));
-                    statusupd("miout",isEmpty(result.output));
+                    statusupd("miin",result.input);
+                    statusupd("miout",result.output);
                     serverdevices(result.input,result.output);
                 } catch (error) {
                     statusupd("miin",false);
