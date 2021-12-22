@@ -43,7 +43,7 @@ async function pingobs(){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) { try {
                     var result= JSON.parse(this.responseText);
-                    if (result.state=="Pong") {resolve(true);} else resolve(false)
+                    if (result.state=="Pong") {resolve(true); statusupd("obs", true);} else resolve(false)
                 } catch (error) {
                     statusupd("obs",false);
                 }}

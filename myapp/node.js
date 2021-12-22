@@ -115,8 +115,14 @@ app.get('/ping', async (req, res) => {
   res.json({ state: 'Pong' })
 });
 app.get('/pingobs', async (req, res) => {
-  //console.log(`Pong`);
-  res.json({ state: 'Pong' })
+  obs.connect({ address: 'localhost:4444'})
+  .then(a =>{
+    res.json({ state: 'Pong' })
+  })
+  .catch(err => {
+    console.log("Obs isn't active");
+    res.json({ state: 'inactive' })
+  }); 
 });
 app.get('/controlRoom', (req, res) => {
   res.sendFile('static/controlRoom/index.html', {root: __dirname })
