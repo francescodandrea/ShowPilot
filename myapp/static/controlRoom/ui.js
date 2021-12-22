@@ -54,6 +54,7 @@ function collectionin(data){
                 value.types.forEach(type => {
                     scene.classList.add(type);
                 });
+            scene.style.backgroundImage="linear-gradient(139deg, "+value.color1+" 0%, "+value.color2+" 100%)";
             scene.setAttribute("onclick","goscene("+key+")");
             holder.appendChild(scene);
         }
