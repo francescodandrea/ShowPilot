@@ -241,6 +241,11 @@ hr {
     color: #979ca2;
     font-weight: bold;
 }
+/*########## LIVE #########*/
+#liveselect{
+    height:auto;
+}
+
 /*########## DEVICES #########*/
 
 /*########## SCROLLBAR ############*/
@@ -276,4 +281,20 @@ hr {
   }
   ::-webkit-scrollbar-corner {
     background: transparent;
+  }
+
+  /*temporary mobile adaptation*/
+  @media (min-width:424px) and (max-width:425px) {
+    #container > nav,
+    #status_miin,
+    #status_miout,
+    #status_obs,
+    #obsplayer,
+    #seqcomposer
+    {
+        display: none;
+    }
+    .status {
+        margin-bottom: auto;
+    }
   }

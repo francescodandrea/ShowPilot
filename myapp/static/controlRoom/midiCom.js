@@ -86,7 +86,7 @@ function midiplay(filename){
         xhr.open("POST", "http://"+ip+":8000/play?file="+filename);
         xhr.send();
 }
-function midistop(filename){
+function midistop(){
     var xhr = new XMLHttpRequest();
         xhr.open("POST", "http://"+ip+":8000/stop");
         xhr.send();

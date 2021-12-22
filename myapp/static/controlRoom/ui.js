@@ -1,6 +1,6 @@
 //Ui js
 
-var opensection="sequences"; //startup screen
+var opensection="live"; //startup screen
 if(localStorage.getItem("ip")===null) opensection="devices";
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
@@ -25,6 +25,9 @@ function section(x){
             break;
         case "sequences":
             squencelistupd("sgt2022");
+            break;
+        case "live":
+            livelistupd("sgt2022");
             break;
     }
 }
@@ -248,6 +251,7 @@ document.addEventListener('keyup', handleKeyboard)
 //player
 function se_play(){
     newonclick=true;
+    midistop();
     midiplay(current_seqdat.meta.file);
     counter=0;
     counterengine = setInterval(() => {
@@ -291,6 +295,16 @@ function timeoutpulse_reset(){
     trigger.forEach(el => {
         el.className="trigger";
     });
+}
+//################ LIVE
+async function livelistupd(show){
+    let optionsseqdat = await optionssequences(show);
+    let seqselector=document.querySelector("#liveselect");
+    seqselector.innerHTML="";
+    optionsseqdat.forEach(option => {
+        seqselector.appendChild(option.cloneNode(true));
+    });
+    sequence(optionsseqdat[0].innerHTML);
 }
 
 //################ DEVICES
@@ -361,6 +375,8 @@ function statusupd(element, bool){
                 if(!bool) {document.querySelector(element).classList.add("unavailable");}
                 else {document.querySelector(element).classList.remove("unavailable");}
             });
+            if(bool) document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#0f0');
+            else document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#f00');
             break;
     }
 }

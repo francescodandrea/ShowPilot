@@ -332,6 +332,10 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
 });
 
+app.get('/remote', function(req, res) {
+  res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
+});
+
 const files = [
   'style.css',
   'dataCom.js',
