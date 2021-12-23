@@ -2,7 +2,7 @@
 let ip="localhost";
 if(localStorage.getItem("ip")) {
     ip=localStorage.getItem("ip");
-    document.querySelector("#serverip").innerHTML=ip;
+    document.querySelector("#serverip").value=ip;
 };
 function serveripsave(ip){
     localStorage.setItem("ip",ip);
@@ -10,6 +10,7 @@ function serveripsave(ip){
 
 //SERVER CHECKS
 async function pingcom(){
+    return new Promise(resolve => {
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) { try {
@@ -19,27 +20,34 @@ async function pingcom(){
                         statusupd("miin",result.miin);
                         statusupd("miout",result.miout);
                         statusupd("obs",result.obs);
+                        resolve(true);
                     }
                 } catch (error) {
                     statusupd("server",false);
                     statusupd("miin",false);
                     statusupd("miout",false);
                     statusupd("obs",false);
-                }}
+                    resolve(false);
+                }
+            }
         });
         xhr.open("GET", "http://"+ip+":8000/ping");
         xhr.send();
-};
+    });
+}
 
-function ping(){
-   pingcom();
+async function ping(){
+   return await pingcom();
 };
 
 //ping start and repeat
 setTimeout(async () => {
-    ping();
+    if(await ping()){
+        localStorage.setItem("ip",ip);
+        document.querySelector("#serverip").value=ip;
+    }
 }, 1000);
-setInterval(async () => {
+setInterval(() => {
     ping();
 }, 10000);
 
