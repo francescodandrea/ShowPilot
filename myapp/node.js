@@ -28,6 +28,18 @@ obs.connect({ address: 'localhost:4444'})
 
 //SETTINGS
 //setup communication
+app.get('/ping', async (req, res) => {
+  //console.log(`Pong`);
+  let obsping;
+  obs.connect({ address: 'localhost:4444'})
+  .then(a =>{
+    obsping=true;
+  })
+  .catch(err => {
+    obsping=false;
+  });
+  res.json({ state:'Pong', server:true, "miin": myinput.name, "miout": myoutput.name, "obs": obsping});
+});
 app.get('/devicelist', (req, res) => {
   console.log(`Getting devices`);
   let inputs = easymidi.getInputs();
@@ -109,26 +121,6 @@ app.get('/testdevices', (req, res) => {
   var inputs = easymidi.getInputs();
   var outputs = easymidi.getOutputs();
   res.json({ "inputs": inputs, "outputs": outputs });
-});
-app.get('/ping', async (req, res) => {
-  //console.log(`Pong`);
-  res.json({ state: 'Pong' })
-});
-app.get('/pingobs', async (req, res) => {
-  obs.connect({ address: 'localhost:4444'})
-  .then(a =>{
-    res.json({ state: 'Pong' })
-  })
-  .catch(err => {
-    console.log("Obs isn't active");
-    res.json({ state: 'inactive' })
-  }); 
-});
-app.get('/controlRoom', (req, res) => {
-  res.sendFile('static/controlRoom/index.html', {root: __dirname })
-});
-app.get('/testing', (req, res) => {
-  res.sendFile('static/testing/index.html', {root: __dirname })
 });
 app.post('/sendcc', (req, res) => {
   console.log(req.query.channel+" "+req.query.controller+" "+req.query.value)
@@ -338,8 +330,8 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
 });
 
-app.get('/remote', function(req, res) {
-  res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
+app.get('/testing', function(req, res) {
+  res.sendFile(path.join(__dirname, 'static/testing/index.html'));
 });
 
 const files = [

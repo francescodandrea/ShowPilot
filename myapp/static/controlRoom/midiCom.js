@@ -42,14 +42,6 @@ function senddevices(indevice,outdevice){
         xhr.open("PUT", "http://"+ip+":8000/devices?in="+indevice+"&out="+outdevice);
         xhr.send();
 }
-//ping start and repeat
-getdevicelist(); //get full list on launch
-setTimeout(() => {
-    getdevices();
-}, 1000);
-setInterval(() => {
-    getdevices();
-}, 10000);
 
 //MIDI SIGNALS TRIGGER
 function sendcc(ch,co,va){
