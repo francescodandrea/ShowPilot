@@ -98,6 +98,18 @@ function sequence(name){
         xhr.open("GET", "http://"+ip+":8000/sequence?file="+name);
         xhr.send();
 }
+function se_new(){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    //console.log(result);
+                    triggersupd(result);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/sequencenew");
+        xhr.send();
+}
 function sequenceeditupd(file,sequence){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
@@ -117,8 +129,8 @@ async function sequencecollist(show){
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     let list=[];
-                    list.show=result.sequences.show;
-                    list.bin=result.sequences.bin;
+                    list["show"]=result.sequences.show;
+                    list["bin"]=result.sequences.bin;
                     resolve(list);
                 }
         });

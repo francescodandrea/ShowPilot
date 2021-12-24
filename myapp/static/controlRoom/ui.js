@@ -1,6 +1,6 @@
 //Ui js
 
-var opensection="live"; //startup screen
+var opensection="sequences"; //startup screen
 if(localStorage.getItem("ip")===null) opensection="devices";
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
@@ -98,10 +98,15 @@ async function triggersupd(data){
     });
     obsselector.value=data.meta.obsscene;
 }
-function sequencesave(){
+function se_save(){
     current_seqdat.seq=containertodata();
+    document.querySelector("#savebtn").classList.replace("btn-warning","btn-secondary");
     current_seqdat.meta.obsscene=document.querySelector("#obsselect").value;
     sequenceeditupd(current_seqdat.meta.file,current_seqdat);
+}
+function se_apply(){
+    current_seqdat.seq=containertodata();
+    document.querySelector("#savebtn").classList.replace("btn-secondary","btn-warning")
 }
 function containertodata(){
     let sequence={};
@@ -134,6 +139,8 @@ async function createtriggers(seq){
         input.type="number";
         input.min=0; input.max=600000;
         input.value=key;
+        input.setAttribute("onchange","se_apply()");
+
 
         /*optionsobsdat.forEach(option => {
             selobs.appendChild(option.cloneNode(true));
@@ -143,6 +150,7 @@ async function createtriggers(seq){
             selsce.appendChild(option.cloneNode(true));
         });
         selsce.value=seq[key];
+        selsce.setAttribute("onchange","se_apply()");
 
         x.innerHTML="X";
         x.setAttribute("onclick","deletetrigger(this)");
@@ -166,8 +174,7 @@ async function createtriggers(seq){
 function newtrigger(){
     let edited = current_seqdat;
     let i=0;
-    console.log(counter);
-    if(counter!=0){
+    if(counter!=undefined){
         i=counter;
     } else {
         for (var key in edited.seq) {

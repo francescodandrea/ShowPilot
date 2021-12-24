@@ -10,7 +10,7 @@
         "viewer": [""]
     },
     "sequences": {
-        "show": [["stay"]],
+        "show": [["stay"],["new"]],
         "bin": [["off"],["test"]]
     }
 }

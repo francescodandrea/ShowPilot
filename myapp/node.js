@@ -75,6 +75,10 @@ app.get('/sequence', async (req, res) => {
 app.put('/sequence', (req, res) => {
   sequencesave(req.body);
 });
+app.get('/sequencenew', async (req, res) => {
+  res.send(await sequencenew());
+  console.log("created sequence");
+});
 app.get('/show', async (req, res) => {
   res.send(await show(req.query.file));
   console.log("sent show");
@@ -145,10 +149,12 @@ app.get('/obsscenelist', (req, res) => {
     res.json({ "obsscenelist": scenelist });
   })
   .catch(err => {
-    console.log("Obs isn't active");
+    //console.log("Obs isn't active");
+    res.json({ "obsscenelist": [] });
   });
 
 });
+
 function obsscenetrigger(name){
   obs.send('SetCurrentScene', {
         'scene-name': name
@@ -270,6 +276,17 @@ function sequencesave(data){
         console.log('sequence '+data.meta.name+' saved');
     }
 })
+}
+async function sequencenew(){
+  const jsonString = JSON.stringify(await sequence("template"));
+  fs.writeFile("storage/shows/sgt2022/sequences/new.json", jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('new sequence created');
+    }
+  })
+  return sequence("new");
 }
 function sequencename(collect, name){
   const jsonString = JSON.stringify(collect);
