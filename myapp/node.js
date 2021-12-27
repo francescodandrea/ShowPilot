@@ -162,7 +162,7 @@ function obsscenetrigger(name){
         'scene-name': name
   })
   .catch(err => {
-    console.log("Obs isn't active");
+    console.log(err);
   });
 }
 
