@@ -140,7 +140,6 @@ function scenebutton(key,value){
 
     if(value.types)
         value.types.forEach(type => {
-            console.log(type);
             let icon = document.createElement("i");
             icon.classList.add("bi");
             icon.classList.add("bi-"+_types[type]);
@@ -375,6 +374,7 @@ function timeoutpulse(){
 function timeoutpulse_t(el,t){
     let i = setTimeout(() => {
         el.classList.add("pulse");
+        el.scrollIntoView();
     }, t);
     pulseinterval.push(i);
 }
