@@ -60,7 +60,6 @@ function collection(){
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     collectionin(result);
-                    //console.log(result);
                 }
         });
         xhr.open("GET", "http://"+ip+":8000/collection");
@@ -82,6 +81,17 @@ async function scenecollist(){
         });
         xhr.open("GET", "http://"+ip+":8000/collection");
         xhr.send();
+    });
+}
+async function sceneupd(scene){
+    var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
+        xhr.addEventListener("readystatechange", function() {
+            resolve();
+        });
+        xhr.open("PUT", "http://"+ip+":8000/collection");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(scene));
     });
 }
 

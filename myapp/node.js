@@ -66,7 +66,9 @@ app.get('/collection', async (req, res) => {
   res.send(await collection())
   //console.log("sent collection");
 });
-app.put('/collection', (req, res) => {
+app.put('/collection', async (req, res) => {
+  await collectionsave(req.body)
+  res.send("done");
 });
 app.get('/sequence', async (req, res) => {
   res.send(await sequence(req.query.file));
@@ -90,12 +92,12 @@ app.put('/show', (req, res) => {
 //TO MIDI
 app.post('/goscene', (req, res) => {
   myoutput.send('cc', {
-    channel: req.query.index,
-    controller: 0,
+    channel: Math.floor(req.query.index/128),
+    controller: req.query.index % 128,
     value: 0
   });
 
-  console.log("goscene "+req.query.index);
+  console.log("midi "+req.query.index+" ("+Math.floor(req.query.index/128)+" "+req.query.index % 128+")")
   res.send();
 });
 app.post('/play', async (req, res) => {
@@ -240,7 +242,12 @@ async function collection(){
   });
   });
 }
-function collectionsave(collect){
+async function collectionsave(scene){
+  let collect = await collection();
+  collect[scene.key]={};
+  collect[scene.key]["name"]=scene.name;
+  collect[scene.key]["color1"]=scene.color1;
+  collect[scene.key]["color2"]=scene.color2;
   const jsonString = JSON.stringify(collect);
   fs.writeFile("storage/shows/sgt2022/scenes/scenes.json", jsonString, err => {
     if (err) {
@@ -332,11 +339,12 @@ var intervals = [];
 function miditrigger(x,t){
   let i = setTimeout(() => {
     myoutput.send('cc', {
-      channel: x,
-      controller: 0,
+      channel: Math.floor(x/128),
+      controller: x % 128,
       value: 0
     });
-  console.log("midi "+x)
+  //console.log("midi "+x);
+  console.log("midi "+x+" ("+Math.floor(x/128)+" "+x % 128+")")
   }, t);
   intervals.push(i);
 }

@@ -1,6 +1,6 @@
 //Ui js
 
-var opensection="sequences"; //startup screen
+var opensection="scenes"; //startup screen
 if(localStorage.getItem("ip")===null) opensection="devices";
 document.querySelector("#"+opensection).style.display="inherit";
 document.querySelector("#"+opensection).style.opacity=1;
@@ -32,6 +32,47 @@ function section(x){
     }
 }
 
+//################ TILE WORK
+function tile(x){
+    document.querySelector("#"+x).parentElement.classList.toggle("open");
+    
+    switch (x) {
+        case "sceneedit":
+            tilescenepreview();
+            tilescenegetkey();
+            break;
+    }
+}
+function tilescenepreview(){
+    document.querySelector("#tilescenepreview").innerHTML="";
+    let value = {};
+    value.name=document.querySelector("#tsn_name").value;
+    value.color1=document.querySelector("#tsn_color1").value;
+    value.color2=document.querySelector("#tsn_color2").value;
+
+    document.querySelector("#tilescenepreview").appendChild(scenebutton("preview",value))
+}
+async function tilescenegetkey(){
+    let scenes = await scenecollist();
+
+    let newkey=0;
+
+    scenes.forEach(element => {
+        if(element[1]>=newkey) newkey=Number(element[1])+1;
+    });
+    document.querySelector("#tsn_key").value=newkey;
+}
+
+async function tilescenesave(){
+    let value = {};
+    value.key=document.querySelector("#tsn_key").value;
+    value.name=document.querySelector("#tsn_name").value;
+    value.color1=document.querySelector("#tsn_color1").value;
+    value.color2=document.querySelector("#tsn_color2").value;
+    await sceneupd(value);
+    tile('sceneedit'),section('scenes');
+}
+
 //################ SCENE COLLECTION
 function collectionin(data){
     
@@ -48,31 +89,35 @@ function collectionin(data){
     container.appendChild(p);
 
     for (let [key, value] of Object.entries(data)) {
-        if(value.name){//if scene isnt hidden
-            let scene = document.createElement("div");
-            scene.className="scene";
-            scene.innerHTML=value.name;
-            if(value.pattern) scene.classList.add(value.pattern);
-            if(value.types)
-                value.types.forEach(type => {
-                    scene.classList.add(type);
-                });
-            scene.style.backgroundImage="linear-gradient(139deg, "+value.color1+" 0%, "+value.color2+" 100%)";
-            scene.setAttribute("onclick","goscene("+key+")");
-            holder.appendChild(scene);
-        }
-    };
+        holder.appendChild(scenebutton(key,value));
+    }
 
     //add create button
     let scene = document.createElement("div");
     scene.className="scene create";
     scene.innerHTML="+";
-    scene.setAttribute("onclick","linkscene()");
+    scene.setAttribute("onclick","tile('sceneedit')");
     holder.appendChild(scene);
 
     //append to container
     container.appendChild(holder);
+};
 
+function scenebutton(key,value){
+    let scene = document.createElement("div");
+    scene.className="scene";
+    scene.innerHTML=value.name;
+    if(value.pattern) scene.classList.add(value.pattern);
+    if(value.types)
+        value.types.forEach(type => {
+            scene.classList.add(type);
+        });
+    scene.style.backgroundImage="linear-gradient(139deg, "+value.color1+" 0%, "+value.color2+" 100%)";
+    if(key!="preview"){
+        scene.setAttribute("onclick","goscene("+key+")");
+        scene.dataset.id=key;
+    }
+    return scene;
 }
 
 //################ SEQUENCE EDITOR
