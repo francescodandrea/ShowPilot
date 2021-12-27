@@ -61,6 +61,28 @@
             <h2>Scene collection</h2>
             <div id="scenecollection">
             </div>
+
+            <div class="tilecontainer">
+                <div id="sceneedit" class="edittile">
+                    <i class="bi bi-x" onclick="tile('sceneedit')"></i>
+                    <h3>New scene</h3>
+                    <div>
+                        <div>
+                            <label>ID:</label>
+                            <input type="number" id="tsn_key" min="0" max="2048" disabled><br>
+                            <label>Name:</label>
+                            <input type="text" id="tsn_name" onchange="tilescenepreview()" autocomplete="off"><br>
+                            <label>Colors:</label>
+                            <input type="color" id="tsn_color1" onchange="tilescenepreview()">
+                            <input type="color" id="tsn_color2" onchange="tilescenepreview()">
+                        </div>
+                        <div id="tilescenepreview">
+                        </div>
+                        <div style="flex-basis:100%"></div>
+                        <button class="btn btn-secondary" onclick="tilescenesave()">Create</button>
+                    </div>
+            </div>
+
         </section>
         <section id="sequences">
             <h2>Sequence editor</h2>
@@ -87,6 +109,17 @@
                 </div>
             </div>
             <div id="seqcomposer"> </div>
+
+            <div class="tilecontainer">
+                <div id="sequenceedit" class="edittile">
+                    <h3>New scene</h3>
+                    <label for="file">Codename:</label>
+                    <input type="text" id="tile_file"><br>
+                    <label for="lname">Name:</label>
+                    <input type="text" id="tile_name"><br>
+                    <i class="bi bi-x" onclick="tile('sequenceedit')"></i>
+                </div>
+            </div>
         </section>
         <section id="live">
             <h2>Live</h2>

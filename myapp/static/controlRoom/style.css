@@ -116,7 +116,56 @@ hr {
     border-top: 2px solid rgb(0 0 0 / 9%);
     margin: 0;
 }
-
+/*common tile sys*/
+.tilecontainer{
+    color: white;
+    display: none;
+    background-color: #c6cbcdab;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+}
+.tilecontainer.open{
+    display: flex;
+}
+.edittile {
+    display: none;
+    background-color: #ffffff;
+    color: initial;
+    box-shadow: 2px 2px 11px 0px #0000001f;
+    height: max-content;
+    width: max-content;
+    position: relative;
+    top: 20%;
+    z-index: 10;
+    padding: 1.5em;
+    border-radius: 8px;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+.tilecontainer.open>.edittile {
+    display: block;
+    top: 0%;
+    opacity: 1;
+}
+#sceneedit > .bi-x {
+    position: absolute;
+    right: 0.2em;
+    top: 0em;
+    font-size: 2em;
+}
+#sceneedit > div{
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+}
 /*########## SCENE COLLECTION #########*/
 .sceneholder {
     display: flex;
