@@ -249,7 +249,7 @@ async function createtriggers(seq){
         trigger.setAttribute("onclick","newtrigger()");
     container.appendChild(trigger);
 
-    container.scrollTop = container.scrollHeight;
+    //container.scrollTop = container.scrollHeight;
 
 }
 function newtrigger(){
