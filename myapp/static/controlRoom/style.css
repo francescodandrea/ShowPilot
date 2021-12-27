@@ -146,14 +146,17 @@ hr {
     padding: 1.5em;
     border-radius: 8px;
     opacity: 0;
-    justify-content: center;
     align-items: center;
     transition: all 0.5s;
 }
 .tilecontainer.open>.edittile {
-    display: block;
+    display: flex;
     top: 0%;
     opacity: 1;
+    gap: 1em;
+    max-width: 42em;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 #sceneedit > .bi-x {
     position: absolute;
@@ -161,10 +164,25 @@ hr {
     top: 0em;
     font-size: 2em;
 }
-#sceneedit > div{
-    display: flex;
-    gap: 1em;
-    flex-wrap: wrap;
+.nail {
+    background-color: #f6f6f6;
+    padding: 0.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.25em;
+    margin-right: 0.5em;
+    outline: #b4bcc400 solid 3px;
+    border-radius: 8px;
+    color: #454a4f;
+    font-style: unset;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+.nail:hover{
+    outline: #b4bcc4 solid 3px;
+}
+.nail.checked {
+    background-color: #7d848a;
+    color: white;
 }
 /*########## SCENE COLLECTION #########*/
 .sceneholder {
@@ -183,6 +201,9 @@ hr {
     box-shadow: 4px 4px 18px 0px #0000001a;
     color: white;
     padding: 0.7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding-top: 0.5em;
     transition: 0.1s all;
 }
@@ -193,6 +214,15 @@ hr {
     outline-offset: 38.5px;
     outline: #ffffff00 solid 3px;
     transform: scale(0.9);
+}
+.scene > div > p {
+    margin: 0;
+    font-size: 0.8em;
+    opacity: 0.7;
+    margin-bottom: -0.3em;
+}
+.scene > div > i:not(:first-of-type) {
+    margin-left: 5px;
 }
 .scene.create {
     background-image: none;

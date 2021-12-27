@@ -11,16 +11,17 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     
-    
     <link rel="stylesheet" href="style.css">
     
     <script src="dataCom.js" defer></script>
     <script src="midiCom.js" defer></script>
     <script src="ui.js" defer></script>
     <script src="player.js" defer></script>
+    
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+    
 </head>
 <body>
     <!-- A horizontal nav -->
@@ -65,23 +66,30 @@
             <div class="tilecontainer">
                 <div id="sceneedit" class="edittile">
                     <i class="bi bi-x" onclick="tile('sceneedit')"></i>
-                    <h3>New scene</h3>
-                    <div>
+                    
                         <div>
+                            <h3>New scene</h3>
                             <label>ID:</label>
                             <input type="number" id="tsn_key" min="0" max="2048" disabled><br>
                             <label>Name:</label>
                             <input type="text" id="tsn_name" onchange="tilescenepreview()" autocomplete="off"><br>
+                            <label>Category:</label>
+                            <select id="tsn_category" onchange="tilescenepreview()" class="form-control"></select>
                             <label>Colors:</label>
                             <input type="color" id="tsn_color1" onchange="tilescenepreview()">
                             <input type="color" id="tsn_color2" onchange="tilescenepreview()">
                         </div>
-                        <div id="tilescenepreview">
-                        </div>
+                        <div id="tilescenepreview"></div>
                         <div style="flex-basis:100%"></div>
+                        <div>
+                            <i class="bi bi-bezier nail checked" id="tsn_moving" title="Moving fixtures" onclick="tiletoggletypes(this),tilescenepreview()" > Animated</i>
+                            <i class="bi bi-lightning-fill nail" id="tsn_strobo" title="Flashing lights" onclick="tiletoggletypes(this),tilescenepreview()"> Strobo</i>
+                            <i class="bi bi-cloud-haze2-fill nail" id="tsn_smoky" title="Active smoke machines" onclick="tiletoggletypes(this),tilescenepreview()"> Foggy</i>
+                            <i class="bi bi-stars nail" id="tsn_pyro" title="Active pyro or special effects" onclick="tiletoggletypes(this),tilescenepreview()"> Pyro</i>
+                            <i class="bi bi-people-fill nail" id="tsn_audience" title="Lights pointing towards the audience" onclick="tiletoggletypes(this),tilescenepreview()"> Audience</i>
+                        </div>
                         <button class="btn btn-secondary" onclick="tilescenesave()">Create</button>
-                    </div>
-            </div>
+                </div>
 
         </section>
         <section id="sequences">

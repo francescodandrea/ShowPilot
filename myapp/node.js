@@ -246,8 +246,10 @@ async function collectionsave(scene){
   let collect = await collection();
   collect[scene.key]={};
   collect[scene.key]["name"]=scene.name;
+  collect[scene.key]["category"]=scene.category;
   collect[scene.key]["color1"]=scene.color1;
   collect[scene.key]["color2"]=scene.color2;
+  collect[scene.key]["types"]=scene.types;
   const jsonString = JSON.stringify(collect);
   fs.writeFile("storage/shows/sgt2022/scenes/scenes.json", jsonString, err => {
     if (err) {

@@ -40,17 +40,29 @@ function tile(x){
         case "sceneedit":
             tilescenepreview();
             tilescenegetkey();
+            tilescenegetsequences();
             break;
     }
 }
-function tilescenepreview(){
-    document.querySelector("#tilescenepreview").innerHTML="";
+function tilescenetodata(){
     let value = {};
+    value.key=document.querySelector("#tsn_key").value;
     value.name=document.querySelector("#tsn_name").value;
+    value.category=document.querySelector("#tsn_category").value;
     value.color1=document.querySelector("#tsn_color1").value;
     value.color2=document.querySelector("#tsn_color2").value;
-
-    document.querySelector("#tilescenepreview").appendChild(scenebutton("preview",value))
+    value.types=[];
+    for (var key in _types) {
+        if(document.querySelector("#tsn_"+key).classList.contains("checked")){
+            value.types.push(key);
+        }
+    }
+    console.log(value.types);
+    return value;
+}
+function tilescenepreview(){
+    document.querySelector("#tilescenepreview").innerHTML="";
+    document.querySelector("#tilescenepreview").appendChild(scenebutton("preview",tilescenetodata()))
 }
 async function tilescenegetkey(){
     let scenes = await scenecollist();
@@ -62,14 +74,27 @@ async function tilescenegetkey(){
     });
     document.querySelector("#tsn_key").value=newkey;
 }
+async function tilescenegetsequences(){
+    let optionsseqdat = await optionssequences("sgt2022");
 
+    //add default
+    let def=new Option;
+    def.value="_default";
+    def.innerHTML="Default";
+    optionsseqdat.push(def);
+
+    let seqselector=document.querySelector("#tsn_category");
+    seqselector.innerHTML="";
+    optionsseqdat.forEach(option => {
+        seqselector.appendChild(option.cloneNode(true));
+    });
+    seqselector.value="_default";
+}
+function tiletoggletypes(nail){
+    nail.classList.toggle("checked");
+}
 async function tilescenesave(){
-    let value = {};
-    value.key=document.querySelector("#tsn_key").value;
-    value.name=document.querySelector("#tsn_name").value;
-    value.color1=document.querySelector("#tsn_color1").value;
-    value.color2=document.querySelector("#tsn_color2").value;
-    await sceneupd(value);
+    await sceneupd(tilescenetodata());
     tile('sceneedit'),section('scenes');
 }
 
@@ -108,10 +133,22 @@ function scenebutton(key,value){
     scene.className="scene";
     scene.innerHTML=value.name;
     if(value.pattern) scene.classList.add(value.pattern);
+    let foot = document.createElement("div");
+    let p = document.createElement("p");
+    if(value.category!="_default") p.innerHTML=value.category;
+    foot.appendChild(p);
+
     if(value.types)
         value.types.forEach(type => {
-            scene.classList.add(type);
+            console.log(type);
+            let icon = document.createElement("i");
+            icon.classList.add("bi");
+            icon.classList.add("bi-"+_types[type]);
+        
+            foot.appendChild(icon);
         });
+    
+    scene.appendChild(foot);
     scene.style.backgroundImage="linear-gradient(139deg, "+value.color1+" 0%, "+value.color2+" 100%)";
     if(key!="preview"){
         scene.setAttribute("onclick","goscene("+key+")");
@@ -440,3 +477,6 @@ function sendccui(){
     let va = document.querySelector("#value").value;
     sendcc(ch,co,va);
 }
+
+/////////const alley
+const _types = { "moving": "bezier", "strobo": "lightning-fill", "smoky": "cloud-haze2-fill", "pyro": "stars", "audience": "people-fill" };

@@ -1,22 +1,59 @@
 {
-    "0":{
+    "0": {
         "name": "Dark",
         "color1": "#000",
         "color2": "#000",
-        "types": ["black"]
+        "category": "stay",
+        "types": [
+            "moving"
+        ]
     },
-    "1":{
+    "1": {
         "name": "Red",
+        "category": "_default",
         "color1": "#f00",
         "color2": "#900",
         "pattern": "high",
-        "types": ["back"]
+        "types": [
+            "strobo"
+        ]
     },
-    "2":{
+    "2": {
         "name": "Blue",
-        "color1": "#00f",
-        "color2": "#009",
-        "pattern": "dots",
-        "types": ["audience","moving"]
+        "category": "new",
+        "color1": "#3d44ff",
+        "color2": "#74beec",
+        "types": [
+            "pyro",
+            "audience"
+        ]
+    },
+    "3": {
+        "name": "s",
+        "category": "_default",
+        "color1": "#000000",
+        "color2": "#000000",
+        "types": [
+            "smoky",
+            "audience"
+        ]
+    },
+    "4": {
+        "name": "",
+        "category": "_default",
+        "color1": "#000000",
+        "color2": "#000000",
+        "types": [
+            "moving"
+        ]
+    },
+    "5": {
+        "name": "",
+        "category": "_default",
+        "color1": "#000000",
+        "color2": "#000000",
+        "types": [
+            "moving"
+        ]
     }
 }
