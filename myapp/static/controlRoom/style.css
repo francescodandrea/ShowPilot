@@ -185,6 +185,10 @@ hr {
     color: white;
 }
 /*########## SCENE COLLECTION #########*/
+#scenecollection {
+    height: inherit;
+    overflow-y: scroll;
+}
 .sceneholder {
     display: flex;
     flex-wrap: wrap;
