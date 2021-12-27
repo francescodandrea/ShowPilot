@@ -375,6 +375,7 @@ function timeoutpulse_t(el,t){
     let i = setTimeout(() => {
         el.classList.add("pulse");
         el.scrollIntoView();
+        document.querySelector("#seqcomposer").scrollTop -= 80;
     }, t);
     pulseinterval.push(i);
 }
