@@ -2,7 +2,7 @@
 
 var opensection="scenes"; //startup screen
 if(localStorage.getItem("ip")===null) opensection="devices";
-document.querySelector("#"+opensection).style.display="inherit";
+document.querySelector("#"+opensection).style.display="flex";
 document.querySelector("#"+opensection).style.opacity=1;
 
 section(opensection);
@@ -13,7 +13,7 @@ function section(x){
     if(x!=prev){
         opensection=x;
         document.querySelector("#"+prev).style.opacity=0;
-        document.querySelector("#"+x).style.display="inherit";
+        document.querySelector("#"+x).style.display="flex";
         setTimeout(() => {
             document.querySelector("#"+x).style.opacity=1;
             document.querySelector("#"+prev).style.display="none";

@@ -12,6 +12,7 @@ section{
     position: relative;
     display: none;
     opacity: 0;
+    flex-direction: column;
     padding:2em;
     overflow: hidden;
     height: 100%;
@@ -253,11 +254,7 @@ hr {
 }
 #sqplayer {
     display: inline-block;
-    margin-left: 20px;
-}
-#sqplayer {
-    display: inline-block;
-    margin-left: 20px;
+    width: 28em;
 }
 #obsplayer {
     display: block;
@@ -274,7 +271,6 @@ hr {
     padding-right: 2em;
     height: 68%;
     width: fit-content;
-    position: absolute;
     outline: solid 2px #aab0b230;
     border-radius: 4px;
     overflow-y: scroll;
@@ -332,6 +328,7 @@ hr {
 /*########## LIVE #########*/
 #liveselect{
     height:auto;
+    font-size: 1.5em;
 }
 
 /*########## DEVICES #########*/
