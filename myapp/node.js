@@ -276,12 +276,11 @@ async function collectionsave(scene){
       if (err) {
           console.log('Error writing file', err)
       } else {
-          console.log('config saved')
+          console.log('Scene saved')
       }
     })
   } else {
     let bin = await scenebin();
-    console.log(JSON.stringify(bin))
     bin[scene.key]=collect[scene.key];
     delete collect[scene.key];
     const jsonString = JSON.stringify(collect);
@@ -289,7 +288,7 @@ async function collectionsave(scene){
       if (err) {
           console.log('Error writing file', err)
       } else {
-          console.log('config saved')
+          console.log('Scene moved to bin')
       }
     })
     const jsonStringBin = JSON.stringify(bin);
@@ -297,7 +296,7 @@ async function collectionsave(scene){
       if (err) {
           console.log('Error writing file', err)
       } else {
-          console.log('config saved')
+          console.log('Scene deleted')
       }
     })
   }

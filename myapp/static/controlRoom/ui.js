@@ -36,6 +36,7 @@ function section(x){
 async function tile(x,options){
     document.querySelector("#"+x).parentElement.classList.toggle("open");
     
+    if(document.querySelector("#"+x).parentElement.classList.contains("open")){
     switch (x) {
         case "sceneedit":
             tilescenepreview();
@@ -45,7 +46,7 @@ async function tile(x,options){
                 if(options.category){
                     document.querySelector("#tsn_category").value=options.category;
                 }
-                if(options.key){
+                if(options.key>-1){
                     let value=await collectionpick(options.key);
                     value.key=options.key;
                     datatotilescene(value);
@@ -54,6 +55,7 @@ async function tile(x,options){
             }
 
             break;
+    }
     }
 }
 function tilescenetodata(){
@@ -80,9 +82,10 @@ function datatotilescene(value){
     for (var key in _types) { //remove all
         document.querySelector("#tsn_"+key).classList.remove("checked");
     }
+    if(value.types){
     value.types.forEach(type => { //than add
         document.querySelector("#tsn_"+type).classList.add("checked");
-    });
+    });}
 }
 function tilescenepreview(){
     document.querySelector("#tilescenepreview").innerHTML="";
