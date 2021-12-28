@@ -67,6 +67,19 @@ async function collection(){
         xhr.send();
     });
 }
+async function collectionpick(key){
+    var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    resolve(result);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/collectionpick?key="+key);
+        xhr.send();
+    });
+}
 async function scenecollist(){
     var xhr = new XMLHttpRequest();
     return new Promise(resolve => {

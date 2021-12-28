@@ -66,6 +66,10 @@ app.get('/collection', async (req, res) => {
   res.send(await collection())
   //console.log("sent collection");
 });
+app.get('/collectionpick', async (req, res) => {
+  res.send(await collectionpick(req.query.key))
+  //console.log("sent collection");
+});
 app.put('/collection', async (req, res) => {
   await collectionsave(req.body)
   res.send("done");
@@ -242,22 +246,78 @@ async function collection(){
   });
   });
 }
+async function collectionpick(key){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/scenes/scenes.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj[key]);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
 async function collectionsave(scene){
   let collect = await collection();
-  collect[scene.key]={};
-  collect[scene.key]["name"]=scene.name;
-  collect[scene.key]["category"]=scene.category;
-  collect[scene.key]["color1"]=scene.color1;
-  collect[scene.key]["color2"]=scene.color2;
-  collect[scene.key]["types"]=scene.types;
-  const jsonString = JSON.stringify(collect);
-  fs.writeFile("storage/shows/sgt2022/scenes/scenes.json", jsonString, err => {
+  if(!scene.delete){
+    collect[scene.key]={};
+    collect[scene.key]["name"]=scene.name;
+    collect[scene.key]["category"]=scene.category;
+    collect[scene.key]["color1"]=scene.color1;
+    collect[scene.key]["color2"]=scene.color2;
+    collect[scene.key]["types"]=scene.types;
+    const jsonString = JSON.stringify(collect);
+    fs.writeFile("storage/shows/sgt2022/scenes/scenes.json", jsonString, err => {
+      if (err) {
+          console.log('Error writing file', err)
+      } else {
+          console.log('config saved')
+      }
+    })
+  } else {
+    let bin = await scenebin();
+    console.log(JSON.stringify(bin))
+    bin[scene.key]=collect[scene.key];
+    delete collect[scene.key];
+    const jsonString = JSON.stringify(collect);
+    fs.writeFile("storage/shows/sgt2022/scenes/scenes.json", jsonString, err => {
+      if (err) {
+          console.log('Error writing file', err)
+      } else {
+          console.log('config saved')
+      }
+    })
+    const jsonStringBin = JSON.stringify(bin);
+    fs.writeFile("storage/shows/sgt2022/scenes/bin.json", jsonStringBin, err => {
+      if (err) {
+          console.log('Error writing file', err)
+      } else {
+          console.log('config saved')
+      }
+    })
+  }
+  
+}
+async function scenebin(){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/scenes/bin.json", "utf8", (err, jsonString) => {
     if (err) {
-        console.log('Error writing file', err)
-    } else {
-        console.log('config saved')
+      console.log("File read failed:", err);
+      return;
     }
-})
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
 }
 //----------SEQUENCE
 async function sequence(name){
