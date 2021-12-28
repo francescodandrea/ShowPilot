@@ -21,7 +21,7 @@ function section(x){
     }
     switch (x) {
         case "scenes":
-            collection();
+            collectionin("category");
             break;
         case "sequences":
             squencelistupd("sgt2022");
@@ -99,33 +99,84 @@ async function tilescenesave(){
 }
 
 //################ SCENE COLLECTION
-function collectionin(data){
-    
+async function collectionin(method){
+    let data = await collection();
+
     let container = document.querySelector("#scenecollection");
     container.innerHTML="";
 
-    let category = document.createElement("div");
-    category.className="category";
+    switch (method) {
+        case "all": {
 
-    let holder = document.createElement("div"),
-        p = document.createElement("p");
-    holder.className="sceneholder";
-    p.innerHTML="Tutte le scene";
-    container.appendChild(p);
+            let holder = document.createElement("div"),
+                p = document.createElement("p");
+            holder.className="sceneholder";
+            p.innerHTML="Tutte le scene";
+            container.appendChild(p);
 
-    for (let [key, value] of Object.entries(data)) {
-        holder.appendChild(scenebutton(key,value));
+            for (let [key, value] of Object.entries(data)) {
+                holder.appendChild(scenebutton(key,value));
+            }
+
+            //add create button
+            let scene = document.createElement("div");
+            scene.className="scene create";
+            scene.innerHTML="+";
+            scene.setAttribute("onclick","tile('sceneedit')");
+            holder.appendChild(scene);
+
+            //append to container
+            container.appendChild(holder);
+            
+            }break;
+        case "category": {
+            let catnames=[];
+
+            for (let [key, value] of Object.entries(data)) {
+                if(!catnames.includes(value.category)) catnames.push(value.category);
+            }
+
+            catnames.sort();
+
+            let scenespercat={};
+            catnames.forEach(name => {
+                scenespercat[name]={};
+                scenespercat[name].buttons=[];
+            });
+
+            for (let [key, value] of Object.entries(data)) {
+                scenespercat[value.category].buttons.push(scenebutton(key,value));
+            }
+
+            catnames.forEach((name,i) => {
+                let category = document.createElement("div");
+                category.className="category";
+
+                let holder = document.createElement("div"),
+                    p = document.createElement("p");
+                holder.className="sceneholder";
+                if(!(name.charAt(0)=="_")) p.innerHTML=name;
+                category.appendChild(p);
+
+                scenespercat[name].buttons.forEach(button => {
+                    holder.appendChild(button);
+                });
+
+                //add create button
+                let scene = document.createElement("div");
+                scene.className="scene create";
+                scene.innerHTML="+";
+                scene.setAttribute("onclick","tile('sceneedit')");
+                holder.appendChild(scene);
+                
+                //append to category
+                category.appendChild(holder);
+                container.appendChild(category);
+            });
+
+            }break;
     }
 
-    //add create button
-    let scene = document.createElement("div");
-    scene.className="scene create";
-    scene.innerHTML="+";
-    scene.setAttribute("onclick","tile('sceneedit')");
-    holder.appendChild(scene);
-
-    //append to container
-    container.appendChild(holder);
 };
 
 function scenebutton(key,value){

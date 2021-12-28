@@ -189,6 +189,11 @@ hr {
     height: inherit;
     overflow-y: scroll;
 }
+.category:not(:last-child) {
+    border-bottom: 2px solid #aab0b24d;
+    padding-bottom: 1em;
+    margin-bottom: 2em;
+}
 .sceneholder {
     display: flex;
     flex-wrap: wrap;

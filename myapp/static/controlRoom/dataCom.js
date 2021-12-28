@@ -54,16 +54,18 @@ setInterval(() => {
 //############## CLIENT SERVER CONNECTION
 
 //SCENE COLLECTION
-function collection(){
+async function collection(){
     var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
-                    collectionin(result);
+                    resolve(result);
                 }
         });
         xhr.open("GET", "http://"+ip+":8000/collection");
         xhr.send();
+    });
 }
 async function scenecollist(){
     var xhr = new XMLHttpRequest();
