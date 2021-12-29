@@ -1,6 +1,7 @@
 //Ui js
 
 var opensection="scenes"; //startup screen
+if(screen.width<425) opensection="live";
 if(localStorage.getItem("ip")===null) opensection="devices";
 document.querySelector("#"+opensection).style.display="flex";
 document.querySelector("#"+opensection).style.opacity=1;
