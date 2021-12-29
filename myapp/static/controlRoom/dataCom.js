@@ -4,8 +4,9 @@ if(localStorage.getItem("ip")) {
     ip=localStorage.getItem("ip");
     document.querySelector("#serverip").value=ip;
 };
-function serveripsave(ip){
-    localStorage.setItem("ip",ip);
+function serveripsave(i){
+    localStorage.setItem("ip",i);
+    ip=i;
 }
 
 //SERVER CHECKS
@@ -17,6 +18,7 @@ async function pingcom(){
                     var result= JSON.parse(this.responseText);
                     if (result.state=="Pong") {
                         statusupd("server",result.server);
+                        serveripsave(result.server);
                         statusupd("miin",result.miin);
                         statusupd("miout",result.miout);
                         statusupd("obs",result.obs);

@@ -6,9 +6,11 @@ var easymidi = require('easymidi'); //midi com
 const OBSWebSocket = require('obs-websocket-js'); //obs
 const obs = new OBSWebSocket();
 const cors = require('cors'); //cors made east
+var nodeip = require("ip"); //easy ip getter
 const fs = require("fs"); //file reading
 
 const port = 8000;
+const ip = nodeip.address();
 
 app.use(
   cors({
@@ -38,7 +40,7 @@ app.get('/ping', async (req, res) => {
   .catch(err => {
     obsping=false;
   });
-  res.json({ state:'Pong', server:true, "miin": myinput.name, "miout": myoutput.name, "obs": obsping});
+  res.json({ state:'Pong', server:ip, "miin": myinput.name, "miout": myoutput.name, "obs": obsping});
 });
 app.get('/devicelist', (req, res) => {
   console.log(`Getting devices`);
