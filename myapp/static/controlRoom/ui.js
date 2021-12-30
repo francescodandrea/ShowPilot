@@ -125,11 +125,12 @@ async function tilescenesave(){
     await sceneupd(tilescenetodata());
     tile('sceneedit'),section('scenes');
 }
-async function tilescenedelete(){
+async function tilescenedelete(close){
     let value=tilescenetodata();
     value.delete=true;
     await sceneupd(value);
-    tile('sceneedit'),section('scenes');
+    if(close) tile('sceneedit');
+    section('scenes');
 }
 
 //################ SCENE COLLECTION
@@ -248,7 +249,28 @@ function push(key){
         case "edit":
             tile('sceneedit',{'key':key});
             break;
+        case "delete":
+            document.querySelector("[data-id='"+key+"']").classList.toggle("todelete");
+            break;
     }
+}
+function collectionstate(x){
+    if(scenecollectionstate=="delete"){
+        let todelete = document.getElementsByClassName("todelete");
+        console.log(todelete);
+        for (let element of todelete) {
+            console.log(element.dataset.id);
+            document.querySelector("#tsn_key").value=element.dataset.id;
+            tilescenedelete(false);
+        };
+    }
+
+    document.querySelector("#state_delete").classList.replace("btn-danger","btn-outline-danger");
+    document.querySelector("#state_edit").classList.replace("btn-secondary","btn-outline-secondary");
+    document.querySelector("#state_play").classList.replace("btn-secondary","btn-outline-secondary");
+    scenecollectionstate=x;
+    document.querySelector("#state_"+x).classList.replace("btn-outline-danger","btn-danger");
+    document.querySelector("#state_"+x).classList.replace("btn-outline-secondary","btn-secondary");
 }
 
 //################ SEQUENCE EDITOR
@@ -576,4 +598,4 @@ function sendccui(){
 
 /////////const alley
 const _types = { "moving": "bezier", "strobo": "lightning-fill", "smoky": "cloud-haze2-fill", "pyro": "stars", "audience": "people-fill" };
-var scenecollectionstate = "edit";
+var scenecollectionstate = "play";

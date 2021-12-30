@@ -234,6 +234,10 @@ hr {
 .scene > div > i:not(:first-of-type) {
     margin-left: 5px;
 }
+.scene.todelete {
+    outline-color: #d44343;
+    box-shadow: 4px 4px 18px 0px #ff010154;
+}
 .scene.create {
     background-image: none;
     outline: #aab0b2 dashed 3px;

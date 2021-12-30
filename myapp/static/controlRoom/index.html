@@ -59,7 +59,16 @@
 
     <div id="sectionholder">
         <section id="scenes">
-            <h2>Scene collection</h2>
+            <div>
+                <h2 style="float: left">Scene collection</h2>
+                <div class="input-group" style="width: fit-content; margin-left: auto">
+                    <button class="btn btn-secondary" id="state_play" type="button" onclick="collectionstate('play')"><i class="bi bi-play-fill"></i></button>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" id="state_edit" type="button" onclick="collectionstate('edit')"><i class="bi bi-pencil-fill"></i></button>
+                        <button class="btn btn-outline-danger" id="state_delete" type="button"  onclick="collectionstate('delete')"><i class="bi bi-trash-fill"></i></button>
+                    </div>
+                </div>
+            </div>
             <div id="scenecollection">
             </div>
 
@@ -90,9 +99,10 @@
                         </div>
                         <button class="btn btn-secondary" onclick="tilescenesave()">Create</button>
                         
-                        <button class="btn btn-danger" onclick="tilescenedelete()">Delete</button>
+                        <button class="btn btn-danger" onclick="tilescenedelete(true)">Delete</button>
                 </div>
-
+            </div>
+            
         </section>
         <section id="sequences">
             <h2>Sequence editor</h2>
