@@ -107,18 +107,30 @@ app.post('/goscene', (req, res) => {
   res.send();
 });
 app.post('/play', async (req, res) => {
+
   let data=await sequence(req.query.file);
   let seq=data.seq;
 
-  obsscenetrigger(data.meta.obsscene);
-
-  for (var key in seq) {
-      if(seq[key]!="null") miditrigger(seq[key],key);
+  if(!req.query.resume){
+    obsscenetrigger(data.meta.obsscene);
+    for (var key in seq){
+          if(seq[key]!="null") miditrigger(seq[key],key);
+    }
+  } else {
+    setmediatime(getscenemain(data.meta.obsscene),req.query.resume);
+    obsscenetrigger(data.meta.obsscene);
+    for (var key in seq){
+      if(key>req.query.resume){
+          if(seq[key]!="null") miditrigger(seq[key],key-req.query.resume);
+      }
+    }
   }
+
 
   console.log("Currently playing "+data.meta.name);
   res.send();
 });
+
 app.post('/stop', async (req, res) => {
   intervals.forEach(clearInterval);
   console.log("Stopped all intervals");
@@ -166,6 +178,28 @@ app.get('/obsscenelist', (req, res) => {
 function obsscenetrigger(name){
   obs.send('SetCurrentScene', {
         'scene-name': name
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+function getscenemain(name){
+  obs.send('SetCurrentScene', {
+        'scene-name': name,
+        'timestamp': timestamp
+  }).then(data => {
+    console.log(data);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
+
+function setmediatime(name,timestamp){
+  obs.send('SetCurrentScene', {
+        'scene-name': name,
+        'timestamp': timestamp
   })
   .catch(err => {
     console.log(err);
