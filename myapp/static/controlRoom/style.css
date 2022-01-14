@@ -332,6 +332,9 @@ hr {
     font-weight: bold;
 }
 /*########## LIVE #########*/
+#liveplayer{
+    max-width: 34em;
+}
 #liveselect{
     height:auto;
     font-size: 1.5em;
