@@ -189,6 +189,8 @@ hr {
 #scenecollection {
     height: inherit;
     overflow-y: scroll;
+    padding-left: 0.5em;
+    padding-bottom: 0.5em;
 }
 .category:not(:last-child) {
     border-bottom: 2px solid #aab0b24d;
@@ -199,7 +201,6 @@ hr {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
-    padding-left: 0.5em;
 }
 .scene {
     height: 6em;
