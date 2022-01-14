@@ -125,8 +125,6 @@ app.post('/play', async (req, res) => {
       }
     }
   }
-
-
   console.log("Currently playing "+data.meta.name);
   res.send();
 });
@@ -180,7 +178,7 @@ function obsscenetrigger(name){
         'scene-name': name
   })
   .catch(err => {
-    console.log(err);
+    console.log('Cannot play OBS scene because '+err.description);
   });
 }
 
