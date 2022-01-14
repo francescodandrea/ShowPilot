@@ -331,6 +331,20 @@ hr {
     color: #979ca2;
     font-weight: bold;
 }
+.trigger > i {
+    color: #888e9500;
+    transition: color 0.3s;
+    padding: 0.5em;
+}
+.trigger > i.startpoint {
+    color: #888e95;
+}
+.trigger > i:hover {
+    color: #888e956e;
+}
+.trigger > i.startpoint:hover {
+    color: #686c72;
+}
 /*########## LIVE #########*/
 #liveplayer{
     max-width: 34em;

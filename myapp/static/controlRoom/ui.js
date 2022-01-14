@@ -331,17 +331,20 @@ async function createtriggers(seq){
     for (var key in seq) {
         let trigger = document.createElement("div"),
             input = document.createElement("input"),
+            startpoint = document.createElement("i"),
             selobs = document.createElement("select"),
             selsce = document.createElement("select"),
             x = document.createElement("p");
         
         trigger.className="trigger";
 
+        startpoint.className="bi bi-caret-right-square";
+        startpoint.setAttribute("onclick","setstartpoint(this)");
+
         input.type="number";
         input.min=0; input.max=600000;
         input.value=key;
         input.setAttribute("onchange","se_apply()");
-
 
         /*optionsobsdat.forEach(option => {
             selobs.appendChild(option.cloneNode(true));
@@ -356,6 +359,7 @@ async function createtriggers(seq){
         x.innerHTML="X";
         x.setAttribute("onclick","deletetrigger(this)");
 
+        trigger.appendChild(startpoint);
         trigger.appendChild(input);
         //trigger.appendChild(selobs);
         trigger.appendChild(selsce);
@@ -481,13 +485,17 @@ function se_reset(){
     clearInterval(counterengine);
     timeoutpulse_reset();
 }
+//startpoint handling
+function setstartpoint(i){
+    i.classList.toggle("startpoint");
 
+}
 //trigger pulse on done
 var pulseinterval=[];
 function timeoutpulse(){
     let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
     trigger.forEach(el => {
-        timeoutpulse_t(el,el.childNodes[0].value);
+        timeoutpulse_t(el,el.getElementsByTagName('input')[0].value);
     });
 }
 function timeoutpulse_t(el,t){
