@@ -199,6 +199,7 @@ hr {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
+    padding-left: 0.5em;
 }
 .scene {
     height: 6em;
