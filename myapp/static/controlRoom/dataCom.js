@@ -208,19 +208,3 @@ async function obsscenelist(){
         xhr.send();
     }
 )};
-
-//OBS DIRECT
-async function obsscenelist(){
-    return new Promise(resolve => {
-    var xhr = new XMLHttpRequest();
-        xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
-                    var result= JSON.parse(this.responseText);
-                    //console.log(result.obsscenelist);
-                    resolve(result.obsscenelist);
-                }
-        });
-        xhr.open("GET", "http://"+ip+":8000/obsscenelist");
-        xhr.send();
-    }
-)};

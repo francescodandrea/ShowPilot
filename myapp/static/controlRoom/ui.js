@@ -291,9 +291,12 @@ async function triggersupd(data){
     let optionsobsdat = await optionsobs();
     let obsselector=document.querySelector("#obsselect");
     obsselector.innerHTML="";
-    optionsobsdat.forEach(option => {
-        obsselector.appendChild(option.cloneNode(true));
-    });
+        optionsobsdat.forEach(option => {
+            obsselector.appendChild(option.cloneNode(true));
+        });
+    if(optionsobsdat.length==1){
+        document.querySelector("#obsselect > option").innerHTML=data.meta.obsscene;
+    }
     obsselector.value=data.meta.obsscene;
 }
 function se_save(){
@@ -394,7 +397,6 @@ async function optionsobs(){
     let options = [];
     
     let option = document.createElement("option");
-    option.value=null
     option.innerHTML=null;
     options.push(option);
 
@@ -575,16 +577,23 @@ function statusupd(element, bool){
     }, 200);
 
     let needserver=["#scenes","#sequences","#live"];
+    let needobs=["#obsselect"];
 
     switch (element) {
         case "server":
             needserver.forEach(element => {
-                if(!bool) {document.querySelector(element).classList.add("unavailable");}
-                else {document.querySelector(element).classList.remove("unavailable");}
+                if(bool) {document.querySelector(element).classList.remove("unavailable");}
+                else {document.querySelector(element).classList.add("unavailable");}
             });
             if(bool) document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#0f0');
             else document.querySelector('meta[name="theme-color"]').setAttribute('content',  '#f00');
             break;
+        v
+        case "obs":
+            needobs.forEach(element => {
+                if(bool){document.querySelector(element).disabled=false;}
+                else {document.querySelector(element).disabled=true;}
+            });
     }
 }
 
