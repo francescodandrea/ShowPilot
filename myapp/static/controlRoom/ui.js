@@ -487,8 +487,13 @@ function se_reset(){
 }
 //startpoint handling
 function setstartpoint(i){
-    i.classList.toggle("startpoint");
-
+    if(i.classList.contains("startpoint")){
+        i.classList.remove("startpoint");
+    } else {
+        let start=document.getElementsByClassName("startpoint")[0];
+        if(start!=undefined) start.classList.remove("startpoint");
+        i.classList.add("startpoint");
+    }
 }
 //trigger pulse on done
 var pulseinterval=[];
