@@ -73,9 +73,13 @@ function goscene(i){
 }
 
 //PLAYER TRIGGER
-function midiplay(filename){
+function midiplay(filename,time){
     var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://"+ip+":8000/play?file="+filename);
+        if(time==0){
+            xhr.open("POST", "http://"+ip+":8000/play?file="+filename);
+        } else {
+            xhr.open("POST", "http://"+ip+":8000/play?file="+filename+"&resume="+time);
+        }
         xhr.send();
 }
 function midistop(){
