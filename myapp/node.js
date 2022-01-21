@@ -115,20 +115,24 @@ app.post('/play', async (req, res) => {
   let data=await sequence(req.query.file);
   let seq=data.seq;
 
+  /* waiting for obs websocket 5.0 release
+  
   if(!req.query.resume){
+  */
     obsscenetrigger(data.meta.obsscene);
     for (var key in seq){
           if(seq[key]!="null") miditrigger(seq[key],key);
     }
+  /*
   } else {
-    setmediatime(getscenemain(data.meta.obsscene),req.query.resume);
+    setmediatime("stay",req.query.resume);
     obsscenetrigger(data.meta.obsscene);
     for (var key in seq){
       if(key>req.query.resume){
           if(seq[key]!="null") miditrigger(seq[key],key-req.query.resume);
       }
     }
-  }
+  }*/
   console.log("Currently playing "+data.meta.name);
   res.send();
 });
@@ -187,9 +191,8 @@ function obsscenetrigger(name){
 }
 
 function getscenemain(name){
-  obs.send('SetCurrentScene', {
-        'scene-name': name,
-        'timestamp': timestamp
+  obs.send('GetSceneItemList', {
+        'scene-name': name
   }).then(data => {
     console.log(data);
   })
@@ -199,11 +202,14 @@ function getscenemain(name){
 }
 
 function setmediatime(name,timestamp){
-  obs.send('SetCurrentScene', {
-        'scene-name': name,
+  obs.send('SetMediaTime', {
+        'sourceName': name,
         'timestamp': timestamp
+  }).then(data => {
+    console.log(data);
   })
   .catch(err => {
+    console.log("nono eh");
     console.log(err);
   });
 }

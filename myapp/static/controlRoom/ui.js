@@ -481,9 +481,13 @@ document.addEventListener('keyup', handleKeyboard)
 
 //player
 function se_play(){
+    let time=0;
+    if(document.getElementsByClassName("startpoint")[0]){
+        time=document.getElementsByClassName("startpoint")[0].nextSibling.value;
+    }
     newonclick=true;
     midistop();
-    midiplay(current_seqdat.meta.file);
+    midiplay(current_seqdat.meta.file, time);
     counter=0;
     counterengine = setInterval(() => {
         counter+=100;
@@ -501,14 +505,19 @@ function se_reset(){
     newonclick=false;
     counter=undefined;
     midistop();
-    midiplay("off");
+    midiplay("off",0);
     clearInterval(counterengine);
     timeoutpulse_reset();
 }
 //startpoint handling
 function setstartpoint(i){
-    i.classList.toggle("startpoint");
-
+    if(i.classList.contains("startpoint")){
+        i.classList.remove("startpoint");
+    } else {
+        let start=document.getElementsByClassName("startpoint")[0];
+        if(start!=undefined) start.classList.remove("startpoint");
+        i.classList.add("startpoint");
+    }
 }
 //trigger pulse on done
 var pulseinterval=[];
