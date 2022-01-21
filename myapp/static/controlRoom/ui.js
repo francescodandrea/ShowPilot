@@ -1,6 +1,6 @@
 //Ui js
 
-var opensection="scenes"; //startup screen
+var opensection="sequences"; //startup screen
 if(screen.width<425) opensection="live";
 if(localStorage.getItem("ip")===null) opensection="devices";
 document.querySelector("#"+opensection).style.display="flex";
@@ -36,7 +36,7 @@ function section(x){
 //################ TILE WORK
 async function tile(x,options){
     document.querySelector("#"+x).parentElement.classList.toggle("open");
-    
+
     if(document.querySelector("#"+x).parentElement.classList.contains("open")){
     switch (x) {
         case "sceneedit":
@@ -52,10 +52,30 @@ async function tile(x,options){
                     value.key=options.key;
                     datatotilescene(value);
                     tilescenepreview();
+                    console.log(value);
                 }
             }
 
-            break;
+        break;
+        case "sequenceedit":
+            await tilescenegetsequences();
+            if(typeof options !== 'undefined') {
+                if(options.category){
+                    document.querySelector("#tsn_category").value=options.category;
+                }
+                if(options.key>-1){
+                    let value=await sequencepick(options.key);
+                    //value.key=options.key;
+                    //datatotilescene(value);
+                    //tilescenepreview();
+                    console.log(value);
+                } else {
+                    document.querySelector("#tsq_key").innerHTML="";
+                    document.querySelector("#tsq_name").innerHTML="";
+                }
+            }
+
+        break;
     }
     }
 }
@@ -88,7 +108,7 @@ function datatotilescene(value){
         document.querySelector("#tsn_"+type).classList.add("checked");
     });}
 }
-function tilescenepreview(){
+function tilescenepreview(){ //generates and adds a scene button to the scene editing tile
     document.querySelector("#tilescenepreview").innerHTML="";
     document.querySelector("#tilescenepreview").appendChild(scenebutton("preview",tilescenetodata()))
 }

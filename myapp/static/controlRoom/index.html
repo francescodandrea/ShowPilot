@@ -79,14 +79,14 @@
                         <div>
                             <h3>New scene</h3>
                             <label>ID:</label>
-                            <input type="number" id="tsn_key" min="0" max="2048" disabled><br>
+                            <input type="number" class="form-control" id="tsn_key" min="0" max="2048" disabled><br>
                             <label>Name:</label>
-                            <input type="text" id="tsn_name" onchange="tilescenepreview()" autocomplete="off"><br>
+                            <input type="text" class="form-control" id="tsn_name" onchange="tilescenepreview()" autocomplete="off"><br>
                             <label>Category:</label>
                             <select id="tsn_category" onchange="tilescenepreview()" class="form-control"></select>
-                            <label>Colors:</label>
-                            <input type="color" id="tsn_color1" onchange="tilescenepreview()">
-                            <input type="color" id="tsn_color2" onchange="tilescenepreview()">
+                            <br><label>Colors:</label>
+                            <input type="color" class="form-control" id="tsn_color1" onchange="tilescenepreview()">
+                            <input type="color" class="form-control" id="tsn_color2" onchange="tilescenepreview()">
                         </div>
                         <div id="tilescenepreview"></div>
                         <div style="flex-basis:100%"></div>
@@ -113,8 +113,9 @@
                     <button class="btn btn-outline-secondary" type="button" onclick="se_play()"><i class="bi bi-play-fill"></i></button>
                     <button class="btn btn-outline-secondary" type="button" onclick="se_stop()"><i class="bi bi-pause-fill"></i></button>
                     <button class="btn btn-outline-danger" type="button" onclick="se_reset()"><i class="bi bi-stop-fill"></i></button>
-                    <button class="btn btn-secondary ml-2" type="button" onclick="se_new()"><i class="bi bi-file-earmark-plus-fill"></i></button>
+                    <button class="btn btn-secondary ml-2" type="button" onclick="tile('sequenceedit')"><i class="bi bi-pencil-fill"></i></button>
                     <button class="btn btn-secondary" id="savebtn" type="button" onclick="se_save()"><i class="bi bi-cloud-arrow-up-fill"></i></button>
+                    <button class="btn btn-secondary ml-2" type="button" onclick="tile('sequenceedit')"><i class="bi bi-file-earmark-plus-fill"></i></button>
                     </div>
                 </div>
             </div>
@@ -132,12 +133,27 @@
 
             <div class="tilecontainer">
                 <div id="sequenceedit" class="edittile">
-                    <h3>New scene</h3>
-                    <label for="file">Codename:</label>
-                    <input type="text" id="tile_file"><br>
-                    <label for="lname">Name:</label>
-                    <input type="text" id="tile_name"><br>
                     <i class="bi bi-x" onclick="tile('sequenceedit')"></i>
+                        <div>
+                            <h3>New sequence</h3>
+                            <label>File:</label>
+                            <input type="text" id="tsq_key" class="form-control" ><br>
+                            <label>Name:</label>
+                            <input type="text" id="tsq_name" class="form-control" onchange="tilescenepreview()" autocomplete="off"><br>
+                            <label>Type:</label>
+                            <select id="tsn_type" class="form-control">
+                                <option>Intro</option>
+                                <option>Act</option>
+                                <option>Interval act</option>
+                                <option>Outro</option>
+                                <option>Ambient</option>
+                            </select>
+                        </div>
+                        <div id="tilescenepreview"></div>
+                        <div style="flex-basis:100%"></div>
+                        <button class="btn btn-primary" onclick="tilescenesave()">Create</button>
+                        
+                        <button class="btn btn-danger" style="display:none" onclick="tilescenedelete(true)">Delete</button>
                 </div>
             </div>
         </section>

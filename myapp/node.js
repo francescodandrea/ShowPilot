@@ -80,6 +80,10 @@ app.get('/sequence', async (req, res) => {
   res.send(await sequence(req.query.file));
   console.log("sent sequence");
 });
+app.get('/sequencepick', async (req, res) => {
+  res.send(await sequencepick(req.query.key))
+  //console.log("sent sequence");
+});
 app.put('/sequence', (req, res) => {
   sequencesave(req.body);
 });
@@ -378,6 +382,22 @@ function sequencesave(data){
         console.log('sequence '+data.meta.name+' saved');
     }
 })
+}
+async function sequencepick(key){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/sequences/"+key+".json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj[key]);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
 }
 async function sequencenew(){
   const jsonString = JSON.stringify(await sequence("template"));

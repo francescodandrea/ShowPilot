@@ -165,7 +165,19 @@ async function sequencecollist(show){
         xhr.send();
     });
 }
-
+async function sequencepick(key){
+    var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    resolve(result);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/sequencepick?key="+key);
+        xhr.send();
+    });
+}
 //SHOW
 function show(name){
     var xhr = new XMLHttpRequest();
