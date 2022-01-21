@@ -112,6 +112,18 @@ body > nav > p:nth-child(2){
 .form-inline{
     gap: 1em;
 }
+.form-control {
+    display: inline;
+    width: fit-content;
+    padding: 0.15rem 0.5rem;
+}
+.form-control[type=color]{
+    width: 2.8em;
+    padding: 0.1em 0.2em;
+}
+select.form-control:not([size]):not([multiple]){
+    height: unset;
+}
 hr {
     flex-basis: 100%;
     border-top: 2px solid rgb(0 0 0 / 9%);
@@ -159,7 +171,7 @@ hr {
     justify-content: space-between;
     flex-wrap: wrap;
 }
-#sceneedit > .bi-x {
+#sceneedit > .bi-x, #sequenceedit > .bi-x {
     position: absolute;
     right: 0.2em;
     top: 0em;
