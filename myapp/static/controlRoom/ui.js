@@ -488,11 +488,13 @@ function se_play(){
     newonclick=true;
     midistop();
     midiplay(current_seqdat.meta.file, time);
-    counter=0;
+    counter=time;
     counterengine = setInterval(() => {
         counter+=100;
     }, 100);
-    timeoutpulse();
+    timeoutpulse(time);
+    document.querySelector("#vid").currentTime = time/1000;
+    document.querySelector("#vid").play();
 }
 function se_stop(){
     newonclick=false;
@@ -500,6 +502,7 @@ function se_stop(){
     midistop();
     clearInterval(counterengine);
     timeoutpulse_reset();
+    document.querySelector("#vid").pause();
 }
 function se_reset(){
     newonclick=false;
@@ -508,6 +511,8 @@ function se_reset(){
     midiplay("off",0);
     clearInterval(counterengine);
     timeoutpulse_reset();
+    document.querySelector("#vid").currentTime = 0;
+    document.querySelector("#vid").load();
 }
 //startpoint handling
 function setstartpoint(i){
@@ -521,10 +526,12 @@ function setstartpoint(i){
 }
 //trigger pulse on done
 var pulseinterval=[];
-function timeoutpulse(){
+function timeoutpulse(time){
     let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
     trigger.forEach(el => {
-        timeoutpulse_t(el,el.getElementsByTagName('input')[0].value);
+        if(el.getElementsByTagName('input')[0].value-time>=0){
+            timeoutpulse_t(el,el.getElementsByTagName('input')[0].value-time);
+        }
     });
 }
 function timeoutpulse_t(el,t){

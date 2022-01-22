@@ -79,3 +79,4 @@ myapp/node_modules/touch/bin/nodetouch.js
 myapp/node_modules/update-notifier/node_modules/.bin/semver
 myapp/node_modules/update-notifier/node_modules/.bin/semver.ps1
 myapp/node_modules/update-notifier/node_modules/semver/bin/semver.js
+myapp/storage/vidignored/*

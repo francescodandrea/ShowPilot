@@ -115,24 +115,22 @@ app.post('/play', async (req, res) => {
   let data=await sequence(req.query.file);
   let seq=data.seq;
 
-  /* waiting for obs websocket 5.0 release
-  
   if(!req.query.resume){
-  */
     obsscenetrigger(data.meta.obsscene);
     for (var key in seq){
           if(seq[key]!="null") miditrigger(seq[key],key);
     }
-  /*
   } else {
-    setmediatime("stay",req.query.resume);
-    obsscenetrigger(data.meta.obsscene);
+    /* waiting for obs websocket 5.0 release
+    */
+    /*setmediatime("stay",req.query.resume);
+    obsscenetrigger(data.meta.obsscene);*/
     for (var key in seq){
       if(key>req.query.resume){
           if(seq[key]!="null") miditrigger(seq[key],key-req.query.resume);
       }
     }
-  }*/
+  }
   console.log("Currently playing "+data.meta.name);
   res.send();
 });
@@ -163,7 +161,13 @@ app.post('/sendcc', (req, res) => {
 
   res.json({ "log": "CC sent "+req.query.channel+' '+req.query.controller+' '+req.query.value, "com": {"in": req.query.in, "out": req.query.out} });
 });
-
+app.get('/videostream', (req, res) => {
+  try {
+    res.sendFile(path.join(__dirname, 'storage/vidignored/stay.mp4'));
+  } catch (error) {
+    res.json({ "error": error });
+  }
+});
 //TO OBS
 app.get('/obsscenelist', (req, res) => {
   //console.log(`Getting obs scenes`);

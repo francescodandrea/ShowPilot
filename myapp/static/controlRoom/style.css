@@ -293,6 +293,11 @@ hr {
     border-radius: 4px;
     overflow-y: scroll;
 }
+#videocomp {
+    position: absolute;
+    left: 31em;
+    top: 10em;
+}
 .trigger {
     border-radius: 3px;
     padding: 5px;
