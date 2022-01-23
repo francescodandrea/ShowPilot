@@ -335,8 +335,8 @@ function containertodata(){
     let trigger = document.querySelectorAll("#seqcomposer > div:not(:last-child)");
     trigger.forEach(el => {
         
-        let key = el.childNodes[0].value;
-        let val = el.childNodes[1].value;
+        let key = el.getElementsByTagName('input')[0].value;
+        let val = el.getElementsByTagName('select')[0].value;
         sequence[key]=val;
     });
     return sequence;
@@ -482,6 +482,7 @@ document.addEventListener('keyup', handleKeyboard)
 //player
 function se_play(){
     let time=0;
+    time=document.querySelector("#vid").currentTime*1000;
     if(document.getElementsByClassName("startpoint")[0]){
         time=document.getElementsByClassName("startpoint")[0].nextSibling.value;
     }
@@ -494,7 +495,6 @@ function se_play(){
     }, 100);
     timeoutpulse(time);
     document.querySelector("#vid").currentTime = time/1000;
-    document.querySelector("#vid").play();
 }
 function se_stop(){
     newonclick=false;
@@ -514,6 +514,14 @@ function se_reset(){
     document.querySelector("#vid").currentTime = 0;
     document.querySelector("#vid").load();
 }
+
+document.querySelector("#vid").onplay = (event) => {
+    se_play()
+};
+document.querySelector("#vid").onpause = (event) => {
+    se_stop()
+};
+
 //startpoint handling
 function setstartpoint(i){
     if(i.classList.contains("startpoint")){
