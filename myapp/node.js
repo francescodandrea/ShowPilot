@@ -17,6 +17,7 @@ app.use(
     origin: "*",
   })
 )
+
 app.use('/static', express.static('public'));
 
 //SERVER STARTUP
