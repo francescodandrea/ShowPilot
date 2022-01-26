@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Business Frontpage - Start Bootstrap Template</title>
+        <title>ShowPilot</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -17,13 +17,13 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                <a class="navbar-brand" href="#!">ShowPilot</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
                     </ul>
                 </div>
@@ -35,10 +35,10 @@
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-6">
                         <div class="text-center my-5">
-                            <h1 class="display-5 fw-bolder text-white mb-2">Present your business in a whole new way</h1>
-                            <p class="lead text-white-50 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit!</p>
+                            <h1 class="display-5 fw-bolder text-white mb-2">Your show copilot,<br>always on time</h1>
+                            <p class="lead text-white-50 mb-4">Easily plan your scenes and let the show play by itself,<br> no matter how fast your script or your creativity go.</p>
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Get Started</a>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Run the show</a>
                                 <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
                             </div>
                         </div>
@@ -84,8 +84,8 @@
         <section class="bg-light py-5 border-bottom">
             <div class="container px-5 my-5">
                 <div class="text-center mb-5">
-                    <h2 class="fw-bolder">Pay as you grow</h2>
-                    <p class="lead mb-0">With our no hassle pricing plans</p>
+                    <h2 class="fw-bolder">Pricing plans</h2>
+                    <p class="lead mb-0">Pay as you grow</p>
                 </div>
                 <div class="row gx-5 justify-content-center">
                     <!-- Pricing card free-->
@@ -94,13 +94,13 @@
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold text-muted">Free</div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">$0</span>
+                                    <span class="display-4 fw-bold">$39</span>
                                     <span class="text-muted">/ mo.</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>1 users</strong>
+                                        <strong>1 user</strong>
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
@@ -144,13 +144,13 @@
                                     Pro
                                 </div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">$9</span>
+                                    <span class="display-4 fw-bold">$49</span>
                                     <span class="text-muted">/ mo.</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>5 users</strong>
+                                        <strong>10 users</strong>
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
@@ -191,7 +191,7 @@
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">$49</span>
+                                    <span class="display-4 fw-bold">$79</span>
                                     <span class="text-muted">/ mo.</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
@@ -274,7 +274,7 @@
             </div>
         </section>
         <!-- Contact section-->
-        <section class="bg-light py-5">
+        <section class="bg-light py-5" id="contact">
             <div class="container px-5 my-5 px-5">
                 <div class="text-center mb-5">
                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
