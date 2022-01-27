@@ -101,11 +101,15 @@ app.put('/show', (req, res) => {
 
 //TO MIDI
 app.post('/goscene', (req, res) => {
-  myoutput.send('cc', {
-    channel: Math.floor(req.query.index/128),
-    controller: req.query.index % 128,
-    value: 0
-  });
+  try {
+    myoutput.send('cc', {
+      channel: Math.floor(req.query.index/128),
+      controller: req.query.index % 128,
+      value: 0
+    });
+  } catch (error) {
+    console.log("MIDI triggering failed:");
+  }
 
   console.log("midi "+req.query.index+" ("+Math.floor(req.query.index/128)+" "+req.query.index % 128+")")
   res.send();
@@ -126,7 +130,7 @@ app.post('/play', async (req, res) => {
     /*setmediatime("stay",req.query.resume);
     obsscenetrigger(data.meta.obsscene);*/
     for (var key in seq){
-      if(key>req.query.resume){
+      if(key>=req.query.resume){
           if(seq[key]!="null") miditrigger(seq[key],key-req.query.resume);
       }
     }
@@ -463,11 +467,15 @@ function showsave(data){
 var intervals = [];
 function miditrigger(x,t){
   let i = setTimeout(() => {
-    myoutput.send('cc', {
-      channel: Math.floor(x/128),
-      controller: x % 128,
-      value: 0
-    });
+    try {
+      myoutput.send('cc', {
+        channel: Math.floor(x/128),
+        controller: x % 128,
+        value: 0
+      }) 
+    } catch (error) {
+      console.log("MIDI triggering failed:");
+    }
   //console.log("midi "+x);
   console.log("midi "+x+" ("+Math.floor(x/128)+" "+x % 128+")")
   }, t);
