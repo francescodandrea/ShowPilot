@@ -137,15 +137,15 @@ function se_new(){
         xhr.open("GET", "http://"+ip+":8000/sequencenew");
         xhr.send();
 }
-function sequenceeditupd(file,sequence){
+function sequenceupd(sequence){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
-                    var result=JSON.parse(this.respoSnseText);
+                    var result=JSON.parse(this.responseText);
                     console.log(result);
                 }
         });
-        xhr.open("PUT", "http://"+ip+":8000/sequence?file="+file);
+        xhr.open("PUT", "http://"+ip+":8000/sequence?file="+sequence.file);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(sequence));
 }

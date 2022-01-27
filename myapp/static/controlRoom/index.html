@@ -143,11 +143,11 @@
                         <div>
                             <h3>New sequence</h3>
                             <label>File:</label>
-                            <input type="text" id="tsq_key" class="form-control" ><br>
+                            <input type="text" id="tsq_file" class="form-control" autocomplete="off"><br>
                             <label>Name:</label>
-                            <input type="text" id="tsq_name" class="form-control" onchange="tilescenepreview()" autocomplete="off"><br>
+                            <input type="text" id="tsq_name" class="form-control" autocomplete="off"><br>
                             <label>Type:</label>
-                            <select id="tsn_type" class="form-control">
+                            <select id="tsq_type" class="form-control">
                                 <option>Intro</option>
                                 <option>Act</option>
                                 <option>Interval act</option>
@@ -157,9 +157,9 @@
                         </div>
                         <div id="tilescenepreview"></div>
                         <div style="flex-basis:100%"></div>
-                        <button class="btn btn-primary" onclick="tilescenesave()">Create</button>
+                        <button class="btn btn-primary" onclick="tilesequencesave()">Create</button>
                         
-                        <button class="btn btn-danger" style="display:none" onclick="tilescenedelete(true)">Delete</button>
+                        <button class="btn btn-danger" style="display:none" onclick="tilesequencedelete(true)">Delete</button>
                 </div>
             </div>
         </section>

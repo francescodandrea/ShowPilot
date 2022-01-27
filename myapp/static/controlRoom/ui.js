@@ -557,6 +557,31 @@ function timeoutpulse_reset(){
         el.className="trigger";
     });
 }
+
+async function tilesequencesave(){
+    await sequenceupd(tilesequencetodata());
+    tile('sequenceedit'),section('sequences');
+}
+async function tilesequencedelete(close){
+    let value=tilesequencetodata();
+    value.delete=true;
+    await sequenceupd(value);
+    if(close) tile('sequenceedit');
+    section('sequences');
+}
+
+function tilesequencetodata(){
+    let value = {};
+    value.file=document.querySelector("#tsq_file").value;
+    value.name=document.querySelector("#tsq_name").value;
+    value.type=document.querySelector("#tsq_type").value;
+    return value;
+}
+function datatotilesequence(value){
+    document.querySelector("#tsq_file").value=value.file;
+    document.querySelector("#tsq_name").value=value.name;
+    document.querySelector("#tsq_type").value=value.type;
+}
 //################ LIVE
 async function livelistupd(show){
     let optionsseqdat = await optionssequences(show);

@@ -387,16 +387,23 @@ async function sequence(name){
   });
   });
 }
+
 function sequencesave(data){
+
   const jsonString = JSON.stringify(data);
-  fs.writeFile("storage/shows/sgt2022/sequences/"+data.meta.file+".json", jsonString, err => {
+
+  fs.writeFile("storage/shows/sgt2022/sequences/"+data.file+".json", jsonString, async err => {
     if (err) {
         console.log('Error writing file', err)
     } else {
-        console.log('sequence '+data.meta.name+' saved');
+        console.log('sequence '+data.name+' saved');
+        let show = await show("sgt2022");
+        show.sequences.show.push(data.file);
+        showsave(show);
     }
 })
 }
+
 async function sequencepick(key){
   return new Promise(resolve => {
   fs.readFile("storage/shows/sgt2022/sequences/"+key+".json", "utf8", (err, jsonString) => {
