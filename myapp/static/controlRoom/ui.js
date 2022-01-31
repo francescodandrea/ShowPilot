@@ -323,7 +323,7 @@ function se_save(){
     current_seqdat.seq=containertodata();
     document.querySelector("#savebtn").classList.replace("btn-warning","btn-secondary");
     current_seqdat.meta.obsscene=document.querySelector("#obsselect").value;
-    sequenceeditupd(current_seqdat.meta.file,current_seqdat);
+    sequenceupd(current_seqdat);
 }
 function se_apply(){
     current_seqdat.seq=containertodata();

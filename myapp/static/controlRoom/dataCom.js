@@ -145,7 +145,7 @@ function sequenceupd(sequence){
                     console.log(result);
                 }
         });
-        xhr.open("PUT", "http://"+ip+":8000/sequence?file="+sequence.file);
+        xhr.open("PUT", "http://"+ip+":8000/sequence?file="+sequence.meta.file);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(sequence));
 }

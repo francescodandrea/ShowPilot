@@ -393,14 +393,15 @@ function sequencesave(data){
 
   const jsonString = JSON.stringify(data);
 
-  fs.writeFile("storage/shows/sgt2022/sequences/"+data.file+".json", jsonString, async err => {
+  fs.writeFile("storage/shows/sgt2022/sequences/"+data.meta.file+".json", jsonString, async err => {
     if (err) {
         console.log('Error writing file', err)
     } else {
-        console.log('sequence '+data.name+' saved');
-        let show = await show("sgt2022");
-        show.sequences.show.push(data.file);
-        showsave(show);
+        console.log('sequence '+data.meta.name+' saved');
+        show("sgt2022").then( sdata=> {
+          sdata.sequences.show.push(data.meta.file);
+          showsave(sdata);
+        });
     }
 })
 }
