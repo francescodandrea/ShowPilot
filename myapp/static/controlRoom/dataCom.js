@@ -51,7 +51,7 @@ setTimeout(async () => {
 }, 1000);
 setInterval(() => {
     ping();
-}, 10000);
+}, 60000);
 
 //############## CLIENT SERVER CONNECTION
 
