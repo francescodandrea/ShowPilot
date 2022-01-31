@@ -39,8 +39,9 @@ app.get('/ping', async (req, res) => {
   })
   .catch(err => {
     obsping=false;
+  }).then(a =>{
+    res.json({ state:'Pong', server:ip, "miin": myinput.name, "miout": myoutput.name, "obs": obsping});
   });
-  res.json({ state:'Pong', server:ip, "miin": myinput.name, "miout": myoutput.name, "obs": obsping});
 });
 app.get('/devicelist', (req, res) => {
   console.log(`Getting devices`);
