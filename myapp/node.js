@@ -398,10 +398,6 @@ function sequencesave(data){
         console.log('Error writing file', err)
     } else {
         console.log('sequence '+data.meta.name+' saved');
-        show("sgt2022").then( sdata=> {
-          sdata.sequences.show.push(data.meta.file);
-          showsave(sdata);
-        });
     }
 })
 }
