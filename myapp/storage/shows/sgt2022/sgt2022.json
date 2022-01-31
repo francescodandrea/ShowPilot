@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "name": "SGT 2022",
+        "file": "sgt2022",
+        "author": "user1"
+    },
+    "users": {
+        "master": ["user1"],
+        "editor": [""],
+        "viewer": [""]
+    },
+    "sequences": {
+        "show": [["stay"],["new"]],
+        "bin": [["off"],["test"]]
+    }
+}

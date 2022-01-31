@@ -1,0 +1,2 @@
+//Ui js
+getdevices();
