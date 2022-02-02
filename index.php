@@ -15,20 +15,8 @@
     </head>
     <body>
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container px-5">
-                <a class="navbar-brand" href="#!">ShowPilot</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <?php include 'webchunks/navbar.php' ?>
+
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-5">
@@ -38,8 +26,8 @@
                             <h1 class="display-5 fw-bolder text-white mb-2">Your show copilot,<br>always on time</h1>
                             <p class="lead text-white-50 mb-4">Easily plan your scenes and let the show play by itself,<br> no matter how fast your script or your creativity go.</p>
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
-                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#features">Run the show</a>
-                                <a class="btn btn-outline-light btn-lg px-4" href="#!">Learn More</a>
+                                <a class="btn btn-primary btn-lg px-4 me-sm-3" href="account">Run the show</a>
+                                <a class="btn btn-outline-light btn-lg px-4" href="#features">Learn More</a>
                             </div>
                         </div>
                     </div>
