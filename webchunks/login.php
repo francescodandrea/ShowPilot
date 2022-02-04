@@ -34,8 +34,8 @@
                                     <input type="text" class="form-control" name="username" value="" autocomplete="off" required><br>
                                     <label for="password">Password:</label><br>
                                     <div class="input-group">
-                                            <input type="text" class="form-control" name="password" value="" autocomplete="off" required>
-                                            <input type="text" class="form-control" value="" autocomplete="off" required placeholder="confirm">
+                                            <input type="password" class="form-control" name="password" value="" autocomplete="off" required>
+                                            <input type="password" class="form-control" value="" autocomplete="off" required placeholder="confirm">
                                     </div><br>
                                     <input class="btn btn-primary" type="submit" value="Signup">
                                 </form> <br><br>
@@ -48,7 +48,7 @@
                                     <label for="username">Username:</label><br>
                                     <input type="text" class="form-control" name="username" value="" autocomplete="off" required><br>
                                     <label for="password">Password:</label><br>
-                                    <input type="text" class="form-control" name="password" value="" autocomplete="off" required><br>
+                                    <input type="password" class="form-control" name="password" value="" autocomplete="off" required><br>
                                     <input class="btn btn-primary" type="submit" value="Login">
                                 </form>  <br><br>
                                 <p onclick="switchform()">Create account</p>

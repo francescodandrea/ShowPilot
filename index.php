@@ -35,7 +35,7 @@
             </div>
         </header>
         <!-- Features section-->
-        <section class="py-5 border-bottom" id="features">
+        <section class="py-5 border-bottom" id="about">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
                     <div class="col-lg-4 mb-5 mb-lg-0">
@@ -69,7 +69,7 @@
             </div>
         </section>
         <!-- Pricing section-->
-        <section class="bg-light py-5 border-bottom">
+        <section class="bg-light py-5 border-bottom" id="pricing">
             <div class="container px-5 my-5">
                 <div class="text-center mb-5">
                     <h2 class="fw-bolder">Pricing plans</h2>
@@ -86,37 +86,29 @@
                                     <span class="text-muted">/ mo.</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
-                                    <li class="mb-2">
+                                <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>1 user</strong>
+                                        <strong>1 user</strong> per project
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        5GB storage
+                                        100 MIDI triggers
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited public projects
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Community access
+                                        10 sequences
                                     </li>
                                     <li class="mb-2 text-muted">
                                         <i class="bi bi-x"></i>
-                                        Unlimited private projects
+                                        Totem view
                                     </li>
                                     <li class="mb-2 text-muted">
                                         <i class="bi bi-x"></i>
-                                        Dedicated support
+                                        Cloud backup
                                     </li>
-                                    <li class="mb-2 text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Free linked domain
-                                    </li>
-                                    <li class="text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Monthly status reports
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Email support
                                     </li>
                                 </ul>
                                 <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
@@ -138,35 +130,27 @@
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>10 users</strong>
+                                        <strong>10 users</strong> per project
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        5GB storage
+                                        3.000 MIDI triggers
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited public projects
+                                        100 sequences
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Community access
+                                        Totem view
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited private projects
+                                        10GB cloud backup
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Dedicated support
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Free linked domain
-                                    </li>
-                                    <li class="text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Monthly status reports
+                                        Prioritary email support
                                     </li>
                                 </ul>
                                 <div class="d-grid"><a class="btn btn-primary" href="#!">Choose plan</a></div>
@@ -189,32 +173,24 @@
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        5GB storage
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Unlimited public projects
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Community access
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Unlimited private projects
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Dedicated support
+                                        5.000 MIDI triggers
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
                                         <strong>Unlimited</strong>
-                                        linked domains
+                                        sequences
                                     </li>
-                                    <li class="text-muted">
+                                    <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Monthly status reports
+                                        Totem view
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        100GB cloud backup
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Phone support
                                     </li>
                                 </ul>
                                 <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
@@ -274,11 +250,7 @@
                         <!-- * * * * * * * * * * * * * * *-->
                         <!-- * * SB Forms Contact Form * *-->
                         <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                       <form id="contactForm" data-sb-form-api-token="API_TOKEN">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
@@ -335,7 +307,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="js/login.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
