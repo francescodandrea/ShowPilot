@@ -9,7 +9,7 @@ services:
         depends_on:
             - db
         volumes:
-            - ./app1:/var/www/html/
+            - ./myapp/static/controlRoom:/var/www/html/
         ports:
             - "5001:80"
     app2:
@@ -21,20 +21,40 @@ services:
         depends_on:
             - db
         volumes:
-            - ./app1:/var/www/html/
+            - ./myapp:/var/www/html/
         ports:
             - "5002:80"
+
     db:
         container_name: db
-        image: mysql
+        image: mariadb:10.3
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-            MYSQL_DATABASE: MYSQL_DATABASE
-            MYSQL_USER: MYSQL_USER
-            MYSQL_PASSWORD: MYSQL_PASSWORD
+            MYSQL_ROOT_PASSWORD: notSecureChangeMe
+        volumes:
+            - ./data:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
         ports:
-            - "9906:3306"
+        - 8888:80
+        environment:
+        - PMA_ARBITRARY=1
+
+    track:
+        container_name: track
+        hostname: track
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+        volumes:
+            - ./:/var/www/html/
+        ports:
+            - "5050:80"
+
     nginx:
         build: ./nginx
         ports:
@@ -42,3 +62,8 @@ services:
         depends_on:
             - app1
             - app2
+    api:
+        build: ./myapp/node.js
+        environment:
+            NODE_ENV: production
+        restart: always
