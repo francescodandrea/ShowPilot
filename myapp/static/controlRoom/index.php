@@ -1,6 +1,19 @@
 <?php
 
 
+$hostname = "db";
+$username = "root";
+$password = "notSecureChangeMe";
+$db = "mydata";
+
+$dbconnect=mysqli_connect($hostname,$username,$password,$db);
+
+if ($dbconnect->connect_error) {
+  die("Database connection failed: " . $dbconnect->connect_error);
+}
+
+$query = mysqli_query($dbconnect, "INSERT INTO `requests` (`timestamp`, `replica`) VALUES (NULL, 'A')")
+   or die (mysqli_error($dbconnect));
 
 ?>
 
