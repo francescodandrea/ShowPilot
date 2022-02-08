@@ -5,12 +5,50 @@
         "author": "user1"
     },
     "users": {
-        "master": ["user1"],
-        "editor": [""],
-        "viewer": [""]
+        "master": [
+            "user1"
+        ],
+        "editor": [
+            ""
+        ],
+        "viewer": [
+            ""
+        ]
     },
     "sequences": {
-        "show": [["stay"],["new"]],
-        "bin": [["off"],["test"]]
+        "show": [
+            [
+                "stay"
+            ],
+            [
+                "intro1"
+            ],
+            [
+                "new"
+            ],
+            [
+                "asdsilvia"
+            ],
+            [
+                "clarissaalice"
+            ],
+            [
+                "irene"
+            ],
+            [
+                "roberto"
+            ],
+            [
+                "mago"
+            ]
+        ],
+        "bin": [
+            [
+                "off"
+            ],
+            [
+                "test"
+            ]
+        ]
     }
 }
