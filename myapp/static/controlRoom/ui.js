@@ -22,13 +22,16 @@ function section(x){
     }
     switch (x) {
         case "scenes":
-            collectionin("category");
+            scenesin("category");
             break;
         case "sequences":
             squencelistupd("sgt2022");
             break;
         case "live":
             livelistupd("sgt2022");
+            break;
+        case "devices":
+            getdevices();
             break;
     }
 }
@@ -48,7 +51,7 @@ async function tile(x,options){
                     document.querySelector("#tsn_category").value=options.category;
                 }
                 if(options.key>-1){
-                    let value=await collectionpick(options.key);
+                    let value=await scenebykey(options.key);
                     value.key=options.key;
                     datatotilescene(value);
                     tilescenepreview();
@@ -154,8 +157,8 @@ async function tilescenedelete(close){
 }
 
 //################ SCENE COLLECTION
-async function collectionin(method){
-    let data = await collection();
+async function scenesin(method){
+    let data = await scenes();
 
     let container = document.querySelector("#scenecollection");
     container.innerHTML="";
@@ -605,17 +608,20 @@ function devicestoselect(result){
     inlist.innerHTML="";
     outlist.innerHTML="";
 
-    result.inputs.forEach(element => {
+    result.available.inputs.forEach(element => {
         var option = document.createElement("option");
         option.innerHTML=element;
         inlist.appendChild(option);
     });
 
-    result.outputs.forEach(element => {
+    result.available.outputs.forEach(element => {
         var option = document.createElement("option");
         option.innerHTML=element;
         outlist.appendChild(option);
     });
+
+    inlist.value=result.current.input;
+    outlist.value=result.current.output;
 }
 function setdevices(){
     let inp = document.querySelector("#inputGroupSelect01");
@@ -633,13 +639,6 @@ function setdevices(){
     }
     
     senddevices(inptxt, outtxt);
-}
-function serverdevices(sinp,sout){
-    let inp = document.querySelector("#inputGroupSelect01");
-    let out = document.querySelector("#inputGroupSelect02");
-    
-    inp.value=sinp;
-    out.value=sout;
 }
 //----devices status
 function statusupd(element, bool){

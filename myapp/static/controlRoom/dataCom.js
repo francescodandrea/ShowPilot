@@ -55,8 +55,8 @@ setInterval(() => {
 
 //############## CLIENT SERVER CONNECTION
 
-//SCENE COLLECTION
-async function collection(){
+//SCENE SCENES
+async function scenes(){
     var xhr = new XMLHttpRequest();
     return new Promise(resolve => {
         xhr.addEventListener("readystatechange", function() {
@@ -65,11 +65,11 @@ async function collection(){
                     resolve(result);
                 }
         });
-        xhr.open("GET", "http://"+ip+":8000/collection");
+        xhr.open("GET", "http://"+ip+":8000/scenes");
         xhr.send();
     });
 }
-async function collectionpick(key){
+async function scenebykey(key){
     var xhr = new XMLHttpRequest();
     return new Promise(resolve => {
         xhr.addEventListener("readystatechange", function() {
@@ -78,7 +78,7 @@ async function collectionpick(key){
                     resolve(result);
                 }
         });
-        xhr.open("GET", "http://"+ip+":8000/collectionpick?key="+key);
+        xhr.open("GET", "http://"+ip+":8000/scenebykey?key="+key);
         xhr.send();
     });
 }
@@ -96,7 +96,7 @@ async function scenecollist(){
                     resolve(list);
                 }
         });
-        xhr.open("GET", "http://"+ip+":8000/collection");
+        xhr.open("GET", "http://"+ip+":8000/scenes");
         xhr.send();
     });
 }
@@ -106,7 +106,7 @@ async function sceneupd(scene){
         xhr.addEventListener("readystatechange", function() {
             resolve();
         });
-        xhr.open("PUT", "http://"+ip+":8000/collection");
+        xhr.open("PUT", "http://"+ip+":8000/scenes");
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send(JSON.stringify(scene));
     });
