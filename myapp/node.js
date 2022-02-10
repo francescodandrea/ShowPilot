@@ -57,8 +57,8 @@ app.put('/devices', (req, res) => {
 });
 async function savedevices(){
   var configs = await config();
-  configs.devices.input=myinput.name;
-  configs.devices.output=myoutput.name;
+  configs.midi.input=myinput.name;
+  configs.midi.output=myoutput.name;
   configsave(configs);
 }
 
