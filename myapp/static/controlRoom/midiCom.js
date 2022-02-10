@@ -4,9 +4,10 @@ function getdevices(){
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) { try{
                     var result=JSON.parse(this.responseText);
-                    statusupd("miin",result.input);
-                    statusupd("miout",result.output);
+                    statusupd("miin",result.current.input);
+                    statusupd("miout",result.current.output);
                     devicestoselect(result);
+                    statusupd("server",true);
                 } catch (error) {
                     statusupd("server",false);
                     statusupd("miin",false);
