@@ -9,8 +9,9 @@ const cors = require('cors'); //cors made east
 var nodeip = require("ip"); //easy ip getter
 const fs = require("fs"); //file reading
 
-const port = 8000;
+var port = 8000;
 const ip = nodeip.address();
+var obsip="";
 
 app.use(
   cors({
@@ -24,16 +25,16 @@ app.use('/static', express.static('public'));
 var myinput=false;
 var myoutput=false;
 
-startupconfigsmidi();
+startupconfigs();
 
-obs.connect({ address: 'localhost:4444'})
+obs.connect({ address: obsip})
 
-//SETTINGS
+//SETTINGS --------------
 //setup communication
 app.get('/ping', async (req, res) => {
   //console.log(`Pong`);
   let obsping;
-  obs.connect({ address: 'localhost:4444'})
+  obs.connect({ address: obsip})
   .then(a =>{
     obsping=true;
   })
@@ -43,15 +44,11 @@ app.get('/ping', async (req, res) => {
     res.json({ state:'Pong', server:ip, "miin": myinput.name, "miout": myoutput.name, "obs": obsping});
   });
 });
-app.get('/devicelist', (req, res) => {
+app.get('/devices', (req, res) => {
   console.log(`Getting devices`);
   let inputs = easymidi.getInputs();
   let outputs = easymidi.getOutputs();
-  res.json({ "inputs": inputs, "outputs": outputs });
-});
-app.get('/devices', (req, res) => {
-  //console.log(`Getting devices`);
-  res.json({ "input": myinput.name, "output": myoutput.name });
+  res.json({ "available":{ "inputs": inputs, "outputs": outputs }, "current":{ "input": myinput.name, "output": myoutput.name }});
 });
 app.put('/devices', (req, res) => {
   if(req.query.in!="undefined")
@@ -63,18 +60,41 @@ app.put('/devices', (req, res) => {
   res.json({ "log": "Devices set on server", "com": {"in": req.query.in, "out": req.query.out} });
   savedevices();
 });
+async function savedevices(){
+  var configs = await config();
+  configs.devices.input=myinput.name;
+  configs.devices.output=myoutput.name;
+  configsave(configs);
+}
 
-//storage
-app.get('/collection', async (req, res) => {
-  res.send(await collection())
-  //console.log("sent collection");
+//STORAGE --------------
+  //scenes
+app.get('/scenes', async (req, res) => {
+  res.send(await scenes())
+  //console.log("sent scenes");
 });
-app.get('/collectionpick', async (req, res) => {
-  res.send(await collectionpick(req.query.key))
-  //console.log("sent collection");
+async function scenes(){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/scenes/scenes.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
+app.get('/scenebykey', async (req, res) => {
+  res.send(await scenebykey(req.query.key))
+  //console.log("sent scene selected by key");
 });
-app.put('/collection', async (req, res) => {
-  await collectionsave(req.body)
+app.put('/scenes', async (req, res) => {
+  await scenessave(req.body)
   res.send("done");
 });
 app.get('/sequence', async (req, res) => {
@@ -263,43 +283,23 @@ function configsave(config){
 })
 }
 
-//SAVING CONFIG
-async function savedevices(){
-  var configs = await config();
-  configs.devices.input=myinput.name;
-  configs.devices.output=myoutput.name;
-  configsave(configs);
-}
 //LOADING CONFIGs
-async function startupconfigsmidi(){
+async function startupconfigs(){
   var configs = await config();
 
-  if(easymidi.getInputs().includes(configs.devices.input))
-    myinput = new easymidi.Input(configs.devices.input);
-  if(easymidi.getOutputs().includes(configs.devices.output))
-    myoutput = new easymidi.Output(configs.devices.output);
+  if(easymidi.getInputs().includes(configs.midi.input))
+    myinput = new easymidi.Input(configs.midi.input);
+  if(easymidi.getOutputs().includes(configs.midi.output))
+    myoutput = new easymidi.Output(configs.midi.output);
+  
+  port=configs.app.port;
 
-    console.log('Devices set:'+ myinput.name+", "+myoutput.name);
+  obsip=configs.services.obs;
+
+  console.log('Devices set:'+ myinput.name+", "+myoutput.name);
 }
 
-//----------SCENE COLLECTION
-async function collection(){
-  return new Promise(resolve => {
-  fs.readFile("storage/shows/sgt2022/scenes/scenes.json", "utf8", (err, jsonString) => {
-    if (err) {
-      console.log("File read failed:", err);
-      return;
-    }
-    try {
-      let obj = JSON.parse(jsonString);
-      resolve(obj);
-    } catch (err) {
-      console.log("Error parsing JSON string:", err);
-    }
-  });
-  });
-}
-async function collectionpick(key){
+async function scenebykey(key){
   return new Promise(resolve => {
   fs.readFile("storage/shows/sgt2022/scenes/scenes.json", "utf8", (err, jsonString) => {
     if (err) {
@@ -315,8 +315,8 @@ async function collectionpick(key){
   });
   });
 }
-async function collectionsave(scene){
-  let collect = await collection();
+async function scenessave(scene){
+  let collect = await scenes();
   if(!scene.delete){
     collect[scene.key]={};
     collect[scene.key]["name"]=scene.name;
