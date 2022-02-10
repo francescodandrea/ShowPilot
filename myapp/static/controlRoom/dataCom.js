@@ -113,7 +113,7 @@ async function sceneupd(scene){
 }
 
 //SEQUENCE
-function sequence(name){
+function sequencebykey(name){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
@@ -122,7 +122,7 @@ function sequence(name){
                     triggersupd(result);
                 }
         });
-        xhr.open("GET", "http://"+ip+":8000/sequence?file="+name);
+        xhr.open("GET", "http://"+ip+":8000/sequencebykey?key="+name);
         xhr.send();
 }
 function se_new(){
@@ -162,19 +162,6 @@ async function sequencecollist(show){
                 }
         });
         xhr.open("GET", "http://"+ip+":8000/show?file="+show);
-        xhr.send();
-    });
-}
-async function sequencepick(key){
-    var xhr = new XMLHttpRequest();
-    return new Promise(resolve => {
-        xhr.addEventListener("readystatechange", function() {
-            if (this.readyState === this.DONE) {
-                    var result=JSON.parse(this.responseText);
-                    resolve(result);
-                }
-        });
-        xhr.open("GET", "http://"+ip+":8000/sequencepick?key="+key);
         xhr.send();
     });
 }

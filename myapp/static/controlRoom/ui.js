@@ -67,11 +67,11 @@ async function tile(x,options){
                     document.querySelector("#tsn_category").value=options.category;
                 }
                 if(options.key>-1){
-                    let value=await sequencepick(options.key);
+                    //let value=await sequencepick(options.key);
                     //value.key=options.key;
                     //datatotilescene(value);
                     //tilescenepreview();
-                    console.log(value);
+                    //console.log(value);
                 } else {
                     document.querySelector("#tsq_key").innerHTML="";
                     document.querySelector("#tsq_name").innerHTML="";
