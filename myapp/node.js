@@ -27,20 +27,15 @@ var myoutput=false;
 
 startupconfigs();
 
-obs.connect({ address: obsip})
+obs.connect({ address: obsip}).catch(err => {console.log("OBS not connected")});
 
 //SETTINGS --------------
 //setup communication
 app.get('/ping', async (req, res) => {
   //console.log(`Pong`);
-  let obsping;
-  obs.connect({ address: obsip})
+  let obsping=true;
+  obs.connect({ address: obsip}).catch(err => {obsping=false})
   .then(a =>{
-    obsping=true;
-  })
-  .catch(err => {
-    obsping=false;
-  }).then(a =>{
     res.json({ state:'Pong', server:ip, "miin": myinput.name, "miout": myoutput.name, "obs": obsping});
   });
 });
@@ -358,7 +353,7 @@ obs.on('SwitchScenes', data => {
 
 //LISTEN PORT
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log('Listening on '+ip+':'+port)
 });
 
 //READWRITE CONFIG FILE
