@@ -185,6 +185,10 @@
                     <button type="button" class="btn btn-outline-secondary" onclick="setdevices()">Set</button>
                 </div>
 
+                <hr>
+
+                <h3>MIDI</h3><br>
+
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Input device</label>
@@ -202,6 +206,19 @@
                 </div>
 
                 <hr>
+
+                <h3>OBS</h3><br>
+
+                <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">IP</div>
+                    </div>
+                    <input type="text" class="form-control" id="obsip" onchange="obsipsave(this.value)" value="" autocomplete="off">
+                </div>
+            
+                <hr>
+
+                <h3>ShowPilot server</h3><br>
 
                 <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
