@@ -240,7 +240,7 @@ app.post('/goscene', (req, res) => {
 });
 app.post('/play', async (req, res) => {
 
-  let data=await sequence(req.query.file);
+  let data=await sequencebykey(req.query.file);
   let seq=data.seq;
 
   if(!req.query.resume){

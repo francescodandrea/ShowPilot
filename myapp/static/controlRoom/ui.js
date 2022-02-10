@@ -305,7 +305,7 @@ async function squencelistupd(show){
     optionsseqdat.forEach(option => {
         seqselector.appendChild(option.cloneNode(true));
     });
-    sequence(optionsseqdat[0].innerHTML);
+    sequencebykey(optionsseqdat[0].innerHTML);
 }
 async function triggersupd(data){
     createtriggers(data.seq);
@@ -593,7 +593,7 @@ async function livelistupd(show){
     optionsseqdat.forEach(option => {
         seqselector.appendChild(option.cloneNode(true));
     });
-    sequence(optionsseqdat[0].innerHTML);
+    sequencebykey(optionsseqdat[0].innerHTML);
 }
 
 //################ DEVICES
