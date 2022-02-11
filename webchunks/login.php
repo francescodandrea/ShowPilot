@@ -29,7 +29,7 @@
                             <div id="signupform">
                                 <h2>Create your account</h2>
                                 <p style="color:red"><?php if(isset($sigerr)) echo $sigerr ?></p>
-                                <form action="alt/verifylogin" method="POST">
+                                <form action="rest/verifylogin" method="POST">
                                     <label for="username">Username:</label><br>
                                     <input type="text" class="form-control" name="username" value="" autocomplete="off" required><br>
                                     <label for="password">Password:</label><br>
@@ -44,7 +44,7 @@
                             <div id="loginform" class="hidden">
                                 <h2>Login</h2>
                                 <p style="color:red"><?php if(isset($logerr)) echo $logerr ?></p>
-                                <form action="alt/verifylogin" method="POST">
+                                <form action="rest/verifylogin" method="POST">
                                     <label for="username">Username:</label><br>
                                     <input type="text" class="form-control" name="username" value="" autocomplete="off" required><br>
                                     <label for="password">Password:</label><br>
