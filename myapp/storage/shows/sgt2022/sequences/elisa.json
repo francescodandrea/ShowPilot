@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "file": "elisa",
+        "name": "Elisa",
+        "show": "Default",
+        "author": "user1",
+        "encoding": 3,
+        "obsscene": "elisa"
+    },
+    "seq": {
+    }
+}
