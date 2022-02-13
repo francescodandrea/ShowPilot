@@ -1,6 +1,3 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<body>
 <?php
 
 $hostname = "db";
@@ -8,11 +5,15 @@ $username = "root";
 $password = "notSecureChangeMe";
 $db = "mydata";
 
-$dbconnect=mysqli_connect($hostname,$username,$password,$db);
-
+try {
+  $dbconnect=mysqli_connect($hostname,$username,$password,$db);
+} catch (\Throwable $th) {
+  //throw $th;
+}
 if ($dbconnect->connect_error) {
   die("Database connection failed: " . $dbconnect->connect_error);
 }
+
 
 ?>
 
@@ -38,5 +39,3 @@ while ($row = mysqli_fetch_array($query)) {
 
 ?>
 </table>
-</body>
-</html>

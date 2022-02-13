@@ -12,7 +12,7 @@ if ($dbconnect->connect_error) {
   die("Database connection failed: " . $dbconnect->connect_error);
 }
 
-$query = mysqli_query($dbconnect, "INSERT INTO `requests` (`timestamp`, `replica`) VALUES (NULL, 'A')")
+$query = mysqli_query($dbconnect, "INSERT INTO `requests` (`timestamp`, `replica`) VALUES (CURRENT_TIMESTAMP, 'B')")
    or die (mysqli_error($dbconnect));
 
 ?>
@@ -218,7 +218,7 @@ $query = mysqli_query($dbconnect, "INSERT INTO `requests` (`timestamp`, `replica
                     </div>
                     <select class="custom-select" id="inputGroupSelect02">
                     </select>
-                </div>
+                </div><h1>B</h1>
 
                 <hr>
 

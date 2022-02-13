@@ -1,3 +1,21 @@
+<?php
+
+
+$hostname = "db";
+$username = "root";
+$password = "notSecureChangeMe";
+$db = "mydata";
+
+$dbconnect=mysqli_connect($hostname,$username,$password,$db);
+
+if ($dbconnect->connect_error) {
+  die("Database connection failed: " . $dbconnect->connect_error);
+}
+
+$query = mysqli_query($dbconnect, "INSERT INTO `requests` (`timestamp`, `replica`) VALUES (CURRENT_TIMESTAMP, 'A')")
+   or die (mysqli_error($dbconnect));
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -214,6 +232,9 @@
                 </div>
             
             </form>
+            <p>Iniezione della pagina 'tracker' che autonomamente non si collega al db...?</p>
+            <?php require('indexinj.php'); ?>
+
         </section>
     </div>
 </div>
