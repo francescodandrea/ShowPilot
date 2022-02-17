@@ -515,6 +515,7 @@ function se_stop(){
     newonclick=false;
     counter=undefined;
     midistop();
+    midiplay("off",0);
     clearInterval(counterengine);
     timeoutpulse_reset();
     document.querySelector("#vid").pause();
