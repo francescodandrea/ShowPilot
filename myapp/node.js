@@ -6,12 +6,13 @@ var easymidi = require('easymidi'); //midi com
 const OBSWebSocket = require('obs-websocket-js'); //obs
 const obs = new OBSWebSocket();
 const cors = require('cors'); //cors made east
-var nodeip = require("ip"); //easy ip getter
+var os = require('os'); // ip getter
 const fs = require("fs"); //file reading
 
+var obsip = "";
+
 var port = 8000;
-const ip = nodeip.address();
-var obsip="";
+const ip = os.networkInterfaces()['Wi-Fi'][1].address;
 
 app.use(
   cors({

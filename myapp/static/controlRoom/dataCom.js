@@ -18,7 +18,7 @@ async function pingcom(){
                     var result= JSON.parse(this.responseText);
                     if (result.state=="Pong") {
                         statusupd("server",result.server);
-                        //serveripsave(result.server);
+                        serveripsave(result.server);
                         statusupd("miin",result.miin);
                         statusupd("miout",result.miout);
                         statusupd("obs",result.obs);
