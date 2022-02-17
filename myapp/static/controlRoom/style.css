@@ -191,7 +191,7 @@ hr {
     justify-content: space-between;
     flex-wrap: wrap;
 }
-#sceneedit > .bi-x, #sequenceedit > .bi-x {
+#sceneedit > .bi-x, #sequenceedit > .bi-x, #rundownedit > .bi-x {
     position: absolute;
     right: 0.2em;
     top: 0em;
@@ -382,6 +382,61 @@ hr {
 .trigger > i.startpoint:hover {
     color: #888e95;
 }
+
+/*########## RUNDOWN COMPOSER #########*/
+#rundowns > h2{
+    display: inline;
+}
+#runmenu {
+    display: inline-block;
+    width: 28em;
+}
+#runcomposer {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 1em;
+    padding: 0.5em;
+    padding-right: 2em;
+    height: 68%;
+    width: fit-content;
+    outline: solid 2px #aab0b230;
+    border-radius: 4px;
+    overflow-y: scroll;
+}
+.runsequence {
+    border-radius: 3px;
+    padding: 5px;
+    transition: 0.1s all;
+    outline: solid 2px #aab0b2;
+    position: relative;
+    padding-right: 9em;
+}
+.runsequence.pulse {
+    animation: triggerpulse 1s forwards;
+}
+.runsequence:hover{
+    transform: scale(0.99);
+}
+.runsequence > p {
+    display: inline;
+    margin-left: 7px;
+    margin-right: 7px;
+    color: #979ca2;
+    font-weight: bold;
+}
+.runsequence > p.del {
+    right: 0em;
+    position: absolute;
+}
+.runsequence > i {
+    color: #888e95;
+}
+.runsequence:active > i {
+    color: #888e956e;
+}
+
 /*########## LIVE #########*/
 #liveplayer{
     max-width: 34em;

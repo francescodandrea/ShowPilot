@@ -165,6 +165,60 @@ async function sequencecollist(show){
         xhr.send();
     });
 }
+
+//RUNDOWN
+function rundownbykey(name){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    //console.log(result);
+                    runsequenceholderupd(result);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/rundownbykey?key="+name);
+        xhr.send();
+}
+function ru_new(){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    //console.log(result);
+                    triggersupd(result);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/sequencenew");
+        xhr.send();
+}
+function rundownupd(rundown){
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    console.log(result);
+                }
+        });
+        xhr.open("PUT", "http://"+ip+":8000/rundown?file="+rundown.show);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(rundown));
+}
+async function rundowncollist(show){
+    var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    let list=[];
+                    list=result;
+                    resolve(list);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/rundowns?file="+show);
+        xhr.send();
+    });
+}
+
 //SHOW
 function show(name){
     var xhr = new XMLHttpRequest();

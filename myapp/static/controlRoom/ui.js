@@ -1,6 +1,6 @@
 //Ui js
 
-var opensection="sequences"; //startup screen
+var opensection="rundowns"; //startup screen
 if(screen.width<425) opensection="live";
 if(localStorage.getItem("ip")===null) opensection="devices";
 document.querySelector("#"+opensection).style.display="flex";
@@ -26,6 +26,9 @@ function section(x){
             break;
         case "sequences":
             squencelistupd("sgt2022");
+            break;
+        case "rundowns":
+            rundownlistupd("sgt2022");
             break;
         case "live":
             livelistupd("sgt2022");
@@ -575,7 +578,7 @@ function timeoutpulse_reset(){
 }
 
 async function tilesequencesave(){
-    await sequenceupd(tilesequencetodata());
+    await rundownupd(tilesequencetodata());
     tile('sequenceedit'),section('sequences');
 }
 async function tilesequencedelete(close){
@@ -598,6 +601,112 @@ function datatotilesequence(value){
     document.querySelector("#tsq_name").value=value.name;
     document.querySelector("#tsq_type").value=value.type;
 }
+
+//################ RUNDOWN COMPOSER
+var current_rundat;
+async function rundownlistupd(show){
+    let optionsrundat = await optionsrundown(show);
+    let runselector=document.querySelector("#runselect");
+    runselector.innerHTML="";
+    optionsrundat.forEach(option => {
+        runselector.appendChild(option.cloneNode(true));
+    });
+    rundownbykey(optionsrundat[0].innerHTML); //than starts runsequenceholderupd();
+}
+async function runsequenceholderupd(data){
+    //sequences
+    runcreatesequences(data.list);
+    current_rundat=data;
+}
+async function run_save(){
+    current_rundat.list = await runcontainertodata();
+    await rundownupd(current_rundat);
+    document.querySelector("#runsavebtn").classList.replace("btn-warning","btn-secondary");
+}
+function run_apply(){
+    current_rundat.list=runcontainertodata();
+    document.querySelector("#runsavebtn").classList.replace("btn-secondary","btn-warning")
+}
+async function runcontainertodata(){
+    let rundown=[];
+
+    let sequence = document.querySelectorAll("#runcomposer > div");
+    sequence.forEach(el => {
+        let key = el.getElementsByTagName('p')[0].innerHTML;
+        rundown.push(key);
+    });
+    return rundown;
+}
+async function runcreatesequences(seq){
+    let container=document.querySelector("#runcomposer");
+    container.innerHTML="";
+
+    seq.forEach(seq => {
+        let sequence = document.createElement("div"),
+            dots = document.createElement("i"),
+            name = document.createElement("p"),
+            x = document.createElement("p");
+        
+        sequence.className="runsequence";
+
+        dots.className="bi bi-arrows-expand";
+
+        name.innerHTML=seq;
+
+        x.innerHTML="X";
+        x.className="del";
+        x.setAttribute("onclick","deletesequence(this)");
+
+        sequence.appendChild(dots);
+        sequence.appendChild(name);
+        sequence.appendChild(x);
+
+        container.appendChild(sequence);
+    });
+}
+function deletesequence(p){
+    p.parentElement.remove();
+    current_rundat.list=runcontainertodata();
+}
+//precomp options fields for select elems
+async function optionsrundown(show){
+    let list= await rundowncollist(show);
+    let options = [];
+
+    list.forEach(element => {
+        let option = document.createElement("option");
+        option.innerHTML=element;
+        option.value=element;
+        options.push(option);
+    });
+
+    return options;
+}
+
+async function tilerundownsave(){
+    let data = current_rundat;
+    data.name = await tilerundowntodata();
+    await rundownupd(data);
+    tile('rundownedit'),section('rundowns');
+}
+async function tilerundowndelete(close){
+    let value=tilerundowntodata();
+    value.delete=true;
+    await rundownupd(value);
+    if(close) tile('sequenceedit');
+    section('sequences');
+}
+
+function tilerundowntodata(){
+    let value;
+    value=document.querySelector("#tru_name").value;
+    return value;
+}
+function datatotilesequence(value){
+    document.querySelector("#tru_name").value=value.name;
+    document.querySelector("#tru_show").value=value.show;
+}
+
 //################ LIVE
 async function livelistupd(show){
     let optionsseqdat = await optionssequences(show);

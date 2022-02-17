@@ -185,6 +185,64 @@ function sequencesave(data){
 })
 }
 
+//**************** rundowns ****************
+app.get('/rundownbykey', async (req, res) => {
+  res.send(await rundownbykey(req.query.key));
+  console.log("sent rundown by key");
+});
+async function rundownbykey(name){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/sgt2022.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      let resp={};
+      resp.list=obj.rundowns[name];
+      resp.name=name;
+      resp.show="sgt2022";
+      resolve(resp);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
+app.put('/rundown', (req, res) => {
+  rundownsave(req.body);
+});
+async function rundownsave(data){
+  let showw=await show("sgt2022");
+  showw.rundowns[data.name]=data.list;
+  showsave(showw);
+}
+app.get('/rundowns', async (req, res) => {
+  res.send(await rundowns(req.query.file));
+  console.log("sent rundown list");
+});
+async function rundowns(name){
+  return new Promise(resolve => {
+  fs.readFile("storage/shows/sgt2022/sgt2022.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      let list=[];
+      for (var key in obj.rundowns) {
+        list.push(key);
+      }
+      resolve(list);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
+
 //**************** show ****************
 app.get('/show', async (req, res) => {
   res.send(await show(req.query.file));

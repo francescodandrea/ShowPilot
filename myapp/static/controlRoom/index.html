@@ -47,6 +47,9 @@
         <li class="nav-item">
             <p class="nav-link" onclick="section('sequences')">Sequence editor</p>
         </li>
+        <li class="nav-item">
+            <p class="nav-link" onclick="section('rundowns')">Rundown composer</p>
+        </li>
         <li class="nav-item live">
             <a class="nav-link" onclick="section('live')">Live</a>
         </li>
@@ -160,6 +163,38 @@
                         <button class="btn btn-primary" onclick="tilesequencesave()">Create</button>
                         
                         <button class="btn btn-danger" style="display:none" onclick="tilesequencedelete(true)">Delete</button>
+                </div>
+            </div>
+        </section>
+        <section id="rundowns">
+            <h2>Rundown composer</h2>
+            <div id="runmenu">
+                <div class="input-group">
+                    <select id="runselect"  onchange="rundownbykey(this.value)" class="form-control"></select>
+                    <div class="input-group-append">
+                    <button class="btn btn-secondary ml-2" type="button" onclick="tile('rundownedit')"><i class="bi bi-pencil-fill"></i></button>
+                    <button class="btn btn-secondary" id="runsavebtn" type="button" onclick="run_save()"><i class="bi bi-cloud-arrow-up-fill"></i></button>
+                    <button class="btn btn-secondary ml-2" type="button" onclick="tile('rundownedit')"><i class="bi bi-file-earmark-plus-fill"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="runcomposer"> </div>
+
+            <div id="runsequenceholder"> </div>
+
+            <div class="tilecontainer">
+                <div id="rundownedit" class="edittile">
+                    <i class="bi bi-x" onclick="tile('rundownedit')"></i>
+                        <div>
+                            <h3>New rundown</h3>
+                            <label>Name:</label>
+                            <input type="text" id="tru_name" class="form-control" autocomplete="off"><br>
+                        </div>
+                        <div style="flex-basis:100%"></div>
+                        <button class="btn btn-primary" onclick="tilerundownsave()">Create</button>
+                        
+                        <button class="btn btn-danger" style="display:none" onclick="tilerundowndelete(true)">Delete</button>
                 </div>
             </div>
         </section>
