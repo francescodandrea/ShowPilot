@@ -305,12 +305,14 @@ async function squencelistupd(show){
     optionsseqdat.forEach(option => {
         seqselector.appendChild(option.cloneNode(true));
     });
-    sequencebykey(optionsseqdat[0].innerHTML);
+    sequencebykey(optionsseqdat[0].innerHTML); //than starts triggersupd();
 }
 async function triggersupd(data){
+    //triggers
     createtriggers(data.seq);
     current_seqdat=data;
     
+    //obs scene selection
     let optionsobsdat = await optionsobs();
     let obsselector=document.querySelector("#obsselect");
     obsselector.innerHTML="";
@@ -321,6 +323,16 @@ async function triggersupd(data){
         document.querySelector("#obsselect > option").innerHTML=data.meta.obsscene;
     }
     obsselector.value=data.meta.obsscene;
+
+    //video
+    if(data.meta.syncedmedia){
+        document.querySelector("#videocomp").style.display="block";
+        document.querySelector("#vid").src=data.meta.syncedmedia;
+
+    } else {
+        document.querySelector("#videocomp").style.display="none";
+    }
+
 }
 function se_save(){
     current_seqdat.seq=containertodata();

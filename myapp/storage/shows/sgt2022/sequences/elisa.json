@@ -1,1 +1,11 @@
-{"meta":{"file":"elisa","name":"Elisa","show":"Default","author":"user1","encoding":3,"obsscene":"beatriceG"},"seq":{}}
+{
+    "meta": {
+        "file": "elisa",
+        "name": "Elisa",
+        "show": "Default",
+        "author": "user1",
+        "encoding": 3,
+        "obsscene": "beatriceG"
+    },
+    "seq": {}
+}
