@@ -56,6 +56,26 @@ li{
 li:last-child{
     margin-top:auto;
 }
+li.live{
+    font-weight: 500;
+    user-select: none;
+    border: 1px solid #ededed00;
+    background-color: #e7eaeb;
+    border-radius: 0.25rem;
+    padding-left: 0.6em;
+    transition: border .3s;
+}
+li.nav-item.live > a {
+    transition: color .3s;
+    color: #c00000 !important;
+}
+li.live:active{
+    background-color: transparent;
+    border: 1px solid #edededde;
+}
+li.nav-item.live > a:active {
+    color: white !important;
+}
 #container{
     display: flex;
     width: 100%;
