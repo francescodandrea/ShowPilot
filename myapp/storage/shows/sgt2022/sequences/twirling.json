@@ -1,11 +1,11 @@
 {
     "meta": {
-        "file": "beatriceG",
-        "name": "beatriceG",
+        "file": "twirling",
+        "name": "twirling",
         "show": "Default",
         "author": "user1",
         "encoding": 3,
-        "obsscene": "beatriceG"
+        "obsscene": "twirling"
     },
     "seq": {
     }

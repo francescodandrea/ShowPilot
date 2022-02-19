@@ -1,11 +1,11 @@
 {
     "meta": {
-        "file": "beatriceG",
-        "name": "beatriceG",
+        "file": "circo",
+        "name": "circo",
         "show": "Default",
         "author": "user1",
         "encoding": 3,
-        "obsscene": "beatriceG"
+        "obsscene": "circo"
     },
     "seq": {
     }
