@@ -616,6 +616,9 @@ async function rundownlistupd(show){
 async function runsequenceholderupd(data){
     //sequences
     runcreatesequences(data.list);
+    let draggables=document.querySelectorAll('.runsequence');
+    let container=document.querySelectorAll('.runcomposer');
+    dragengine(draggables,container);
     current_rundat=data;
 }
 async function run_save(){
@@ -648,6 +651,7 @@ async function runcreatesequences(seq){
             x = document.createElement("p");
         
         sequence.className="runsequence";
+        sequence.draggable=true;
 
         dots.className="bi bi-arrows-expand";
 
@@ -705,6 +709,45 @@ function tilerundowntodata(){
 function datatotilesequence(value){
     document.querySelector("#tru_name").value=value.name;
     document.querySelector("#tru_show").value=value.show;
+}
+
+//drag n drop
+function dragengine(el,cont){
+    el.forEach(el => {
+        el.addEventListener('dragstart', () => {
+            el.classList.add('dragging')
+        })
+      
+        el.addEventListener('dragend', () => {
+            el.classList.remove('dragging')
+        })
+      })
+      
+      cont.forEach(cont => {
+        cont.addEventListener('dragover', e => {
+          e.preventDefault()
+          const afterElement = getDragAfterElement(cont, e.clientY)
+          const draggable = document.querySelector('.runsequence')
+          if (afterElement == null) {
+            cont.appendChild(draggable)
+          } else {
+            cont.insertBefore(draggable, afterElement)
+          }
+        })
+      })
+      function getDragAfterElement(cont, y) {
+        const draggableElements = [...cont.querySelectorAll('.runsequence:not(.dragging)')]
+      
+        return draggableElements.reduce((closest, child) => {
+          const box = child.getBoundingClientRect()
+          const offset = y - box.top - box.height / 2
+          if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child }
+          } else {
+            return closest
+          }
+        }, { offset: Number.NEGATIVE_INFINITY }).element
+      }
 }
 
 //################ LIVE

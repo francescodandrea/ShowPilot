@@ -412,6 +412,7 @@ hr {
     outline: solid 2px #aab0b2;
     position: relative;
     padding-right: 9em;
+    cursor:move;
 }
 .runsequence.pulse {
     animation: triggerpulse 1s forwards;
