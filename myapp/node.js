@@ -9,10 +9,11 @@ const cors = require('cors'); //cors made east
 var os = require('os'); // ip getter
 const fs = require("fs"); //file reading
 
-var obsip = "";
+var obsip = "192.168.1.37";
 
 var port = 8000;
-const ip = os.networkInterfaces()['Wi-Fi'][1].address;
+const ip = true;
+//ip = os.networkInterfaces()['Wi-Fi'][1].address;
 
 app.use(
   cors({
