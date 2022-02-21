@@ -331,6 +331,8 @@ async function triggersupd(data){
     if(data.meta.syncedmedia){
         document.querySelector("#videocomp").style.display="block";
         document.querySelector("#vid").src=data.meta.syncedmedia;
+        //temp
+        document.querySelector("#vid").src="videostream";
 
     } else {
         document.querySelector("#videocomp").style.display="none";
