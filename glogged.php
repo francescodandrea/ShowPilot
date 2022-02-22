@@ -4,8 +4,8 @@ if(isset($_GET["code"])){
     echo "ciao";
     $token=$client->fetchAccessTokenwithAuthCode($_GET['code']);
 
-    /*$client->setAccessToken ($token);
-
+    $client->setAccessToken ($token);
+/*
     //Getting User Profile Sgauth-new Google Service 1
 
     $gauth=Oauth2($client);
