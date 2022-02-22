@@ -4,8 +4,8 @@ require "./vendor/autoload.php";
 
 $gouthSecrets = json_decode(file_get_contents(".\client_secret.json"), true);
 
-$clientID = $gouthSecrets["web"]["client_id"];
-$clientSecret = $gouthSecrets["web"]["clientSecret"]
+$clientID = getenv('clientID');
+$clientSecret = gatenv('clientSecret');
 $redirectUrl = 'https://showpilot.herokuapp.com/glogged';
 
 // Creating client request to google
