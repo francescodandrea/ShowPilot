@@ -1,6 +1,6 @@
 <?php
 if(isset($_GET["code"])){
-    $token-$client->fetchAccessTokenwithAuthCode ($_GET['code']);
+    $token=$client->fetchAccessTokenwithAuthCode ($_GET['code']);
 
     $client->setAccessToken ($token);
 
