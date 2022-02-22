@@ -6,7 +6,7 @@ if(isset($_GET["code"])){
 
     //Getting User Profile Sgauth-new Google Service 1
 
-    $google_info=Oauth2($client);
+    $gauth=Oauth2($client);
 
     $google_info=$gauth->userinfo->get();
     $email = $google_info->email;
