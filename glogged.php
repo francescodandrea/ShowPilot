@@ -13,8 +13,6 @@ if(isset($_GET["code"])){
     $name = $google_info->name;
     echo "Welcome ". $name.". You are registered using email: ".$email;
 
-} else {
-    echo "<a href=". $client->createAuthurl().">Login with Google</a>";
 }
 
 
