@@ -1,8 +1,10 @@
 <?php
+
 if(isset($_GET["code"])){
+    echo "ciao";
     $token=$client->fetchAccessTokenwithAuthCode($_GET['code']);
 
-    $client->setAccessToken ($token);
+    /*$client->setAccessToken ($token);
 
     //Getting User Profile Sgauth-new Google Service 1
 
@@ -12,7 +14,7 @@ if(isset($_GET["code"])){
     $email = $google_info->email;
     $name = $google_info->name;
     echo "Welcome ". $name.". You are registered using email: ".$email;
-
+*/
 }
 
 
