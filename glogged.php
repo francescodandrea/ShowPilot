@@ -2,13 +2,23 @@
 
 if(isset($_GET["code"])){
     echo "ciao";
-    $token=$client->fetchAccessTokenwithAuthCode($_GET['code']);
+    $client->authenticate($_GET['code']);
+    $access_token = $client->getAccessToken();
 
-    $client->setAccessToken ($token);
-
-    //Getting User Profile Sgauth-new Google Service 1
+    $client->setAccessToken($access_token);
 
     $gauth=Oauth2($client);
+
+    $user = $oauth2->userinfo->get();
+
+    // These fields are currently filtered through the PHP sanitize filters.
+    // See http://www.php.net/manual/en/filter.filters.sanitize.php
+    $email = filter_var($user['email'], FILTER_SANITIZE_EMAIL);
+
+    // The access token may have been updated lazily.
+    $_SESSION['token'] = $client->getAccessToken();
+    $_SESSION['email'] = $email;
+    echo $email;
 
     $google_info=$gauth->userinfo->get();
     $email = $google_info->email;
