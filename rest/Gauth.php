@@ -2,13 +2,10 @@
 
 require "./vendor/autoload.php";
 
-/*
 $gouthSecrets = json_decode(file_get_contents(".\client_secret.json"), true);
-echo $gouthSecrets["web"]["client_id"];
-var_dump($gouthSecrets);
-*/
-$clientID = '211776424215-gollvp5dbmplhdcualakcajfdcrrqp7e.apps.googleusercontent.com';
-$clientSecret = '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';
+
+$clientID = $gouthSecrets["web"]["client_id"];
+$clientSecret = $gouthSecrets["web"]["clientSecret"]
 $redirectUrl = 'https://showpilot.herokuapp.com/glogged';
 
 // Creating client request to google
