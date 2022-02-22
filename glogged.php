@@ -12,11 +12,9 @@ if(isset($_GET["code"])){
 
     $google_info=$gauth->userinfo->get();
     $email = $google_info->email;
-    echo $email;
-/*
     $name = $google_info->name;
     echo "Welcome ". $name.". You are registered using email: ".$email;
-*/
+
 }
 
 
