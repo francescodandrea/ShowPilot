@@ -613,7 +613,7 @@ async function rundownlistupd(show){
     optionsrundat.forEach(option => {
         runselector.appendChild(option.cloneNode(true));
     });
-    rundownbykey(optionsrundat[0].innerHTML); //than starts runsequenceholderupd();
+    runsequenceholderupd(await rundownbykey(optionsrundat[0].innerHTML)); //than starts runsequenceholderupd();
 }
 async function runsequenceholderupd(data){
     //sequences
@@ -754,7 +754,7 @@ function dragengine(el,cont){
 
 //################ LIVE
 async function livelistupd(show){
-    let optionsseqdat = await optionssequences(show);
+    let optionsseqdat = await rundownbykey(optionsrundat[0].innerHTML)
     let seqselector=document.querySelector("#liveselect");
     seqselector.innerHTML="";
     optionsseqdat.forEach(option => {
@@ -762,7 +762,6 @@ async function livelistupd(show){
     });
     sequencebykey(optionsseqdat[0].innerHTML);
 }
-
 //################ DEVICES
 //devices upd
 //----set

@@ -29,7 +29,9 @@ var myoutput=false;
 
 startupconfigs();
 
-obs.connect({ address: obsip}).catch(err => {console.log("OBS not connected")});
+var session = sessioncongifs();
+
+obs.connect({ address: obsip}).catch(err => {console.log("OBS not connected. Testing " + obsip)});
 
 //SETTINGS --------------
 //setup communication
@@ -416,7 +418,7 @@ app.listen(port, () => {
   console.log('Listening on '+ip+':'+port)
 });
 
-//READWRITE CONFIG FILE
+//READWRITE CONFIG FILEs
 //----------CONFIG
 //const config = await config();
 async function config(){
@@ -446,6 +448,35 @@ function configsave(config){
 })
 }
 
+//----------USEERDATA
+//const config = await config();
+async function session(){
+  return new Promise(resolve => {
+  fs.readFile("storage/userdata.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
+  });
+  });
+}
+function sessionsave(config){
+  const jsonString = JSON.stringify(config);
+  fs.writeFile("storage/userdata.json", jsonString, err => {
+    if (err) {
+        console.log('Error writing file', err)
+    } else {
+        console.log('config saved')
+    }
+})
+}
+
 //LOADING CONFIGs
 async function startupconfigs(){
   var configs = await config();
@@ -460,6 +491,9 @@ async function startupconfigs(){
   obsip=configs.services.obs;
 
   console.log('Devices set:'+ myinput.name+", "+myoutput.name);
+}
+async function sessioncongifs(){
+  return await session();
 }
 async function scenebin(){
   return new Promise(resolve => {
@@ -477,6 +511,7 @@ async function scenebin(){
   });
   });
 }
+
 
 //----------MIDI code to note TRIGGER
 var intervals = [];

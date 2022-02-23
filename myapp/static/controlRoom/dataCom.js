@@ -167,17 +167,19 @@ async function sequencecollist(show){
 }
 
 //RUNDOWN
-function rundownbykey(name){
+async function rundownbykey(name){
     var xhr = new XMLHttpRequest();
+    return new Promise(resolve => {
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     //console.log(result);
-                    runsequenceholderupd(result);
+                    resolve(result);
                 }
         });
         xhr.open("GET", "http://"+ip+":8000/rundownbykey?key="+name);
         xhr.send();
+    });
 }
 function ru_new(){
     var xhr = new XMLHttpRequest();
