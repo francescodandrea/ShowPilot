@@ -1,18 +1,38 @@
 //Ui js
 
-var opensection="live"; //startup screen
-if(screen.width<425) opensection="live";
-if(localStorage.getItem("ip")===null) opensection="devices";
-document.querySelector("#"+opensection).style.display="flex";
-document.querySelector("#"+opensection).style.opacity=1;
+var SESSION={};
+var forcesessionupd=false; //to overwrite local storage
 
-section(opensection);
+if(localStorage.getItem("session") && !forcesessionupd){
+    SESSION=JSON.parse(localStorage.getItem("session"));
+} else {
+    //defaults
+    SESSION["show"]="sgt2022";
+    SESSION["section"]="live";
+    SESSION["sequence"]="stay";
+    SESSION["rundown"]="sabato 26";
+    SESSION["live"]="sabato 26";
+    SESSION["live"]["sequence"]="intro1";
+    localStorage.setItem("session",JSON.stringify(SESSION));
+}
+
+if(screen.width<425) SESSION["section"]="live";
+if(localStorage.getItem("ip")===null) SESSION["section"]="devices";
+document.querySelector("#"+SESSION["section"]).style.display="flex";
+document.querySelector("#"+SESSION["section"]).style.opacity=1;
+
+section(SESSION["section"]);
+
+function session(key,value){
+    SESSION[key]=value;
+    localStorage.setItem("session",JSON.stringify(SESSION));
+}
 
 //################ SECTIONS WORK
 function section(x){
-    let prev=opensection;
+    let prev=SESSION["section"];
     if(x!=prev){
-        opensection=x;
+        session("section",x);
         document.querySelector("#"+prev).style.opacity=0;
         document.querySelector("#"+x).style.display="flex";
         setTimeout(() => {
@@ -25,13 +45,13 @@ function section(x){
             scenesin("category");
             break;
         case "sequences":
-            squencelistupd("sgt2022");
+            squencelistupd(SESSION["show"]);
             break;
         case "rundowns":
-            rundownlistupd("sgt2022");
+            rundownlistupd(SESSION["show"]);
             break;
         case "live":
-            livelistupd("sgt2022");
+            livelistupd(SESSION["show"]);
             break;
         case "devices":
             getdevices();
@@ -308,7 +328,19 @@ async function squencelistupd(show){
     optionsseqdat.forEach(option => {
         seqselector.appendChild(option.cloneNode(true));
     });
-    sequencebykey(optionsseqdat[0].innerHTML); //than starts triggersupd();
+
+    let check=false; //if previously selected item is still in the list
+    optionsseqdat.forEach(option => {
+        if(check || option.innerHTML==SESSION["sequence"]) { check=true}
+        //Checking makes it run faster after the elem has been found.
+        //Break is considered illegal and foreach is simpler to maintain than the trad for
+    });
+
+    if(check){
+        sequencebykey(SESSION["sequence"]); //than starts triggersupd();
+        seqselector.value=SESSION["sequence"];
+    }
+    else sequencebykey(optionsseqdat[0].innerHTML); //than starts triggersupd();
 }
 async function triggersupd(data){
     //triggers
@@ -754,13 +786,25 @@ function dragengine(el,cont){
 
 //################ LIVE
 async function livelistupd(show){
-    let optionsseqdat = await rundownbykey(optionsrundat[0].innerHTML)
+    let liverundat = await optionsliverundown(SESSION["live"]);
     let seqselector=document.querySelector("#liveselect");
     seqselector.innerHTML="";
-    optionsseqdat.forEach(option => {
+    liverundat.forEach(option => {
         seqselector.appendChild(option.cloneNode(true));
     });
-    sequencebykey(optionsseqdat[0].innerHTML);
+}
+async function optionsliverundown(rundown){
+    let list= await rundownbykey(rundown);
+    let options = [];
+
+    list.list.forEach(element => {
+        let option = document.createElement("option");
+        option.innerHTML=element;
+        option.value=element;
+        options.push(option);
+    });
+
+    return options;
 }
 //################ DEVICES
 //devices upd

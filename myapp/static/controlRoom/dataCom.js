@@ -114,6 +114,7 @@ async function sceneupd(scene){
 
 //SEQUENCE
 function sequencebykey(name){
+    session("sequence",name);
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
@@ -168,6 +169,7 @@ async function sequencecollist(show){
 
 //RUNDOWN
 async function rundownbykey(name){
+    session("live",name);
     var xhr = new XMLHttpRequest();
     return new Promise(resolve => {
         xhr.addEventListener("readystatechange", function() {
