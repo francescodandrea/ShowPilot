@@ -89,16 +89,19 @@
         ]
     },
     "rundowns": {
-        "test": [
+        "tutti": [
             "stay",
-            "intro1"
+            "intro1",
+            "inthistogether",
+            "greatestshow",
+            "debora", "dalila", "clarissaalice", "mago", "giada", "artistaitaliano", "beatriceT", "bicchierai", "blackpink", "camilla", "michela", "beatriceG", "asd", "michelagiulio", "roberto", "asdsilvia", "showdown", "irene", "mariem", "alessandro", "elisa", "circo", "elenaalice", "armstrong", "twirling", "marica", "nataliagioia"
         ],
         "prove 19": [
             "stay",
             "intro1"
         ],
-        "sabato 26": [
-            "intro1"
-        ]
+        "sabato 26": ["intro1","stay","artistaitaliano", "beatriceT", "blackpink", "michela", "beatriceG", "asd", "roberto", "asdsilvia", "elisa", "circo", "elenaalice", "armstrong", "marica", "nataliagioia"]
+        ,
+        "domenica 27": ["inthistogether","debora", "dalila", "clarissaalice", "mago", "giada", "bicchierai", "camilla", "michelagiulio", "showdown", "irene", "mariem", "alessandro", "twirling"]
     }
 }
