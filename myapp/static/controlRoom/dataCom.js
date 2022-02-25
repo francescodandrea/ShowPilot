@@ -183,6 +183,19 @@ async function rundownbykey(name){
         xhr.send();
     });
 }
+function activerundownbykey(name){
+    session("live",name);
+    var xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function() {
+            if (this.readyState === this.DONE) {
+                    var result=JSON.parse(this.responseText);
+                    //console.log(result);
+                    runsequenceholderupd(result);
+                }
+        });
+        xhr.open("GET", "http://"+ip+":8000/rundownbykey?key="+name);
+        xhr.send();
+}
 function ru_new(){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
