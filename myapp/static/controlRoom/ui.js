@@ -806,6 +806,30 @@ async function optionsliverundown(rundown){
 
     return options;
 }
+function li_play(){
+    let file=document.querySelector("#liveselect").value;
+    midistop();
+    midiplay(file, 0);
+}
+function li_stingerplay(){
+    let file=document.querySelector("#liveselect").value;
+    midistop();
+    midiplay("stinger", 0);
+    setTimeout(() => {
+        midiplay(file, 0);
+    }, 2000);
+}
+function li_playbyfile(file){
+    midistop();
+    midiplay(file, 0);
+}
+function li_stop(){
+    midistop();
+}
+function li_reset(){
+    midistop();
+    midiplay("off",0);
+}
 //################ DEVICES
 //devices upd
 //----set

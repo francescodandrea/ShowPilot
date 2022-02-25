@@ -201,14 +201,30 @@
         <section id="live">
             <h2>Live</h2>
             <div class="input-group" id="liveplayer">
-                
-                <select id="liveselect"  onchange="sequencebykey(this.value)" class="form-control"></select>
+            
+                <select id="liveselect" class="form-control"></select>
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="button" onclick="se_play()"><i class="bi biduble bi-play-fill"></i></button>
-                  <button class="btn btn-outline-secondary" type="button" onclick="se_stop()"><i class="bi biduble bi-pause-fill"></i></button>
-                  <button class="btn btn-outline-secondary" type="button" onclick="se_reset()"><i class="bi biduble bi-stop-fill"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" onclick="li_play()"><i class="bi biduble bi-play-fill"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" onclick="li_stop()"><i class="bi biduble bi-pause-fill"></i></button>
+                  <button class="btn btn-outline-secondary" type="button" onclick="li_reset()"><i class="bi biduble bi-stop-fill"></i></button>
                 </div>
             </div>
+
+            <hr style="margin-top:1em">
+
+            <h3>Start with...</h3><br>
+            <div class="input-group mb-2" style="gap:0.5em">
+                <button type="button" class="btn btn-dark btn-lg" onclick="li_stingerplay()"><i class="bi bi-play"></i> Inizio con stinger</button>
+            </div>
+            <hr>
+
+            <h3>Handy triggers</h3><br>
+            <div class="input-group mb-2" style="gap:0.5em">
+                <button type="button" class="btn btn-danger" onclick="li_playbyfile('alarm')"><i class="bi bi-x"></i> Allarme</button>
+                <button type="button" class="btn btn-warning" onclick="li_playbyfile('gold')"><i class="bi bi-star"></i> Gold</button>
+                <button type="button" class="btn btn-dark" onclick="li_playbyfile('stinger')"><i class="bi bi-music-note"></i> Stinger</button>
+            </div>
+            <hr>
         </section>
         <section id="devices">
             <form class="form-inline">
