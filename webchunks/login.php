@@ -30,12 +30,11 @@
                                 <h2>Create your account</h2>
                                 <p style="color:red"><?php if(isset($sigerr)) echo $sigerr ?></p>
                                 <form action="rest/verifylogin" method="POST">
-                                    <label for="username">Username:</label><br>
-                                    <input type="text" class="form-control" name="username" value="" autocomplete="off" required><br>
-                                    <label for="password">Password:</label><br>
+                                    <input type="text" class="form-control" name="username" value="" autocomplete="off" required placeholder="Username"><br>
+                                    <input type="text" class="form-control" name="name" value="" autocomplete="off" required placeholder="Name"><br>
                                     <div class="input-group">
-                                            <input type="password" class="form-control" name="password" value="" autocomplete="off" required>
-                                            <input type="password" class="form-control" value="" autocomplete="off" required placeholder="confirm">
+                                            <input type="password" class="form-control" name="password" value="" autocomplete="off" required placeholder="Password">
+                                            <input type="password" class="form-control" value="" autocomplete="off" required placeholder="Retype password">
                                     </div><br>
                                     <input class="btn btn-primary" type="submit" value="Signup">
                                 </form> <br><br>

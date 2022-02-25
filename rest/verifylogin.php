@@ -1,10 +1,10 @@
 <?php
+
 $postdata = http_build_query(
     array(
-        'email' => $_REQUEST['email'],
         'username' => $_REQUEST['username'],
         'name' => $_REQUEST['name'],
-        'password' => $_REQUEST['password']
+        'password' => "aaa"
     )
 );
 $opts = array('http' =>
