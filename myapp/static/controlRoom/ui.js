@@ -651,7 +651,7 @@ async function runsequenceholderupd(data){
     //sequences
     runcreatesequences(data.list);
     let draggables=document.querySelectorAll('.runsequence');
-    let container=document.querySelectorAll('.runcomposer');
+    let container=document.querySelectorAll('.runcontainer');
     dragengine(draggables,container);
     current_rundat=data;
 }
