@@ -1,0 +1,12 @@
+{
+    "meta": {
+        "file": "stinger",
+        "name": "stinger",
+        "show": "Default",
+        "author": "user1",
+        "encoding": 3,
+        "obsscene": "stinger"
+    },
+    "seq": {
+    }
+}
