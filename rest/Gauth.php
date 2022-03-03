@@ -1,39 +1,39 @@
 <?php
+require_once './vendor/autoload.php';
 
-require "./vendor/autoload.php";
+$secrets = json_decode(file_get_contents("./rest/secrets.json"), true);
 
-//$gouthSecrets = json_decode(file_get_contents(".\client_secret.json"), true);
-
-$clientID = '211776424215-gollvp5dbmplhdcualakcajfdcrrqp7e.apps.googleusercontent.com';
-$clientSecret = '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';
-$redirectUrl = 'https://showpilot.herokuapp.com/glogged';
-
-// Creating client request to google
-
+// init configuration
+$clientID = $secrets["googleapi"]["clientID"];
+$clientSecret = $secrets["googleapi"]["clientSecret"];
+$redirectUri = 'http://localhost/account';
+   
+// create Client Request to access Google API
 $client = new Google_Client();
-
 $client->setClientId($clientID);
-$client->setClientSecret ($clientSecret);
-$client->setRedirectUri($redirectUrl);
+$client->setClientSecret($clientSecret);
+$client->setRedirectUri($redirectUri);
+$client->addScope("email");
 $client->addScope("profile");
-
-$client->addScope('email');
-
-if(isset($_GET["code"])){
-    $token-$client->fetchAccessTokenwithAuthCode ($_GET['code']);
-
-    $client->setAccessToken ($token);
-
-    //Getting User Profile Sgauth-new Google Service 1
-
-    Oauth2($client);
-
-    $google_info=$gauth->userinfo->get();
-    $email = $google_info->email;
-    $name = $google_info->name;
-    echo "Welcome ". $name.". You are registered using email: ".$email;
-
+  
+// authenticate code from Google OAuth Flow
+if (isset($_GET['code'])) {
+  $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+  $client->setAccessToken($token['access_token']);
+   
+  // get profile info
+  $google_oauth = new Google_Service_Oauth2($client);
+  $google_account_info = $google_oauth->userinfo->get();
+  $email =  $google_account_info->email;
+  $name =  $google_account_info->familyName;
+  $name =  $google_account_info->givenName;
+  $name =  $google_account_info->id;
+  $name =  $google_account_info->picture;
+  
+  echo($name." ".$email);
+  
+  // now you can use this profile info to create account in your website and make user logged in.
 } else {
-    echo "<a href=". $client->createAuthurl().">Login with Google</a>";
+  echo "<a href='".$client->createAuthUrl()."'>Google Login</a>";
 }
-
+?>

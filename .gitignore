@@ -1,2 +1,2 @@
 myapp/storage/vidignored/*
-client_secret.json
+rest/secrets.json
