@@ -1,5 +1,11 @@
 <?php
 require_once './vendor/autoload.php';
+if(!getenv('inHeroku')){
+  echo "a";
+}{
+  echo "b";
+  echo getenv('clientSecret');
+}
 
 if(!getenv('inHeroku')){
   $secrets = json_decode(file_get_contents("./rest/secrets.json"), true);
