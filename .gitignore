@@ -1,2 +1,3 @@
 myapp/storage/vidignored/*
 rest/secrets.json
+vendor/
