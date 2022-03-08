@@ -3,8 +3,8 @@ require_once './vendor/autoload.php';
 if(!getenv('inHeroku')){
   echo "a";
 }{
-  echo "b";
-  echo getenv('clientSecret');
+  //echo "b";
+ // echo getenv('clientSecret');
 }
 
 if(!getenv('inHeroku')){
