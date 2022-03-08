@@ -1,13 +1,20 @@
 <?php
 require_once './vendor/autoload.php';
 
-$secrets = json_decode(file_get_contents("./rest/secrets.json"), true);
+if(!getenv('inHeroku')){
+  $secrets = json_decode(file_get_contents("./rest/secrets.json"), true);
 
-// init configuration
-$clientID = $secrets["googleapi"]["clientID"];
-$clientSecret = $secrets["googleapi"]["clientSecret"];
-$redirectUri = 'http://localhost/account';
-   
+  // init configuration
+  $clientID = $secrets["googleapi"]["clientID"];
+  $clientSecret = $secrets["googleapi"]["clientSecret"];
+  $redirectUri = 'http://localhost/account';
+}{
+  // init configuration
+  $clientID = getenv('clientID');
+  $clientSecret = getenv('clientSecret');
+  $redirectUri = 'https://showpilot.herokuapp.com/account';
+}
+
 // create Client Request to access Google API
 $client = new Google_Client();
 $client->setClientId($clientID);
