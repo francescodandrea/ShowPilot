@@ -21,7 +21,9 @@ if(getenv('inHeroku') !== false){
 }
 
 // create Client Request to access Google API
+  echo "s";
 $client = new Google_Client();
+echo "o";
 $client->setClientId($clientID);
 $client->setClientSecret($clientSecret);
 $client->setRedirectUri($redirectUri);
@@ -29,6 +31,8 @@ $client->addScope("email");
 $client->addScope("profile");
   
 // authenticate code from Google OAuth Flow
+  echo "q";
+
 if (isset($_REQUEST['code'])) {
   $token = $client->fetchAccessTokenWithAuthCode($_REQUEST['code']);
   $client->setAccessToken($token['access_token']);
@@ -51,6 +55,7 @@ if (isset($_REQUEST['code'])) {
   echo "c";
   // now you can use this profile info to create account in your website and make user logged in.
 } else {
+  echo "s";
   echo "<a href='".$client->createAuthUrl()."'>Google Login</a>";
 }
 ?>
