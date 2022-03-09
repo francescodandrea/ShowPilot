@@ -1,5 +1,5 @@
 <?php
-
+echo "hi";
 $postdata = http_build_query(
     array(
         'username' => $_REQUEST['username'],
