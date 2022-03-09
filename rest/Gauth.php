@@ -33,6 +33,7 @@ if (isset($_REQUEST['code'])) {
   $token = $client->fetchAccessTokenWithAuthCode($_REQUEST['code']);
   $client->setAccessToken($token['access_token']);
    
+  echo "a";
   // get profile info
   $google_oauth = new Google_Service_Oauth2($client);
   $google_account_info = $google_oauth->userinfo->get();
@@ -42,10 +43,12 @@ if (isset($_REQUEST['code'])) {
   $name = $google_account_info->id;
   $name = $google_account_info->picture;
   
-  var_dump($google_account_info);
+  echo "b";
+  var_dump($google_oauth);
 
   echo($name." ".$email);
   
+  echo "c";
   // now you can use this profile info to create account in your website and make user logged in.
 } else {
   echo "<a href='".$client->createAuthUrl()."'>Google Login</a>";
