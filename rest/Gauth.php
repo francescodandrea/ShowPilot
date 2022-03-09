@@ -2,8 +2,6 @@
 require './vendor/autoload.php';
 if(getenv('inHeroku') !== false){
   echo "heroku vars - ";
-  echo getenv('clientSecret');
-  echo getenv('clientID');
 } else {
   echo "not heroku vars - ";
 }
@@ -44,6 +42,8 @@ if (isset($_REQUEST['code'])) {
   $name = $google_account_info->id;
   $name = $google_account_info->picture;
   
+  var_dump($google_account_info);
+
   echo($name." ".$email);
   
   // now you can use this profile info to create account in your website and make user logged in.
