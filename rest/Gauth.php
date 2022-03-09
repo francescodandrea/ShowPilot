@@ -1,5 +1,5 @@
 <?php
-require_once './vendor/autoload.php';
+require './vendor/autoload.php';
 if(getenv('inHeroku') !== false){
   echo "heroku vars - ";
   // echo getenv('clientSecret');
