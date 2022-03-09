@@ -16,13 +16,12 @@ $opts = array('http' =>
 );
 $context = stream_context_create($opts);
 $result = file_get_contents('https://francescodandreastudente.altervista.org/showPilotREST/signup', false, $context);
-echo $result;
 
 if($result["result"]){
-    require ('page.php');
+    require ('../page.php');
 }{
     $sigerr=$result["message"];
-    require ('account.php');
+    require ('../account.php');
 }
 
 ?>
