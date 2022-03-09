@@ -33,8 +33,10 @@ $client->addScope("profile");
 // authenticate code from Google OAuth Flow
   echo "q";
 
-if (isset($_REQUEST['code'])) {
+if(isset($_REQUEST['code'])) {
+  echo "q1";
   $token = $client->fetchAccessTokenWithAuthCode($_REQUEST['code']);
+  echo "q2";
   $client->setAccessToken($token['access_token']);
    
   echo "a";
