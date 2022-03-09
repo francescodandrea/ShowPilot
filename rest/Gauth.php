@@ -2,7 +2,8 @@
 require './vendor/autoload.php';
 if(getenv('inHeroku') !== false){
   echo "heroku vars - ";
-  // echo getenv('clientSecret');
+  echo getenv('clientSecret');
+  echo getenv('clientID');
 } else {
   echo "not heroku vars - ";
 }
