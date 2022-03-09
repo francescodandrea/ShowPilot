@@ -4,7 +4,7 @@ $postdata = http_build_query(
     array(
         'username' => $_REQUEST['username'],
         'name' => $_REQUEST['name'],
-        'password' => $_REQUEST['password']
+        'password' => hash('sha256',$_REQUEST['password'])
     )
 );
 $opts = array('http' =>
@@ -16,6 +16,12 @@ $opts = array('http' =>
 );
 $context = stream_context_create($opts);
 $result = file_get_contents('https://francescodandreastudente.altervista.org/showPilotREST/login', false, $context);
-echo $result;
+
+if($result["result"]){
+    require ('../page.php');
+}{
+    $sigerr=$result["message"];
+    require ('../account.php');
+}
 
 ?>
