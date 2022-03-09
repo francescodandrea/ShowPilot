@@ -29,7 +29,7 @@
                             <div id="signupform">
                                 <h2>Create your account</h2>
                                 <p style="color:red"><?php if(isset($sigerr)) echo $sigerr ?></p>
-                                <form action="rest/verifylogin" method="POST">
+                                <form action="rest/verifysignup" method="POST">
                                     <input type="text" class="form-control" name="username" value="" autocomplete="off" required placeholder="Username"><br>
                                     <input type="text" class="form-control" name="name" value="" autocomplete="off" required placeholder="Name"><br>
                                     <div class="input-group">
