@@ -3,7 +3,7 @@ require_once './vendor/autoload.php';
 if(getenv('inHeroku') !== false){
   echo "heroku vars - ";
   // echo getenv('clientSecret');
-}{
+}else{
   echo "not heroku vars - ";
 }
 
@@ -12,7 +12,7 @@ if(getenv('inHeroku') !== false){
   $clientID = getenv('clientID');
   $clientSecret = getenv('clientSecret');
   $redirectUri = 'https://showpilot.herokuapp.com/account';
-}{
+}else{
   $secrets = json_decode(file_get_contents("./rest/secrets.json"), true);
 
   // init configuration
