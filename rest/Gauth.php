@@ -3,7 +3,7 @@ require_once './vendor/autoload.php';
 if(getenv('inHeroku') !== false){
   echo "heroku vars - ";
   // echo getenv('clientSecret');
-}else{
+} else {
   echo "not heroku vars - ";
 }
 
@@ -12,7 +12,7 @@ if(getenv('inHeroku') !== false){
   $clientID = getenv('clientID');
   $clientSecret = getenv('clientSecret');
   $redirectUri = 'https://showpilot.herokuapp.com/account';
-}else{
+} else {
   $secrets = json_decode(file_get_contents("./rest/secrets.json"), true);
 
   // init configuration
@@ -30,18 +30,18 @@ $client->addScope("email");
 $client->addScope("profile");
   
 // authenticate code from Google OAuth Flow
-if (isset($_GET['code'])) {
-  $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+if (isset($_REQUEST['code'])) {
+  $token = $client->fetchAccessTokenWithAuthCode($_REQUEST['code']);
   $client->setAccessToken($token['access_token']);
    
   // get profile info
   $google_oauth = new Google_Service_Oauth2($client);
   $google_account_info = $google_oauth->userinfo->get();
-  $email =  $google_account_info->email;
-  $name =  $google_account_info->familyName;
-  $name =  $google_account_info->givenName;
-  $name =  $google_account_info->id;
-  $name =  $google_account_info->picture;
+  $email = $google_account_info->email;
+  $name = $google_account_info->familyName;
+  $name = $google_account_info->givenName;
+  $name = $google_account_info->id;
+  $name = $google_account_info->picture;
   
   echo($name." ".$email);
   
