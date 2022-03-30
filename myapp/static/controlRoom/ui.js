@@ -645,14 +645,23 @@ async function rundownlistupd(show){
     optionsrundat.forEach(option => {
         runselector.appendChild(option.cloneNode(true));
     });
-    runsequenceholderupd(await rundownbykey(optionsrundat[0].innerHTML)); //than starts runsequenceholderupd();
+    runsequencecomposerupd(await rundownbykey(optionsrundat[0].innerHTML)); //than starts runsequencecomposerupd();
+    runsequenceholderupd(await rundownbykey(optionsrundat[0].innerHTML)); //than starts runsequencecomposerupd();
+}
+async function runsequencecomposerupd(data){
+    //sequences
+    runcreatesequences(data.list);
+    let draggables=document.querySelectorAll('#runcomposer>.runsequence');
+    let container=document.querySelectorAll('#runcomposer');
+    dragengine(draggables,container,true);
+    current_rundat=data;
 }
 async function runsequenceholderupd(data){
     //sequences
-    runcreatesequences(data.list);
-    let draggables=document.querySelectorAll('.runsequence');
-    let container=document.querySelectorAll('.runcontainer');
-    dragengine(draggables,container);
+    runsequencesall(data.list);
+    let draggables=document.querySelectorAll('#runsequenceholder>.runsequence');
+    let container=document.querySelectorAll('#runsequenceholder');
+    dragengine(draggables,container,false);
     current_rundat=data;
 }
 async function run_save(){
@@ -676,6 +685,34 @@ async function runcontainertodata(){
 }
 async function runcreatesequences(seq){
     let container=document.querySelector("#runcomposer");
+    container.innerHTML="";
+
+    seq.forEach(seq => {
+        let sequence = document.createElement("div"),
+            dots = document.createElement("i"),
+            name = document.createElement("p"),
+            x = document.createElement("p");
+        
+        sequence.className="runsequence";
+        sequence.draggable=true;
+
+        dots.className="bi bi-arrows-expand";
+
+        name.innerHTML=seq;
+
+        x.innerHTML="X";
+        x.className="del";
+        x.setAttribute("onclick","deletesequence(this)");
+
+        sequence.appendChild(dots);
+        sequence.appendChild(name);
+        sequence.appendChild(x);
+
+        container.appendChild(sequence);
+    });
+}
+async function runsequencesall(seq){
+    let container=document.querySelector("#runsequenceholder");
     container.innerHTML="";
 
     seq.forEach(seq => {
@@ -746,7 +783,7 @@ function datatotilesequence(value){
 }
 
 //drag n drop
-function dragengine(el,cont){
+function dragengine(el,cont,active){
     el.forEach(el => {
         el.addEventListener('dragstart', () => {
             el.classList.add('dragging')
@@ -757,11 +794,12 @@ function dragengine(el,cont){
         })
       })
       
+      if(active){
       cont.forEach(cont => {
         cont.addEventListener('dragover', e => {
           e.preventDefault()
           const afterElement = getDragAfterElement(cont, e.clientY)
-          const draggable = document.querySelector('.runsequence')
+          const draggable = document.querySelector('.dragging')
           if (afterElement == null) {
             cont.appendChild(draggable)
           } else {
@@ -769,6 +807,20 @@ function dragengine(el,cont){
           }
         })
       })
+      } else {
+        cont.forEach(cont => {
+          cont.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElement(cont, e.clientY)
+            const draggable = document.querySelector('.dragging')
+            if (afterElement == null) {
+              cont.appendChild(draggable)
+            } else {
+              cont.insertBefore(draggable, afterElement)
+            }
+          })
+        })
+      }
       function getDragAfterElement(cont, y) {
         const draggableElements = [...cont.querySelectorAll('.runsequence:not(.dragging)')]
       
@@ -783,6 +835,7 @@ function dragengine(el,cont){
         }, { offset: Number.NEGATIVE_INFINITY }).element
       }
 }
+
 
 //################ LIVE
 async function livelistupd(show){
