@@ -9,7 +9,7 @@
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
@@ -24,7 +24,7 @@
                     <div class="col-lg-6">
                         <div class="text-center my-5">
                             <h1 class="display-5 fw-bolder text-white mb-2">Your show copilot,<br>always on time</h1>
-                            <p class="lead text-white-50 mb-4">Easily plan your scenes and let the show play by itself,<br> no matter how fast your script or your creativity go.</p>
+                            <p class="lead text-white-50 mb-4">Plan your scenes and let the show play by itself,<br> no matter how fast your script or your creativity go.</p>
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                                 <a class="btn btn-primary btn-lg px-4 me-sm-3" href="account">Run the show</a>
                                 <a class="btn btn-outline-light btn-lg px-4" href="#features">Learn More</a>
@@ -39,25 +39,27 @@
             <div class="container px-5 my-5">
                 <div class="row gx-5">
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-                        <h2 class="h4 fw-bolder">Featured title</h2>
-                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-router"></i></div>
+                        <h2 class="h4 fw-bolder">Remote control</h2>
+                        <p>Take control of your whole setup from your tablet or smartphone.</p>
+                        <p>Everything happens in your network: connect and go live.</p>
                         <a class="text-decoration-none" href="#!">
-                            Call to action
+                            Connect to ShowPilot
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
-                        <h2 class="h4 fw-bolder">Featured title</h2>
-                        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-usb-plug"></i></div>
+                        <h2 class="h4 fw-bolder">Flexible linking</h2>
+                        <p>Use MIDI and HTTP protocols to control your equipment, from expensive audio and DMX consoles to your arduino doohickeys.</p>
+                        <p>Bring it all in and let the software run it for you.</p>
                         <a class="text-decoration-none" href="#!">
-                            Call to action
+                            Supported devices
                             <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                     <div class="col-lg-4">
-                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                        <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-bezier"></i></div>
                         <h2 class="h4 fw-bolder">Featured title</h2>
                         <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
                         <a class="text-decoration-none" href="#!">
