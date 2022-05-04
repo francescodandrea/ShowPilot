@@ -5,6 +5,7 @@ var path = require('path'); //path express
 var easymidi = require('easymidi'); //midi com
 const OBSWebSocket = require('obs-websocket-js'); //obs
 const obs = new OBSWebSocket();
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest; //HTTP Requests
 const cors = require('cors'); //cors made east
 var os = require('os'); // ip getter
 const fs = require("fs"); //file reading
@@ -575,7 +576,6 @@ function servingfiles(files){
 
 //logger
 app.post('/auth', function(req, res) {
-  console.log("a");
   let email=req.query.email;
   let pass=req.query.pass;
   var xhttp = new XMLHttpRequest();

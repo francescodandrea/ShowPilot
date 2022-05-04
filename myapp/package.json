@@ -15,7 +15,8 @@
     "express": "^4.17.1",
     "ip": "^1.1.5",
     "midi": "^2.0.0",
-    "obs-websocket-js": "^4.0.3"
+    "obs-websocket-js": "^4.0.3",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.14"
