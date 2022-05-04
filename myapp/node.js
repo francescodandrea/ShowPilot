@@ -533,9 +533,12 @@ function miditrigger(x,t){
 }
 
 // ############### Serving files
-
+let logged=false;
 app.get('/', function(req, res) {
+  if(logged)
   res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
+  else
+  res.sendFile(path.join(__dirname, '/static/account/login.html'));
 });
 
 app.get('/testing', function(req, res) {
@@ -549,6 +552,10 @@ const files = [
   'player.js',
   'style.css',
   'ui.js'
+];
+const filesextra = [
+  'account/style.css',
+  'account/script.js'
 ]
 
 servingfiles(files);
@@ -559,6 +566,33 @@ function servingfiles(files){
       res.sendFile(path.join(__dirname, '/static/controlRoom/'+file));
     });
   });
+  filesextra.forEach(file =>{
+    app.get('/'+file, function(req, res) {
+      res.sendFile(path.join(__dirname, '/static/'+file));
+    });
+  });
 }
+
+//logger
+app.post('/auth', function(req, res) {
+  console.log("a");
+  let email=req.query.email;
+  let pass=req.query.pass;
+  var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+       let response=JSON.parse(this.responseText);
+       if(response.result){
+        logged=true;
+        response.redirect="/";
+        res.json(response);
+       }else{
+        res.send(response);
+       }
+      }
+    };
+    xhttp.open("GET", "https://francescodandreastudente.altervista.org/showPilotREST/login.php?username="+email+"&password="+pass, true);
+    xhttp.send();
+});
 
 //npm start
