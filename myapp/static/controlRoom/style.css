@@ -414,6 +414,9 @@ hr {
     padding-right: 9em;
     cursor:move;
 }
+.runsequence.dragging {
+    opacity: 0;
+}
 .runsequence.pulse {
     animation: triggerpulse 1s forwards;
 }
@@ -436,6 +439,31 @@ hr {
 }
 .runsequence:active > i {
     color: #888e956e;
+}
+#runsequenceholder {
+    margin-top: 24px;
+    display: flex;
+    gap: 1em;
+    padding: 0.5em;
+    padding-right: 2em;
+    height: 68%;
+    width: 44%;
+    outline: solid 2px #aab0b230;
+    border-radius: 4px;
+    overflow-y: scroll;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+#runsequenceholder>.runsequence {
+    padding: 3px;
+}
+#runsequenceholder>.runsequence>i,#runsequenceholder>.runsequence>p:last-child {
+    display: none;
+}
+#rundowns>.layout{
+    height: 100%;
+    display: flex;
+    gap: 2em;
 }
 
 /*########## LIVE #########*/
