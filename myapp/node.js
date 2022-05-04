@@ -591,8 +591,13 @@ app.post('/auth', function(req, res) {
        }
       }
     };
-    xhttp.open("GET", "https://francescodandreastudente.altervista.org/showPilotREST/login.php?username="+email+"&password="+pass, true);
-    xhttp.send();
+    xhttp.open("POST", "https://francescodandreastudente.altervista.org/showPilotREST/login.php?hil", true);
+    xhttp.setRequestHeader('Content-Type', 'application/json');
+    xhttp.send(JSON.stringify({
+        email: email,
+        password: pass,
+        hil: true
+    }));
 });
 
 //npm start
