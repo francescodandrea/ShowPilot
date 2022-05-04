@@ -1,11 +1,3 @@
-<?php
-	
-    //startup hidden section
-    $startup="login";
-    if(isset($sigerr)) $startup="login";
-    if(isset($logerr)) $startup="signup";
-
-?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,42 +24,16 @@
                     <div class="col-lg-6">
                         <div class="text-center my-5">
 
-                            <div id="signupform" <?php if($startup=="signup") echo 'class="hidden"' ?>>
-                                <h2>Create your account</h2><br>
-                                <?php
-                                if(isset($authurl)){ ?>
-                                <a href="<?php echo $authurl ?>">
-                                <button type="button" class="btn btn-outline-light">
-                					<i class="bi bi-google"> </i> Sign up with Google
-              					</button></a><br><br>
-                                <p class="divide">or</p>
-                                <?php } ?>
+                            <div id="signupform">
+                                <h2>Complete your account</h2><br>
                                 <p style="color:red"><?php if(isset($sigerr)) echo $sigerr ?></p>
-                                <form action="rest/verifysignup" method="POST">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="username" value="" autocomplete="off" required placeholder="Username"><br>
-                                        <input type="text" class="form-control" name="name" value="" autocomplete="off" required placeholder="First name"><br>
-                                    </div> <br>
-                                    <input type="email" class="form-control" name="email" value="" autocomplete="off" required placeholder="Email"><br>
+                                <form action="rest/completeaccount" method="POST">
                                     <div class="input-group">
                                             <input type="password" class="form-control" name="password" value="" autocomplete="off" required placeholder="Password">
                                             <input type="password" class="form-control" name="passwordcheck" value="" autocomplete="off" required placeholder="Retype password">
                                     </div><br>
-                                    <input class="btn btn-primary" type="submit" value="Signup">
+                                    <input class="btn btn-primary" type="submit" value="Save">
                                 </form>
-                                <br><br><p class="link" onclick="switchform()">Log in instead</p>
-                            </div>
-                            <div id="loginform" <?php if($startup=="login") echo 'class="hidden"' ?> >
-                                <h2>Login</h2>
-                                <p style="color:red"><?php if(isset($logerr)) echo $logerr ?></p>
-                                <form action="rest/verifylogin" method="POST">
-                                    <input type="email" class="form-control" name="email" value="" autocomplete="off" required placeholder="Email"><br>
-                                    <input type="password" class="form-control" name="password" value="" autocomplete="off" required placeholder="Password"><br>
-                                    <a href="rest/forgotpass">Forgot password</a><br><br>
-                                    <input class="btn btn-primary" type="submit" value="Login">
-                                </form>
-                                <br><br>
-                                <p class="link" onclick="switchform()">Create account</p>
                             </div>
                         <style>
                             label {
