@@ -1,11 +1,12 @@
 const express = require('express'); //express
 const app = express();
 app.use(express.json());
+var expsession = require('express-session');// express sessions
 var path = require('path'); //path express
 var easymidi = require('easymidi'); //midi com
 const OBSWebSocket = require('obs-websocket-js'); //obs
 const obs = new OBSWebSocket();
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest; //HTTP Requests
+const fetch = require('node-fetch'); //HTTP Requests
 const cors = require('cors'); //cors made east
 var os = require('os'); // ip getter
 const fs = require("fs"); //file reading
@@ -534,14 +535,6 @@ function miditrigger(x,t){
 }
 
 // ############### Serving files
-let logged=false;
-app.get('/', function(req, res) {
-  if(logged)
-  res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
-  else
-  res.sendFile(path.join(__dirname, '/static/account/login.html'));
-});
-
 app.get('/testing', function(req, res) {
   res.sendFile(path.join(__dirname, 'static/testing/index.html'));
 });
@@ -575,29 +568,41 @@ function servingfiles(files){
 }
 
 //logger
+
+app.use(expsession({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
 app.post('/auth', function(req, res) {
   let email=req.query.email;
   let pass=req.query.pass;
-  var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-       let response=JSON.parse(this.responseText);
+
+  let body = { password: "A", email: email, h:true };
+
+  fetch('https://francescodandreastudente.altervista.org/showPilotREST/login.php?email='+email+'&password='+pass+'&h', {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then(res => res.json()) // expecting a json response
+    .then(json => {
+      let response=json;
        if(response.result){
-        logged=true;
+        req.session.logged=true;
         response.redirect="/";
         res.json(response);
        }else{
         res.send(response);
        }
-      }
-    };
-    xhttp.open("POST", "https://francescodandreastudente.altervista.org/showPilotREST/login.php?hil", true);
-    xhttp.setRequestHeader('Content-Type', 'application/json');
-    xhttp.send(JSON.stringify({
-        email: email,
-        password: pass,
-        hil: true
-    }));
+    });
 });
 
+app.get('/', function(req, res) {
+  if(req.session.logged)
+  res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
+  else
+  res.sendFile(path.join(__dirname, '/static/account/login.html'));
+});
+app.get('/logout', function(req, res) {
+  req.session.logged=false;
+  res.sendFile(path.join(__dirname, '/static/account/login.html'));
+});
 //npm start
