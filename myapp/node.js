@@ -545,7 +545,8 @@ const files = [
   'midiCom.js',
   'player.js',
   'style.css',
-  'ui.js'
+  'ui.js',
+  'logo.ico'
 ];
 const filesextra = [
   'account/style.css',
