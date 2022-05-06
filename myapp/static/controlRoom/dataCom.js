@@ -190,7 +190,7 @@ function activerundownbykey(name){
             if (this.readyState === this.DONE) {
                     var result=JSON.parse(this.responseText);
                     //console.log(result);
-                    runsequenceholderupd(result);
+                    runsequencecomposerupd(result);
                 }
         });
         xhr.open("GET", "http://"+ip+":8000/rundownbykey?key="+name);

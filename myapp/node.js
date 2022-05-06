@@ -1,10 +1,12 @@
 const express = require('express'); //express
 const app = express();
 app.use(express.json());
+var expsession = require('express-session');// express sessions
 var path = require('path'); //path express
 var easymidi = require('easymidi'); //midi com
 const OBSWebSocket = require('obs-websocket-js'); //obs
 const obs = new OBSWebSocket();
+const fetch = require('node-fetch'); //HTTP Requests
 const cors = require('cors'); //cors made east
 var os = require('os'); // ip getter
 const fs = require("fs"); //file reading
@@ -533,11 +535,6 @@ function miditrigger(x,t){
 }
 
 // ############### Serving files
-
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
-});
-
 app.get('/testing', function(req, res) {
   res.sendFile(path.join(__dirname, 'static/testing/index.html'));
 });
@@ -549,6 +546,10 @@ const files = [
   'player.js',
   'style.css',
   'ui.js'
+];
+const filesextra = [
+  'account/style.css',
+  'account/script.js'
 ]
 
 servingfiles(files);
@@ -559,6 +560,49 @@ function servingfiles(files){
       res.sendFile(path.join(__dirname, '/static/controlRoom/'+file));
     });
   });
+  filesextra.forEach(file =>{
+    app.get('/'+file, function(req, res) {
+      res.sendFile(path.join(__dirname, '/static/'+file));
+    });
+  });
 }
 
+//logger
+
+app.use(expsession({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+
+app.post('/auth', function(req, res) {
+  let email=req.query.email;
+  let pass=req.query.pass;
+
+  let body = { password: "A", email: email, h:true };
+
+  fetch('https://francescodandreastudente.altervista.org/showPilotREST/login.php?email='+email+'&password='+pass+'&h', {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then(res => res.json()) // expecting a json response
+    .then(json => {
+      let response=json;
+       if(response.result){
+        req.session.logged=true;
+        response.redirect="/";
+        res.json(response);
+       }else{
+        res.send(response);
+       }
+    });
+});
+
+app.get('/', function(req, res) {
+  if(req.session.logged)
+  res.sendFile(path.join(__dirname, '/static/controlRoom/index.html'));
+  else
+  res.sendFile(path.join(__dirname, '/static/account/login.html'));
+});
+app.get('/logout', function(req, res) {
+  req.session.logged=false;
+  res.sendFile(path.join(__dirname, '/static/account/login.html'));
+});
 //npm start
