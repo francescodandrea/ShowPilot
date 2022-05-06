@@ -568,8 +568,8 @@ function servingfiles(files){
 }
 
 //logger
-
-app.use(expsession({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+//session lasts 12h
+app.use(expsession({ secret: 'keyboard cat', cookie: { maxAge: 60000*60*12 }}))
 
 app.post('/auth', function(req, res) {
   let email=req.query.email;

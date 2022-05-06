@@ -361,13 +361,36 @@ async function triggersupd(data){
 
     //video
     if(data.meta.syncedmedia){
-        document.querySelector("#videocomp").style.display="block";
+        document.querySelector("#videocomp").style.display="flex";
         //document.querySelector("#vid").src="videostream?scene="+data.meta.file+"&id="+data.meta.syncedmedia[0]; server mode
-        document.querySelector("#vid").src="http://francescodandreastudente.altervista.org/showPilotMEDIA/sgt2022/"+data.meta.file+"/"+data.meta.syncedmedia[0];
+        //document.querySelector("#vid").src="http://francescodandreastudente.altervista.org/showPilotMEDIA/sgt2022/"+data.meta.file+"/"+data.meta.syncedmedia[0];
+        document.querySelector("#vid").src="https://showpilotmedia.glitch.me/videostream?file="+data.meta.syncedmedia[0].filename;
+
+        //set up choice buttons
+        let btns=document.querySelector("#videocomp").querySelectorAll('.btn');
+        let bt=btns[0].cloneNode();
+        //remove all
+        btns.forEach(btn => {btn.remove();});
+        //add
+        data.meta.syncedmedia.forEach(media => {
+            let btn=bt.cloneNode();
+            btn.dataset.id=media.filename;
+            btn.innerHTML=media.name;
+            document.querySelector("#videocomp").appendChild(btn);
+        });
+        document.querySelector("#videocomp").querySelectorAll('.btn')[0].classList.replace("btn-outline-secondary","btn-secondary");
     } else {
         document.querySelector("#videocomp").style.display="none";
     }
 
+}
+function se_videochoice(but){
+    x=but.dataset.id;
+    document.querySelector("#vid").src="https://showpilotmedia.glitch.me/videostream?file="+but.dataset.id;
+    document.querySelector("#videocomp").querySelectorAll('.btn').forEach(element => {
+        element.className="btn btn-outline-secondary";
+    });
+    but.classList.replace("btn-outline-secondary","btn-secondary");
 }
 function se_save(){
     current_seqdat.seq=containertodata();

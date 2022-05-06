@@ -317,6 +317,12 @@ hr {
     position: absolute;
     left: 31em;
     top: 10em;
+    display: flex;
+    gap: 1em;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: min-content;
 }
 .trigger {
     border-radius: 3px;
