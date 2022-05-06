@@ -1,13 +1,1 @@
-{
-    "meta": {
-        "file": "stinger",
-        "name": "stinger",
-        "show": "Default",
-        "author": "user1",
-        "encoding": 3,
-        "obsscene": "stinger"
-    },
-    "seq": {
-        "1": "34"
-    }
-}
+{"meta":{"file":"stinger","name":"stinger","show":"Default","author":"user1","encoding":3,"obsscene":"stinger"},"seq":{"1":"38","1000":"39","2300":"40","2600":"41","3000":"42"}}

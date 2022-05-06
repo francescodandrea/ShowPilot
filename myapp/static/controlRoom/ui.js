@@ -817,7 +817,7 @@ function li_stingerplay(){
     midiplay("stinger", 0);
     setTimeout(() => {
         midiplay(file, 0);
-    }, 2000);
+    }, 5000);
 }
 function li_playbyfile(file){
     midistop();
