@@ -362,10 +362,8 @@ async function triggersupd(data){
     //video
     if(data.meta.syncedmedia){
         document.querySelector("#videocomp").style.display="block";
-        document.querySelector("#vid").src=data.meta.syncedmedia;
-        //temp
-        document.querySelector("#vid").src="videostream";
-
+        //document.querySelector("#vid").src="videostream?scene="+data.meta.file+"&id="+data.meta.syncedmedia[0]; server mode
+        document.querySelector("#vid").src="http://francescodandreastudente.altervista.org/showPilotMEDIA/sgt2022/"+data.meta.file+"/"+data.meta.syncedmedia[0];
     } else {
         document.querySelector("#videocomp").style.display="none";
     }
@@ -870,7 +868,7 @@ function li_stingerplay(){
     midiplay("stinger", 0);
     setTimeout(() => {
         midiplay(file, 0);
-    }, 5000);
+    }, 2000);
 }
 function li_playbyfile(file){
     midistop();
