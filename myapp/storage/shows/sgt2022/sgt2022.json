@@ -17,7 +17,19 @@
     },
     "sequences": {
         "show": [
-            ["greatestshow"],["alessandro"],["circo"],["twirling"],["bicchierai"],["marica"],["blackpink"],
+            ["greatestshow"],
+            [
+                "stay"
+            ],
+            [
+                "intro1"
+            ],
+            [
+                "inthistogether"
+            ],
+            [
+                "stinger"
+            ],["alessandro"],["circo"],["twirling"],["bicchierai"],["marica"],["blackpink"],
             ["armstrong"],["debora"],[
                 "elisa"
             ],
@@ -50,15 +62,6 @@
             ],
             [
                 "michela"
-            ],
-            [
-                "stay"
-            ],
-            [
-                "intro1"
-            ],
-            [
-                "inthistogether"
             ],
             [
                 "new"

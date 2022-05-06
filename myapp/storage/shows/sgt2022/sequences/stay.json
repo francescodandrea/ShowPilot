@@ -5,7 +5,18 @@
         "show": "Default",
         "author": "user1",
         "encoding": 3,
-        "syncedmedia": ["prove.mp4"],
+        "syncedmedia": [
+            {
+                "filename": "st_1.webm",
+                "name": "Prima prova"
+            },{
+                "filename": "st_2.webm",
+                "name": "Diretta"
+            },{
+                "filename": "st_3.webm",
+                "name": "Grafica"
+            }
+        ],
         "obsscene": "stay"
     },
     "seq": {

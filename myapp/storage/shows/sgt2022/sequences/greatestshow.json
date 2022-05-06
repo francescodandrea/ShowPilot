@@ -8,13 +8,13 @@
         "obsscene": "greatestshow",
         "syncedmedia": [
             {
-                "filename": "gt_2.mp4",
-                "name": "Prima prova"
+                "filename": "gt_2.webm",
+                "name": "Prova"
             },{
-                "filename": "gt_1.mp4",
+                "filename": "gt_1.webm",
                 "name": "Prove generali"
             },{
-                "filename": "gt_3.mp4",
+                "filename": "gt_3.webm",
                 "name": "Grafica"
             }
         ]
