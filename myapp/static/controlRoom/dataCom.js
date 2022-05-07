@@ -142,8 +142,9 @@ function sequenceupd(sequence){
     var xhr = new XMLHttpRequest();
         xhr.addEventListener("readystatechange", function() {
             if (this.readyState === this.DONE) {
-                    var result=JSON.parse(this.responseText);
-                    console.log(result);
+                    var result=this.responseText;
+                    document.querySelector("#savebtn").classList.replace("btn-warning","btn-secondary");
+                    //console.log(result);
                 }
         });
         xhr.open("PUT", "http://"+ip+":8000/sequence?file="+sequence.meta.file);

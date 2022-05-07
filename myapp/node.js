@@ -178,6 +178,7 @@ async function sequencebykey(name){
 }
 app.put('/sequence', (req, res) => {
   sequencesave(req.body);
+  res.send("Sequence saved");
 });
 function sequencesave(data){
   const jsonString = JSON.stringify(data);
