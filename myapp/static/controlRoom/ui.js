@@ -342,7 +342,7 @@ async function squencelistupd(show){
     }
     else sequencebykey(optionsseqdat[0].innerHTML); //than starts triggersupd();
 }
-async function triggersupd(data){
+async function triggersupd(data, videorefresh=true){
     //triggers
     createtriggers(data.seq);
     current_seqdat=data;
@@ -360,6 +360,7 @@ async function triggersupd(data){
     obsselector.value=data.meta.obsscene;
 
     //video
+    if(videorefresh){
     if(data.meta.syncedmedia){
         document.querySelector("#videocomp").style.display="flex";
         //document.querySelector("#vid").src="videostream?scene="+data.meta.file+"&id="+data.meta.syncedmedia[0]; server mode
@@ -376,15 +377,18 @@ async function triggersupd(data){
             let btn=bt.cloneNode();
             btn.dataset.id=media.filename;
             btn.innerHTML=media.name;
+            btn.className="btn btn-outline-secondary";
             document.querySelector("#videocomp").appendChild(btn);
         });
         document.querySelector("#videocomp").querySelectorAll('.btn')[0].classList.replace("btn-outline-secondary","btn-secondary");
     } else {
         document.querySelector("#videocomp").style.display="none";
     }
+    }
 
 }
 function se_videochoice(but){
+    se_stop();
     x=but.dataset.id;
     document.querySelector("#vid").src="https://showpilotmedia.glitch.me/videostream?file="+but.dataset.id;
     document.querySelector("#videocomp").querySelectorAll('.btn').forEach(element => {
@@ -394,7 +398,6 @@ function se_videochoice(but){
 }
 function se_save(){
     current_seqdat.seq=containertodata();
-    document.querySelector("#savebtn").classList.replace("btn-warning","btn-secondary");
     current_seqdat.meta.obsscene=document.querySelector("#obsselect").value;
     sequenceupd(current_seqdat);
 }
@@ -473,7 +476,7 @@ function newtrigger(){
     let edited = current_seqdat;
     let i=0;
     if(counter!=undefined){
-        i=counter;
+        i=Math.round(counter);
     } else {
         for (var key in edited.seq) {
             if(Number(key)>Number(i)) i=key;
@@ -481,8 +484,9 @@ function newtrigger(){
         i++;
     }
     edited.seq[i] = null;
-    triggersupd(edited);
+    triggersupd(edited,false);
     current_seqdat=edited;
+    document.querySelector("#savebtn").classList.replace("btn-secondary","btn-warning");
 }
 function deletetrigger(p){
     p.parentElement.remove();
@@ -555,7 +559,7 @@ document.addEventListener('keyup', handleKeyboard)
 //player
 function se_play(){
     let time=0;
-    time=document.querySelector("#vid").currentTime*1000;
+    time=Math.round(document.querySelector("#vid").currentTime*1000);
     if(document.getElementsByClassName("startpoint")[0]){
         time=document.getElementsByClassName("startpoint")[0].nextSibling.value;
     }
@@ -564,7 +568,7 @@ function se_play(){
     midiplay(current_seqdat.meta.file, time);
     counter=time;
     counterengine = setInterval(() => {
-        counter+=100;
+        counter=Number(counter)+100;
     }, 100);
     timeoutpulse(time);
     document.querySelector("#vid").currentTime = time/1000;
