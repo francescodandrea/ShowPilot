@@ -365,7 +365,10 @@ async function triggersupd(data, videorefresh=true){
         document.querySelector("#videocomp").style.display="flex";
         //document.querySelector("#vid").src="videostream?scene="+data.meta.file+"&id="+data.meta.syncedmedia[0]; server mode
         //document.querySelector("#vid").src="http://francescodandreastudente.altervista.org/showPilotMEDIA/sgt2022/"+data.meta.file+"/"+data.meta.syncedmedia[0];
-        document.querySelector("#vid").src="https://showpilotmedia.glitch.me/videostream?file="+data.meta.syncedmedia[0].filename;
+        
+        //document.querySelector("#vid").src="https://showpilotmedia.glitch.me/videostream?file="+data.meta.syncedmedia[0].filename;
+
+        document.querySelector("#vid").src=data.meta.syncedmedia[0].full; // temp clouding solution
 
         //set up choice buttons
         let btns=document.querySelector("#videocomp").querySelectorAll('.btn');
@@ -376,6 +379,7 @@ async function triggersupd(data, videorefresh=true){
         data.meta.syncedmedia.forEach(media => {
             let btn=bt.cloneNode();
             btn.dataset.id=media.filename;
+            btn.dataset.full=media.full;
             btn.innerHTML=media.name;
             btn.className="btn btn-outline-secondary";
             document.querySelector("#videocomp").appendChild(btn);
@@ -390,7 +394,8 @@ async function triggersupd(data, videorefresh=true){
 function se_videochoice(but){
     se_stop();
     x=but.dataset.id;
-    document.querySelector("#vid").src="https://showpilotmedia.glitch.me/videostream?file="+but.dataset.id;
+    //document.querySelector("#vid").src="https://showpilotmedia.glitch.me/videostream?file="+but.dataset.id;
+    document.querySelector("#vid").src=but.dataset.full; //temp clouding solution
     document.querySelector("#videocomp").querySelectorAll('.btn').forEach(element => {
         element.className="btn btn-outline-secondary";
     });

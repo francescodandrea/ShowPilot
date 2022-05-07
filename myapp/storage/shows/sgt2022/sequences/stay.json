@@ -8,13 +8,16 @@
         "syncedmedia": [
             {
                 "filename": "st_1.webm",
-                "name": "Prima prova"
-            },{
-                "filename": "st_2.webm",
-                "name": "Diretta"
+                "name": "Coreografia",
+                "full": "https://hospitable-ordinary-mortarboard.glitch.me/videostream?file=st_1.webm"
             },{
                 "filename": "st_3.webm",
-                "name": "Grafica"
+                "name": "Prima prova",
+                "full": "https://hospitable-ordinary-mortarboard.glitch.me/videostream?file=st_3.webm"
+            },{
+                "filename": "st_2.webm",
+                "name": "Grafica",
+                "full": "https://hospitable-ordinary-mortarboard.glitch.me/videostream?file=st_2.webm"
             }
         ],
         "obsscene": "stay"
