@@ -9,7 +9,8 @@
         "syncedmedia": [
             {
                 "filename": "stingerDemo.webm",
-                "name": "Demo"
+                "name": "Demo",
+                "full": "https://deluxe-spangled-vacation.glitch.me/videostream?file=introc.webm"
             }
         ]
     },
