@@ -9,7 +9,8 @@
         "syncedmedia": [
             {
                 "filename": "i1_1.webm",
-                "name": "Grafica"
+                "name": "Grafica",
+                "full": "https://deluxe-spangled-vacation.glitch.me/videostream?file=in_1.webm"
             }
         ]
     },
