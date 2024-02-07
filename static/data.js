@@ -26,7 +26,7 @@ async function pingcom(){
                 }
             }
         });
-        xhr.open("GET", "http://"+ip+":8000/ping");
+        xhr.open("GET", "/ping");
         xhr.send();
     });
 }
@@ -63,7 +63,7 @@ async function lines(){
                     resolve(result);
                 }
         });
-        xhr.open("GET", "http://"+ip+":8000/lines");
+        xhr.open("GET", "/lines");
         xhr.send();
     });
 }
@@ -74,7 +74,7 @@ async function current(line){
         xhr.addEventListener("readystatechange", function() {
             resolve();
         });
-        xhr.open("PUT", "http://"+ip+":8000/current?l="+line);
+        xhr.open("PUT", "/current?l="+line);
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.send();
     });

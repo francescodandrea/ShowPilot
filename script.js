@@ -19,6 +19,9 @@ app.use(
 )
 app.use('/static', express.static('public'));
 
+//PARSING
+txtparsev2();
+
 //LISTEN PORT
 app.listen(port, () => {
   console.log('Listening on '+ip+':'+port)
@@ -37,10 +40,10 @@ var currentline=0;
 //**************** lines ****************
 app.get('/lines', async (req, res) => {
   //res.send(await lines())
-  res.send(await linestxt())
+  res.send(await getlines())
   console.log("sent lines");
 });
-async function lines(){
+async function getlines(){
   return new Promise(resolve => {
   fs.readFile("storage/lines.json", "utf8", (err, jsonString) => {
     if (err) {
@@ -56,9 +59,7 @@ async function lines(){
   });
   });
 }
-linestxt();
-async function linestxt(){
-  return new Promise(resolve => {
+function txtparse(){
   fs.readFile("storage/lines.txt", "utf8", (err, string) => {
     if (err) {
       console.log("File read failed:", err);
@@ -144,9 +145,84 @@ async function linestxt(){
           open=null; close=null;
         }*/
       } while (cuts[0])
+      
+      let data=JSON.stringify(json);
+      fs.writeFile('storage/lines.json', data, 'utf8',function(err) {
+        if (err) throw err;
+        console.log('Parsing complete');
+        });
+  });
+}
+function txtparsev2(){
+  fs.readFile("storage/lines.txt", "utf8", (err, string) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
 
-      //console.log(json);
-      resolve(json);
+      // Array contenente i nomi degli attori
+      const allActors = ['SIMBA', 'NALA', 'ZAZU', 'CORO'];
+
+      // Splitting the script section into lines
+      const lines = string.split('\n');
+
+      // Initializing an empty array to store dialogue arrays
+      const dialoguesArray = [];
+
+      // Variable to keep track of the current actor/scene/song
+      let currentActorOrScene = '';
+
+      // Looping through lines
+      for (let i = 0; i < lines.length; i++) {
+          const line = lines[i].trim();
+          
+          // If the line is not empty
+          if (line !== '') {
+              // If the line contains at least one actor's name
+              if (allActors.some(actor => line.includes(actor))) {
+                  // If the line contains multiple actors' names
+                  if (line.includes(',') || line.includes(' e ')) {
+                      // Pushing a new dialogue array with all actors as the current actor/scene/song
+                      dialoguesArray.push([line,allActors.join(', ')]);
+                  } else {
+                      // Find the specific actor in the line
+                      const actorInLine = allActors.find(actor => line.includes(actor));
+                      // Update the current actor
+                      currentActorOrScene = actorInLine;
+                  }
+              } else {
+                  // Check if it's a scene or a song
+                  let actorOrScene = '';
+                  if (line.startsWith('Scena') || line.startsWith('CANZONE:')) {
+                      actorOrScene = 'scene';
+                  }
+                  // Pushing a new dialogue array with the current actor/scene/song and the dialogue
+                  dialoguesArray.push([line, currentActorOrScene || actorOrScene]);
+              }
+          }
+      }
+      
+      let data=JSON.stringify(dialoguesArray);
+      fs.writeFile('storage/lines.json', data, 'utf8',function(err) {
+        if (err) throw err;
+        console.log('Parsing complete');
+        });
+  });
+}
+//**************** actors ****************
+async function actors(){
+  return new Promise(resolve => {
+  fs.readFile("storage/actors.json", "utf8", (err, jsonString) => {
+    if (err) {
+      console.log("File read failed:", err);
+      return;
+    }
+    try {
+      let obj = JSON.parse(jsonString);
+      resolve(obj);
+    } catch (err) {
+      console.log("Error parsing JSON string:", err);
+    }
   });
   });
 }
