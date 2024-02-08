@@ -1,5 +1,19 @@
-{
-    "actors":{
-        
-    }
-}
+[
+    ["RAFIKI", "Ilaria"],
+    ["SCAR", "Fabione"],
+    ["ZAZU", "Luca C."],
+    ["MUFASA", "Imbe"],
+    ["SIMBA", "Erik"],
+    ["NALA", "Vanessa"],
+    ["SHENZI", "Angelica"],
+    ["BANZAI", "Lisa"],
+    ["ED", "Diana"],
+    ["TIMON", "Andrea"],
+    ["PUMBAA", "William"],
+    ["SIMBAGRANDE", "Luca S."],
+    ["NALAGRANDE", "Cecilia"],
+    ["SARAFINA", "Gloria"],
+    ["SARABI", "Chicca"],
+    ["TALPA", "Yuri"],
+    ["CORO", "coro"]
+]

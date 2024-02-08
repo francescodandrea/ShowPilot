@@ -20,7 +20,11 @@ app.use(
 app.use('/static', express.static('public'));
 
 //PARSING
-txtparsev2();
+let actors
+(async () => {
+  actors = await getactors()
+  txtparsev2();
+})()
 
 //LISTEN PORT
 app.listen(port, () => {
@@ -161,7 +165,7 @@ function txtparsev2(){
     }
 
       // Array contenente i nomi degli attori
-      const allActors = ['SIMBA', 'NALA', 'ZAZU', 'CORO'];
+      const allActors = actors.map(array => array[0]);
 
       // Splitting the script section into lines
       const lines = string.split('\n');
@@ -210,7 +214,7 @@ function txtparsev2(){
   });
 }
 //**************** actors ****************
-async function actors(){
+async function getactors(){
   return new Promise(resolve => {
   fs.readFile("storage/actors.json", "utf8", (err, jsonString) => {
     if (err) {

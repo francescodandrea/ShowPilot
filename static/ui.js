@@ -21,7 +21,7 @@ if(localStorage.getItem("ip")===null) SESSION["section"]="devices";
 document.querySelector("#"+SESSION["section"]).style.display="flex";
 document.querySelector("#"+SESSION["section"]).style.opacity=1;
 
-section(SESSION["section"]);
+section("live");
 
 function session(key,value){
     SESSION[key]=value;
@@ -957,7 +957,36 @@ var scenecollectionstate = "play";
 
 ////////////-----------------------------
 
-const nomi=["CHICCA","YURI","LUCA","LISA","PALA","DIANA","MARGHE","WILLY","LEO","TUTTI"];
+const nomi=[["RAFIKI", "Ilaria"],
+    ["SCAR", "Fabione"],
+    ["ZAZU", "Luca C."],
+    ["MUFASA", "Imbe"],
+    ["SIMBA", "Erik"],
+    ["NALA", "Vanessa"],
+    ["SHENZI", "Angelica"],
+    ["BANZAI", "Lisa"],
+    ["ED", "Diana"],
+    ["TIMON", "Andrea"],
+    ["PUMBAA", "William"],
+    ["SIMBAGRANDE", "Luca S."],
+    ["NALAGRANDE", "Cecilia"],
+    ["SARAFINA", "Gloria"],
+    ["SARABI", "Chicca"],
+    ["TALPA", "Yuri"],
+    ["CORO", "coro"]
+    ]
+
+let cholder=document.querySelector("#cards");
+nomi.forEach(name => {
+    if(name[0]!="CORO"){
+        let c=document.querySelector("#template").cloneNode(true)
+        c.id=name[0]
+        c.querySelector("h2").innerHTML=name[1]
+        c.style.display="inherit"
+        cholder.appendChild(c)
+    }
+});
+
 
 function toline(i){
     current(i);
@@ -980,7 +1009,7 @@ if(i!=lbuffer){
             let txt=document.createElement("p");
 
             div.className="line "+(Number(i)+Number(j));
-            act.innerHTML=nomi[liness[Number(i)+Number(j)][1]-1];
+            act.innerHTML=liness[Number(i)+Number(j)][1];
             txt.innerHTML=liness[Number(i)+Number(j)][0];
             div.appendChild(act);
             div.appendChild(txt);
@@ -997,7 +1026,7 @@ if(i!=lbuffer){
         if(i>lbuffer){ j=Number(i)+14}
 
         div.className="line "+j;
-        act.innerHTML=nomi[liness[Number(j)][1]-1];
+        act.innerHTML=liness[Number(j)][1];
         txt.innerHTML=liness[Number(j)][0];
         div.appendChild(act);
         div.appendChild(txt);
@@ -1074,14 +1103,14 @@ function linesrc(val,down){
 
 function countengine(i){
     nomi.forEach((nome,j) => {
-        if(j==9) return;
+        if(j==16) return;
         let check=true;
         let res=null;
         let verse=null;
         let step=i-1;
         do{
             step++;
-            if(liness[step][1]==j+1){
+            if(liness[step][1]==nome[0]){
                 if(verse==null) verse=step-i;
                 if(typeof liness[step][2]!='undefined'){
                     check=false;
@@ -1094,18 +1123,19 @@ function countengine(i){
 
         if(res==true && verse>step-i) step=verse+i;
         if(res){
-            document.querySelector("#"+nome+">p").innerHTML="Enters in "+(step-i)+"<br>Next line in "+verse;
-            document.querySelector("#"+nome+">.counter").className="counter in";
-            document.querySelector("#"+nome+">.counter").style.width=(step-i)/2+"%";
+            document.querySelector("#"+nome[0]+">p").innerHTML="Enters in "+(step-i)+"<br>Next line in "+verse;
+            document.querySelector("#"+nome[0]+">.counter").className="counter in";
+            document.querySelector("#"+nome[0]+">.counter").style.width=(step-i)/2+"%";
         } else {
-            document.querySelector("#"+nome+">p").innerHTML="Exits in "+(step-i)+"<br>Next line in "+verse;
-            document.querySelector("#"+nome+">.counter").className="counter out";
-            document.querySelector("#"+nome+">.counter").style.width=(step-i)/2+"%";
+            console.log(nome[0])
+            document.querySelector("#"+nome[0]+">p").innerHTML="Exits in "+(step-i)+"<br>Next line in "+verse;
+            document.querySelector("#"+nome[0]+">.counter").className="counter out";
+            document.querySelector("#"+nome[0]+">.counter").style.width=(step-i)/2+"%";
         }
         if(verse==0)
-        document.querySelector("#"+nome).className="speak";
+        document.querySelector("#"+nome[0]).className="speak";
         else 
-        document.querySelector("#"+nome).className="";
+        document.querySelector("#"+nome[0]).className="";
     });
     
 }
